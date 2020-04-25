@@ -1,0 +1,26 @@
+﻿:root {
+    --primary-font: Verdana;
+    --main-color: #333;
+    --sub-color: #DDD;
+    --accent-color: #EEE;
+    --text-color: #333;
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--primary-font);
+    font-size: 17px;
+    line-height: 1.6em;
+    color: var(--text-color);
+}
+
+.container {
+    margin: 0 auto;
+    width: 70%;
+    overflow: hidden;
+}

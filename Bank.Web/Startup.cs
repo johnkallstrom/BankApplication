@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -17,6 +18,9 @@ namespace Bank.Web
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc(options => options.EnableEndpointRouting = false);
+
+            var conn = _config.GetConnectionString("DefaultConnection");
+            services.AddDbContext<>(options => options.UseSqlServer(conn));
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
