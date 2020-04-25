@@ -1,0 +1,65 @@
+﻿:root {
+    --font: 'Roboto', sans-serif;
+    --dark: #2a2b2b;
+    --light: #eee;
+    --white: #fff;
+    --blue: #0079D3;
+    --hover: #070707;
+    --danger: #d92550;
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--light);
+    font-family: var(--font);
+    font-size: 17px;
+    line-height: 1.6em;
+    color: var(--dark);
+}
+
+.container {
+    margin: 0 auto;
+    width: 70%;
+    overflow: hidden;
+}
+
+header {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    background-color: var(--dark);
+}
+
+header #branding {
+    padding-top: 0.6rem;
+    float: left;
+}
+
+header #branding h1 {
+    font-size: 26px;
+    letter-spacing: 0.1rem;
+}
+
+header a {
+    color: var(--white);
+    text-decoration: none;
+}
+
+header nav a {
+    border-radius: 5px;
+    padding: 0.6rem 1.5rem;
+    background-color: var(--blue);
+    float: right;
+}
+
+footer {
+    padding: 3rem;
+    margin-top: 4rem;
+    color: var(--white);
+    background-color: var(--dark);
+    text-align: center;
+}

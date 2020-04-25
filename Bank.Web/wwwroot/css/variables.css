@@ -1,7 +1,9 @@
 ﻿:root {
-    --main-font: Verdana;
-    --main-color: #333;
-    --sub-color: #DDD;
-    --accent-color: #EEE;
-    --text-color: #333;
+    --font: 'Roboto', sans-serif;
+    --dark: #2a2b2b;
+    --light: #eee;
+    --white: #fff;
+    --blue: #0079D3;
+    --hover: #070707;
+    --danger: #d92550;
 }

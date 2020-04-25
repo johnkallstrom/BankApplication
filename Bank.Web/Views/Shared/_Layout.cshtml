@@ -3,23 +3,29 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>Bank Administration</title>
-    <link href="~/css/styles.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+    <link href="~/css/variables.css" rel="stylesheet" />
+    <link href="~/css/layout.css" rel="stylesheet" />
+    <link href="~/css/index.css" rel="stylesheet" />
 </head>
 <body>
     <header>
         <div class="container">
             <div id="branding">
                 <h1>
-                    <a asp-controller="Home"
-                       asp-action="Index">
-                        Bank Administration
-                    </a>
+                    <a asp-controller="Home" asp-action="Index">Bank Administration</a>
                 </h1>
             </div>
+            <partial name="_LoginPartial" />
         </div>
     </header>
+
     <div>
         @RenderBody()
     </div>
+
+    <footer>
+        <p>&copy; Bank Administration @DateTime.Now.Year</p>
+    </footer>
 </body>
 </html>
