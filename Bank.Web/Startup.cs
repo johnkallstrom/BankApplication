@@ -18,9 +18,6 @@ namespace Bank.Web
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc(options => options.EnableEndpointRouting = false);
-
-            //var conn = _config.GetConnectionString("DefaultConnection");
-            //services.AddDbContext<>(options => options.UseSqlServer(conn));
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
