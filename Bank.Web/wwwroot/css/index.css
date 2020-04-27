@@ -1,6 +1,7 @@
 ﻿:root {
     --font: 'Roboto', sans-serif;
     --dark: #2a2b2b;
+    --light-dark: #ccc;
     --light: #eee;
     --white: #fff;
     --blue: #0079D3;
