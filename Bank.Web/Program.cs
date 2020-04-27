@@ -1,11 +1,8 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using Bank.Web.Data;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 
 namespace Bank.Web
 {
@@ -13,7 +10,23 @@ namespace Bank.Web
     {
         public static void Main(string[] args)
         {
-            CreateHostBuilder(args).Build().Run();
+            var iHost = CreateHostBuilder(args).Build();
+            InitializeDatabase(iHost);
+            iHost.Run();
+        }
+
+        private static void InitializeDatabase(IHost iHost)
+        {
+            using (var scope = iHost.Services.CreateScope())
+            {
+                var services = scope.ServiceProvider;
+
+                var userManager = services.GetRequiredService<UserManager<ApplicationUser>>();
+                var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
+
+                var db = new DatabaseInitializer();
+                db.Seed(userManager, roleManager);
+            }
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
