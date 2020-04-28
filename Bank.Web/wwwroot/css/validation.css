@@ -19,13 +19,6 @@
     display: none;
 }
 
-.input-validation-error {
-    font-family: var(--font);
-    border: 1px solid #f00;
-    background-color: #fee;
-    display: block;
-}
-
 .validation-summary-errors {
     color: var(--danger);
     font-size: 14px;

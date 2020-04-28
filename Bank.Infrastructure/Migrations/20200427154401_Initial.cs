@@ -1,7 +1,6 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace Bank.Web.Data.Migrations
+namespace Bank.Infrastructure.Migrations
 {
     public partial class Initial : Migration
     {

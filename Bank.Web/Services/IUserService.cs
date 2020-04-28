@@ -1,4 +1,4 @@
-﻿using Bank.Web.Data;
+﻿using Bank.Infrastructure.Identity;
 using Microsoft.AspNetCore.Identity;
 using System.Threading.Tasks;
 
