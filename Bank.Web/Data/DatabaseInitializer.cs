@@ -9,7 +9,7 @@ namespace Bank.Web.Data
         {
             AddRole(roleManager, "Admin").Wait();
             AddRole(roleManager, "Cashier").Wait();
-            AddUser(userManager, "admin", "admin@mail.com", "Admin").Wait();
+            AddUser(userManager, "admin", "admin@mail.com", "password", "Admin").Wait();
         }
 
         private async Task AddRole(RoleManager<IdentityRole> roleManager, string role)
@@ -23,7 +23,8 @@ namespace Bank.Web.Data
         private async Task AddUser(
             UserManager<ApplicationUser> userManager, 
             string username, 
-            string email, 
+            string email,
+            string password,
             string role)
         {
             if (await userManager.FindByNameAsync(username) == null)
@@ -34,7 +35,6 @@ namespace Bank.Web.Data
                     Email = email,
                 };
 
-                const string password = "password";
                 var result = await userManager.CreateAsync(user, password);
 
                 if (result.Succeeded)

@@ -17,14 +17,14 @@ namespace Bank.Web.Services
             _signInManager = signInManager;
         }
 
-        public async Task<SignInResult> SignInUser(string email, string password)
+        public async Task<ApplicationUser> GetByEmail(string email)
         {
-            var user = await _userManager.FindByEmailAsync(email);
+            return await _userManager.FindByEmailAsync(email);
+        }
 
-            if (user == null) return null;
-
-            var result = await _signInManager.PasswordSignInAsync(user, password, false, false);
-            return result;
+        public async Task<SignInResult> SignInUser(string username, string password)
+        {
+            return await _signInManager.PasswordSignInAsync(username, password, false, false);
         }
 
         public async void SignOutUser()

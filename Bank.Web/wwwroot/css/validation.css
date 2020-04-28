@@ -1,0 +1,37 @@
+﻿:root {
+    --font: 'Roboto', sans-serif;
+    --dark: #2a2b2b;
+    --light-dark: #ccc;
+    --light: #eee;
+    --white: #fff;
+    --blue: #0079D3;
+    --hover: #070707;
+    --danger: #d92550;
+}
+
+.field-validation-error {
+    color: var(--danger);
+    font-size: 14px;
+    font-family: var(--font);
+}
+
+.field-validation-valid {
+    display: none;
+}
+
+.input-validation-error {
+    font-family: var(--font);
+    border: 1px solid #f00;
+    background-color: #fee;
+    display: block;
+}
+
+.validation-summary-errors {
+    color: var(--danger);
+    font-size: 14px;
+    font-family: var(--font);
+}
+
+.validation-summary-errors ul {
+    list-style: none;
+}

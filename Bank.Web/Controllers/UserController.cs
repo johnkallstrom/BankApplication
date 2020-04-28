@@ -29,6 +29,14 @@ namespace Bank.Web.Controllers
         {
             if (!ModelState.IsValid) return View(model);
 
+            var user = await _userService.GetByEmail(model.Email);
+
+            if (user == null)
+            {
+                ModelState.AddModelError(string.Empty, "Incorrect username and/or password.");
+                return View(model);
+            }
+
             var result = await _userService.SignInUser(model.Email, model.Password);
 
             if (result.Succeeded)
@@ -36,7 +44,7 @@ namespace Bank.Web.Controllers
                 return RedirectToAction("Index", "Home");
             }
 
-            return View(model);
+            return View();
         }
 
         public IActionResult Logout()
