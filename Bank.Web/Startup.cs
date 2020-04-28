@@ -1,4 +1,5 @@
-using Bank.Web.Data;
+using Bank.Infrastructure;
+using Bank.Infrastructure.Identity;
 using Bank.Web.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;

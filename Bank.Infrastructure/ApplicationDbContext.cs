@@ -1,8 +1,9 @@
 ﻿using Bank.Domain.Entities;
+using Bank.Infrastructure.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace Bank.Web.Data
+namespace Bank.Infrastructure
 {
     public partial class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {

@@ -10,11 +10,11 @@
 }
 
 #login {
-    padding-top: 2rem;
+    margin-top: 3rem;
     padding-bottom: 1rem;
 }
 
-#login .container {
+#login .wrapper {
     background-color: var(--white);
     border: 1px solid var(--light);
     border-radius: 8px;

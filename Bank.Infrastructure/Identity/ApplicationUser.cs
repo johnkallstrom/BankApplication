@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 
-namespace Bank.Web.Data
+namespace Bank.Infrastructure.Identity
 {
     public class ApplicationUser : IdentityUser
     {

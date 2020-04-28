@@ -1,7 +1,8 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Bank.Infrastructure.Identity;
+using Microsoft.AspNetCore.Identity;
 using System.Threading.Tasks;
 
-namespace Bank.Web.Data
+namespace Bank.Infrastructure
 {
     public class DatabaseInitializer
     {
