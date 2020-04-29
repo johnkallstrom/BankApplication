@@ -1,18 +1,24 @@
-﻿
+﻿@model BankStatisticsViewModel
+
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+
 <section id="showcase">
     <div class="container">
-        <h1>Lorem ipsum dolor sit amet</h1>
-        <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-            Proin velit lacus, bibendum convallis euismod eget, vestibulum eu felis.
-            Nulla nulla libero, ultrices vel euismod quis, placerat sit amet nunc.
-            Proin sagittis fermentum sapien, eget ullamcorper libero malesuada a.
-            Integer nisl leo, luctus id tincidunt quis, interdum ut sem.
-        </p>
+        <div class="wrapper">
+            <h1>Statistics</h1>
+            <div class="stat-group">
+                <h3>@Model.TotalCustomersAmount <span class="paragraph">total customers</span></h3>
+            </div>
+            <div class="stat-group">
+                <h3>@Model.TotalAccountsAmount <span class="paragraph">total accounts</span></h3>
+            </div>
+            <div class="stat-group">
+                <h3>@Model.TotalBalanceAmount.ToString("C2") <span class="paragraph">total balance</span></h3>
+            </div>
+        </div>
     </div>
 </section>
 
@@ -40,4 +46,4 @@
             </p>
         </div>
     </div>
-</section>
+</section>>

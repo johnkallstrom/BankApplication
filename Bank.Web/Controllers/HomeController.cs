@@ -1,4 +1,5 @@
 ﻿using Bank.Web.Services;
+using Bank.Web.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Bank.Web.Controllers
@@ -14,7 +15,14 @@ namespace Bank.Web.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            var model = new BankStatisticsViewModel
+            {
+                TotalCustomersAmount = _bankStatisticsService.GetTotalCustomersAmount(),
+                TotalAccountsAmount = _bankStatisticsService.GetTotalAccountsAmount(),
+                TotalBalanceAmount = _bankStatisticsService.GetTotalBalanceAmount()
+            };
+
+            return View(model);
         }
     }
 }

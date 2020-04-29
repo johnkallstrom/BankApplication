@@ -10,28 +10,37 @@
 }
 
 #showcase {
-    text-align: center;
     color: var(--dark);
 }
 
 #showcase .container {
     margin-top: 3rem;
-    padding: 2rem;
+}
+
+#showcase .wrapper {
+    padding: 2rem 3rem 3rem 3rem;
     background-color: var(--white);
     border: 1px solid var(--light);
     border-radius: 8px;
-    padding-bottom: 4rem;
 }
 
 #showcase h1 {
-    margin-top: 60px;
-    font-size: 55px;
-    margin-bottom: 55px;
+    margin-top: 2rem;
+    font-size: 40px;
+    margin-bottom: 3rem;
 }
 
-#showcase p {
-    line-height: 2rem;
-    font-size: 20px;
+#showcase h3 {
+    font-size: 28px;
+}
+
+#showcase .paragraph {
+    padding-left: 0.5rem;
+    font-size: 16px;
+}
+
+#showcase .stat-group {
+    padding-bottom: 1.5rem;
 }
 
 #boxes {
@@ -63,13 +72,4 @@
 
 .fill {
     filter: invert(12%) sepia(17%) saturate(732%) hue-rotate(150deg) brightness(93%) contrast(93%);
-}
-
-@media (max-width: 992px){
-    #showcase h1 {
-        line-height: 3.5rem;
-        margin-top: 50px;
-        font-size: 55px;
-        margin-bottom: 55px;
-    }
 }
