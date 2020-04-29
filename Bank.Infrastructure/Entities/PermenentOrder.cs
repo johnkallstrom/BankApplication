@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace Bank.Domain.Entities
+﻿namespace Bank.Infrastructure.Entities
 {
     public partial class PermenentOrder
     {

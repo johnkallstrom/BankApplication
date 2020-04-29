@@ -1,4 +1,4 @@
-﻿using Bank.Domain.Entities;
+﻿using Bank.Infrastructure.Entities;
 using Bank.Infrastructure.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;

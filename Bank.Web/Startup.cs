@@ -26,6 +26,7 @@ namespace Bank.Web
             services.AddDbContext<ApplicationDbContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
+            services.AddTransient<IBankStatisticsService, BankStatisticsService>();
             services.AddTransient<IUserService, UserService>();
 
             services.AddIdentity<ApplicationUser, IdentityRole>()
@@ -40,7 +41,6 @@ namespace Bank.Web
                 options.Password.RequireNonAlphanumeric = false;
                 options.Password.RequireUppercase = false;
             });
-
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
