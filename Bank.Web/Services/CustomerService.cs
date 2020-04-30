@@ -14,12 +14,13 @@ namespace Bank.Web.Services
             _context = context;
         }
 
-        public Customers GetCustomerByID(int id)
+        public Customers GetCustomer(int id)
         {
             return _context.Customers
-                .Include(c => c.Dispositions)
-                .ThenInclude(c => c.Account)
-                .FirstOrDefault(c => c.CustomerId == id);
+                .Include(x => x.Dispositions)
+                .ThenInclude(x => x.Account)
+                .ThenInclude(x => x.Transactions)
+                .FirstOrDefault(x => x.CustomerId == id);
         }
     }
 }

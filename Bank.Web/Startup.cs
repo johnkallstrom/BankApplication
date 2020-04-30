@@ -27,6 +27,7 @@ namespace Bank.Web
             services.AddDbContext<ApplicationDbContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
+            services.AddTransient<IAccountService, AccountService>();
             services.AddTransient<ICustomerService, CustomerService>();
             services.AddTransient<IBankStatisticsService, BankStatisticsService>();
             services.AddTransient<IUserService, UserService>();

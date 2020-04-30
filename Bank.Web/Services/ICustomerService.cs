@@ -4,6 +4,6 @@ namespace Bank.Web.Services
 {
     public interface ICustomerService
     {
-        Customers GetCustomerByID(int id);
+        Customers GetCustomer(int id);
     }
 }

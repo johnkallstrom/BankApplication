@@ -1,0 +1,98 @@
+﻿:root {
+    --font: 'Roboto', sans-serif;
+    --dark: #2a2b2b;
+    --light-dark: #ccc;
+    --light: #eee;
+    --white: #fff;
+    --blue: #0079D3;
+    --hover: #070707;
+    --danger: #d92550;
+}
+
+#customer-profile .container {
+    margin-top: 3rem;
+}
+
+#customer-profile ul {
+    list-style: none;
+}
+
+.profile, .accounts {
+    padding: 3rem;
+    background-color: var(--white);
+    border: 1px solid var(--light);
+    border-radius: 8px;
+    width: 48%;
+}
+
+.profile {
+    float: left;
+}
+
+.accounts {
+    float: right;
+}
+
+.accounts h1, .profile h1 {
+    margin-bottom: 2rem;
+}
+
+.accounts h3 {
+    margin-top: 3rem;
+}
+
+.profile .profile-group {
+    margin-bottom: 1rem;
+}
+
+.profile .profile-group:last-child {
+    margin-bottom: 0rem;
+}
+
+#account-table .account-id {
+    text-decoration: none;
+    color: var(--dark);
+    border-bottom: 1px solid var(--dark);
+}
+
+#account-table {
+    table-layout: fixed;
+    overflow: hidden;
+    margin-top: 1rem;
+    border-collapse: collapse;
+    width: 100%;
+    color: var(--dark);
+    margin-bottom: 10px;
+}
+
+#account-table td, th {
+    padding: 1rem;
+    border: 1px solid #ddd;
+}
+
+#account-table th {
+    font-weight: 600;
+    text-align: left;
+    background-color: var(--dark);
+    color: #fff;
+}
+
+@media (max-width: 992px){
+    .profile, .accounts {
+        padding: 3rem;
+        background-color: var(--white);
+        border: 1px solid var(--light);
+        border-radius: 8px;
+        width: 100%;
+    }
+
+    .profile {
+        float: none;
+        margin-bottom: 2rem;
+    }
+
+    .accounts {
+        margin-top: 2rem;
+        float: none;
+    }
+}

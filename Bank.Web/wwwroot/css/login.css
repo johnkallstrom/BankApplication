@@ -27,9 +27,9 @@
 }
 
 #login h1 {
-    font-size: 32px;
+    font-size: 40px;
     color: var(--dark);
-    margin-bottom: 17px;
+    margin-bottom: 2rem;
 }
 
 #login input[type="email"], input[type="password"] {

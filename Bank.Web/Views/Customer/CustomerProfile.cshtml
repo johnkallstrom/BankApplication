@@ -1,0 +1,68 @@
+﻿@model CustomerProfileViewModel
+
+@{
+    ViewData["Title"] = "Customer Profile";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="customer-profile">
+    <div class="container">
+        <div class="profile">
+            <h1>@Model.FirstName @Model.LastName</h1>
+
+            <div class="profile-group">
+                <strong>Contact</strong>
+                <p>@Model.Email</p>
+                <p>+@Model.PhoneCountryCode @Model.Phone</p>
+            </div>
+
+            <div class="profile-group">
+                <strong>Gender</strong>
+                <p>@Model.Gender</p>
+            </div>
+
+            <div class="profile-group">
+                <strong>Birthday</strong>
+                <p>@Model.Birthday</p>
+            </div>
+
+            <div class="profile-group">
+                <strong>Location</strong>
+                <p>@Model.Address</p>
+                <p>@Model.PostalCode, @Model.City</p>
+                <p>@Model.Country, @Model.CountryCode</p>
+            </div>
+        </div>
+        <div class="accounts">
+            <h1>Accounts</h1>
+            <table id="account-table">
+                <thead>
+                    <tr>
+                        <th>Account number</th>
+                        <th>Balance</th>
+                        <th>Created</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var account in Model.Accounts)
+                    {
+                        <tr>
+                            <td>
+                                <a asp-controller="Account"
+                                   asp-action="AccountDetails"
+                                   asp-route-id="@account.AccountId"
+                                   class="account-id">
+                                    @account.AccountId
+                                </a>
+                            </td>
+                            <td>@account.Balance.ToString("C2")</td>
+                            <td>@account.Created</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <h3>Total balance: @Model.TotalBalance.ToString("C2")</h3>
+        </div>
+    </div>
+</div>
+
