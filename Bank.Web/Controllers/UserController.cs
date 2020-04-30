@@ -53,7 +53,7 @@ namespace Bank.Web.Controllers
         public IActionResult Logout()
         {
             _userService.SignOutUser();
-            return RedirectToAction("Login", "User");
+            return RedirectToAction("Index", "Home");
         }
     }
 }

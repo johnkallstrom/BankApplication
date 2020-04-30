@@ -1,23 +1,27 @@
 ﻿@model BankStatisticsViewModel
 
 @{
+    ViewData["Title"] = "Home";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 
 <section id="showcase">
     <div class="container">
-        <div class="wrapper">
+        <div class="showcase-header">
             <h1>Statistics</h1>
-            <div class="stat-group">
-                <h3>@Model.TotalCustomersAmount <span class="paragraph">total customers</span></h3>
-            </div>
-            <div class="stat-group">
-                <h3>@Model.TotalAccountsAmount <span class="paragraph">total accounts</span></h3>
-            </div>
-            <div class="stat-group">
-                <h3>@Model.TotalBalanceAmount.ToString("C2") <span class="paragraph">total balance</span></h3>
-            </div>
+        </div>
+        <div class="showcase-group">
+            <span>Total customers: </span>
+            <h3>@Model.TotalCustomersAmount</h3>
+        </div>
+        <div class="showcase-group">
+            <span>Total accounts: </span>
+            <h3>@Model.TotalAccountsAmount</h3>
+        </div>
+        <div class="showcase-group">
+            <span>Total balance: </span>
+            <h3>@Model.TotalBalanceAmount.ToString("C2")</h3>
         </div>
     </div>
 </section>
@@ -46,4 +50,4 @@
             </p>
         </div>
     </div>
-</section>>
+</section>

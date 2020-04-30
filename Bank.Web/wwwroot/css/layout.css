@@ -35,8 +35,11 @@ header {
     background-color: var(--dark);
 }
 
+header .container {
+    padding: 0.6rem 0;
+}
+
 header #branding {
-    padding-top: 0.6rem;
     float: left;
 }
 
@@ -50,11 +53,24 @@ header a {
     text-decoration: none;
 }
 
+header li {
+    float: left;
+    display: inline;
+    padding: 0 15px 0 20px;
+}
+
+header li:last-child{
+    padding-right: 0px;
+}
+
+header nav {
+    float: right;
+}
+
 header nav a {
     border-radius: 5px;
-    padding: 0.6rem 1.5rem;
+    padding: 0.6rem 1rem;
     background-color: var(--blue);
-    float: right;
 }
 
 footer {

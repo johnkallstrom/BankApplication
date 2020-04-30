@@ -3,11 +3,27 @@
 
 @if (SignInManager.IsSignedIn(User))
 {
-    <nav>
-        <ul>
-            <li><a asp-controller="User" asp-action="Logout">Sign out</a></li>
-        </ul>
-    </nav>
+
+    if (User.IsInRole("Cashier"))
+    {
+        <nav>
+            <ul>
+                <li><a asp-controller="Customer" asp-action="Index">Customers</a></li>
+                <li><a asp-controller="User" asp-action="Logout">Sign out</a></li>
+            </ul>
+        </nav>
+    }
+
+    if (User.IsInRole("Admin"))
+    {
+        <nav>
+            <ul>
+                <li><a asp-controller="Admin" asp-action="Index">Admin</a></li>
+                <li><a asp-controller="Customer" asp-action="Index">Customers</a></li>
+                <li><a asp-controller="User" asp-action="Logout">Sign out</a></li>
+            </ul>
+        </nav>
+    }
 }
 else
 {

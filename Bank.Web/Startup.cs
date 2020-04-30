@@ -1,3 +1,4 @@
+using AutoMapper;
 using Bank.Infrastructure;
 using Bank.Infrastructure.Identity;
 using Bank.Web.Services;
@@ -26,8 +27,11 @@ namespace Bank.Web
             services.AddDbContext<ApplicationDbContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
+            services.AddTransient<ICustomerService, CustomerService>();
             services.AddTransient<IBankStatisticsService, BankStatisticsService>();
             services.AddTransient<IUserService, UserService>();
+
+            services.AddAutoMapper(typeof(Startup));
 
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
