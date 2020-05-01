@@ -27,7 +27,10 @@ namespace Bank.Web.Controllers
         [Authorize(Roles = "Admin, Cashier")]
         public IActionResult Index()
         {
-            return View();
+            var customerList = _customerService.GetAllCustomers();
+            var model = _mapper.Map<List<CustomerViewModel>>(customerList);
+
+            return View(model);
         }
 
         [HttpPost]

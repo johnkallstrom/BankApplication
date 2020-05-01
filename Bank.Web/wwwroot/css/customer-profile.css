@@ -11,14 +11,33 @@
 
 #customer-profile .container {
     margin-top: 3rem;
+    padding-bottom: 4rem;
 }
 
 #customer-profile ul {
     list-style: none;
 }
 
+#customer-profile .return {
+    float: left;
+    margin-top: 5px;
+    height: 50px;
+    font-size: 16px;
+    font-family: var(--font);
+    border: none;
+    background-color: var(--blue);
+    color: #fff;
+    width: 120px;
+    border-radius: 8px;
+    outline: none;
+}
+
+#customer-profile .return:hover {
+    cursor: pointer;
+}
+
 .profile, .accounts {
-    padding: 3rem;
+    padding: 3rem 3rem 2rem 3rem;
     background-color: var(--white);
     border: 1px solid var(--light);
     border-radius: 8px;
@@ -37,8 +56,14 @@
     margin-bottom: 2rem;
 }
 
-.accounts h3 {
+.accounts p {
     margin-top: 3rem;
+}
+
+.accounts .total-balance {
+    font-size: 24px;
+    display: inline;
+    float: right;
 }
 
 .profile .profile-group {
@@ -52,6 +77,10 @@
 #account-table .account-id {
     text-decoration: none;
     color: var(--dark);
+}
+
+#account-table .account-id:hover {
+    cursor: pointer;
     border-bottom: 1px solid var(--dark);
 }
 
@@ -79,7 +108,7 @@
 
 @media (max-width: 992px){
     .profile, .accounts {
-        padding: 3rem;
+        padding: 3rem 3rem 2rem 3rem;
         background-color: var(--white);
         border: 1px solid var(--light);
         border-radius: 8px;

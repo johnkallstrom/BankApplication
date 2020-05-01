@@ -1,6 +1,7 @@
 ﻿using Bank.Infrastructure;
 using Bank.Infrastructure.Entities;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Bank.Web.Services
@@ -12,6 +13,11 @@ namespace Bank.Web.Services
         public CustomerService(ApplicationDbContext context)
         {
             _context = context;
+        }
+
+        public IEnumerable<Customers> GetAllCustomers()
+        {
+            return _context.Customers;
         }
 
         public Customers GetCustomer(int id)

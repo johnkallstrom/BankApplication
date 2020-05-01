@@ -18,12 +18,12 @@
 
             <div class="profile-group">
                 <strong>Gender</strong>
-                <p>@Model.Gender</p>
+                <p>@Model.DisplayGender</p>
             </div>
 
             <div class="profile-group">
                 <strong>Birthday</strong>
-                <p>@Model.Birthday</p>
+                <p>@Model.DisplayBirthday</p>
             </div>
 
             <div class="profile-group">
@@ -38,7 +38,7 @@
             <table id="account-table">
                 <thead>
                     <tr>
-                        <th>Account number</th>
+                        <th>ID</th>
                         <th>Balance</th>
                         <th>Created</th>
                     </tr>
@@ -55,13 +55,13 @@
                                     @account.AccountId
                                 </a>
                             </td>
-                            <td>@account.Balance.ToString("C2")</td>
-                            <td>@account.Created</td>
+                            <td>@account.DisplayBalance</td>
+                            <td>@account.DisplayCreated</td>
                         </tr>
                     }
                 </tbody>
             </table>
-            <h3>Total balance: @Model.TotalBalance.ToString("C2")</h3>
+            <p>Total balance: <span class="total-balance">@Model.DisplayTotalBalance</span></p>
         </div>
     </div>
 </div>

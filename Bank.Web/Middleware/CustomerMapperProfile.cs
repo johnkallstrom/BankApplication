@@ -16,6 +16,11 @@ namespace Bank.Web.Middleware
                 .ForMember(dest => dest.PhoneCountryCode, opt => opt.MapFrom(src => src.Telephonecountrycode))
                 .ForMember(dest => dest.Phone, opt => opt.MapFrom(src => src.Telephonenumber))
                 .ForMember(dest => dest.PostalCode, opt => opt.MapFrom(src => src.Zipcode));
+
+            CreateMap<Customers, CustomerViewModel>()
+                .ForMember(dest => dest.Address, opt => opt.MapFrom(src => src.Streetaddress))
+                .ForMember(dest => dest.FirstName, opt => opt.MapFrom(src => src.Givenname))
+                .ForMember(dest => dest.LastName, opt => opt.MapFrom(src => src.Surname));
         }
     }
 }

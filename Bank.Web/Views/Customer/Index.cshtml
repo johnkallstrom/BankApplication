@@ -1,10 +1,40 @@
-﻿
+﻿@model List<CustomerViewModel>
+
 @{
     ViewData["Title"] = "Customers";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <div id="customers">
-    <div class="container"></div>
+    <div class="container">
+        <table id="customers-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Address</th>
+                    <th>City</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var customer in Model)
+                {
+                <tr>
+                    <td>@customer.CustomerId</td>
+                    <td>
+                        <a asp-controller="Customer"
+                           asp-action="CustomerProfile"
+                           asp-route-id="@customer.CustomerId"
+                           class="customer-name">
+                            @customer.Fullname
+                        </a>
+                    </td>
+                    <td>@customer.Address</td>
+                    <td>@customer.City</td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>
 </div>
 

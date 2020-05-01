@@ -1,0 +1,49 @@
+﻿:root {
+    --font: 'Roboto', sans-serif;
+    --dark: #2a2b2b;
+    --light-dark: #ccc;
+    --light: #eee;
+    --white: #fff;
+    --blue: #0079D3;
+    --hover: #070707;
+    --danger: #d92550;
+}
+
+#customers .container {
+    padding: 3rem 3rem 3rem 3rem;
+    background-color: var(--white);
+    border: 1px solid var(--light);
+    border-radius: 8px;
+    margin-top: 3rem;
+}
+
+#customers-table .customer-name {
+    text-decoration: none;
+    color: var(--dark);
+}
+
+#customers-table .customer-name:hover {
+    cursor: pointer;
+    border-bottom: 1px solid var(--dark);
+}
+
+#customers-table {
+    table-layout: fixed;
+    overflow: hidden;
+    border-collapse: collapse;
+    width: 100%;
+    color: var(--dark);
+    margin-bottom: 10px;
+}
+
+#customers-table td, th {
+    padding: 1rem;
+    border: 1px solid #ddd;
+}
+
+#customers-table th {
+    font-weight: 600;
+    text-align: left;
+    background-color: var(--dark);
+    color: #fff;
+}
