@@ -1,0 +1,50 @@
+﻿@model AccountDetailsViewModel
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="account-details">
+    <div class="container">
+        <div class="account">
+            <h1>Account #@Model.AccountId</h1>
+
+            <div class="account-group">
+                <strong>Balance</strong>
+                <p>@Model.DisplayBalance</p>
+            </div>
+
+            <div class="account-group">
+                <strong>Created</strong>
+                <p>@Model.DisplayCreated</p>
+            </div>
+        </div>
+        <div class="transactions">
+            <h1>Transactions</h1>
+            <table id="transactions-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Amount</th>
+                        <th>Balance</th>
+                        <th>Type</th>
+                        <th>Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var transaction in Model.Transactions)
+                    {
+                        <tr>
+                            <td>@transaction.TransactionId</td>
+                            <td>@transaction.DisplayAmount</td>
+                            <td>@transaction.DisplayBalance</td>
+                            <td>@transaction.Type</td>
+                            <td>@transaction.DisplayDate</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

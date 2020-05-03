@@ -1,40 +1,75 @@
-﻿@model List<CustomerViewModel>
+﻿@model CustomerListViewModel
 
 @{
     ViewData["Title"] = "Customers";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div id="customers">
+<div id="customer-list">
     <div class="container">
-        <table id="customers-table">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Name</th>
-                    <th>Address</th>
-                    <th>City</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var customer in Model)
+        <h1>Customers</h1>
+        <div id="customer-search">
+            <form>
+                <div class="form-group">
+                    <input type="text" asp-for="@Model.SearchWord" placeholder="Search..." />
+                    <input type="submit" value="Search" />
+                </div>
+            </form>
+        </div>
+        @if (Model.DisplaySearchError() == true)
+        {
+            <div id="customer-search-error">
+                <h3>Sorry, we couldn't find any results...</h3>
+            </div>
+        }
+        else
+        {
+            <table id="customers-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Address</th>
+                        <th>City</th>
+                        <th>Details</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var customer in Model.Customers)
+                    {
+                        <tr>
+                            <td>@customer.CustomerId</td>
+                            <td>
+                                <a asp-controller="Customer"
+                                   asp-action="CustomerProfile"
+                                   asp-route-id="@customer.CustomerId"
+                                   class="customer-name">@customer.Fullname
+                                </a>
+                            </td>
+                            <td>@customer.Address</td>
+                            <td>@customer.City</td>
+                            <td>
+                                <a asp-controller="Customer"
+                                   asp-action="CustomerProfile"
+                                   asp-route-id="@customer.CustomerId"
+                                   class="customer-details">Details
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <div id="pagination">
+                @if (Model.DisplayPrevButton())
                 {
-                <tr>
-                    <td>@customer.CustomerId</td>
-                    <td>
-                        <a asp-controller="Customer"
-                           asp-action="CustomerProfile"
-                           asp-route-id="@customer.CustomerId"
-                           class="customer-name">
-                            @customer.Fullname
-                        </a>
-                    </td>
-                    <td>@customer.Address</td>
-                    <td>@customer.City</td>
-                </tr>
+                    <a onclick="window.location.href=updateQueryStringParameter(window.location.href, 'currentPage', '@(Model.CurrentPage - 1)')">&laquo;</a>
                 }
-            </tbody>
-        </table>
+                @if (Model.DisplayNextButton())
+                {
+                    <a onclick="window.location.href=updateQueryStringParameter(window.location.href, 'currentPage', '@(Model.CurrentPage + 1)')">&raquo;</a>
+                }
+            </div>
+        }
     </div>
 </div>
 

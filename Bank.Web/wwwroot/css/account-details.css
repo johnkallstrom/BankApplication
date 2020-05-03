@@ -9,39 +9,50 @@
     --danger: #d92550;
 }
 
-#customers .container {
-    padding: 3rem 3rem 3rem 3rem;
+#account-details .container {
+    margin-top: 3rem;
+    padding-bottom: 4rem;
+}
+
+.account, .transactions {
+    padding: 3rem;
     background-color: var(--white);
     border: 1px solid var(--light);
     border-radius: 8px;
-    margin-top: 3rem;
 }
 
-#customers-table .customer-name {
-    text-decoration: none;
-    color: var(--dark);
+.account {
+    margin-bottom: 2rem;
 }
 
-#customers-table .customer-name:hover {
-    cursor: pointer;
-    border-bottom: 1px solid var(--dark);
+.account h1, .transactions h1 {
+    margin-bottom: 2rem;
 }
 
-#customers-table {
+.account-group {
+    margin-bottom: 1rem;
+}
+
+.account-group:last-child {
+    margin-bottom: 0rem;
+}
+
+#transactions-table {
     table-layout: fixed;
     overflow: hidden;
+    margin-top: 1rem;
     border-collapse: collapse;
     width: 100%;
     color: var(--dark);
     margin-bottom: 10px;
 }
 
-#customers-table td, th {
+#transactions-table td, th {
     padding: 1rem;
     border: 1px solid #ddd;
 }
 
-#customers-table th {
+#transactions-table th {
     font-weight: 600;
     text-align: left;
     background-color: var(--dark);

@@ -15,6 +15,15 @@ namespace Bank.Web.Services
             _context = context;
         }
 
+        public Accounts GetAccount(int id) => _context.Accounts.FirstOrDefault(a => a.AccountId == id);
+
+        public IQueryable<Transactions> GetAccountTransactions(int id)
+        {
+            return _context.Transactions
+                .Where(t => t.AccountId == id)
+                .OrderByDescending(t => t.Date);
+        }
+
         public IEnumerable<Accounts> GetCustomerAccounts(int id)
         {
             return _context.Dispositions

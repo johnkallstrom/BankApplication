@@ -9,6 +9,7 @@ namespace Bank.Web.Middleware
         public AccountMapperProfile()
         {
             CreateMap<Accounts, AccountViewModel>();
+            CreateMap<Accounts, AccountDetailsViewModel>();
         }
     }
 }

@@ -1,0 +1,117 @@
+﻿:root {
+    --font: 'Roboto', sans-serif;
+    --dark: #2a2b2b;
+    --light-dark: #ccc;
+    --light: #eee;
+    --white: #fff;
+    --blue: #0079D3;
+    --hover: #070707;
+    --danger: #d92550;
+}
+
+#customer-list .container {
+    padding: 3rem 3rem 3rem 3rem;
+    background-color: var(--white);
+    border: 1px solid var(--light);
+    border-radius: 8px;
+    margin-top: 3rem;
+}
+
+#customer-list h1 {
+    font-size: 35px;
+    margin-bottom: 2rem;
+}
+
+#customer-search .form-group {
+    margin-bottom: 2rem;
+}
+
+#customer-search input[type="text"] {
+    width: 30%;
+    font-family: var(--font);
+    font-size: 17px;
+    padding: 0.8rem;
+    border: 1px solid var(--light-dark);
+    border-radius: 8px;
+}
+
+#customer-search input[type="text"]:focus {
+    outline: none;
+}
+
+#customer-search input[type="submit"] {
+    padding: 0.8rem;
+    font-size: 17px;
+    font-family: var(--font);
+    border: none;
+    background-color: var(--blue);
+    color: #fff;
+    border-radius: 8px;
+    outline: none;
+    margin-left: 0.4rem;
+}
+
+#customer-search input[type="submit"]:hover {
+    cursor: pointer;
+}
+
+#customers-table .customer-name {
+    text-decoration: none;
+    color: var(--dark);
+}
+
+#customers-table .customer-details {
+    text-decoration: none;
+    color: var(--blue);
+    border-bottom: 1px solid var(--blue);
+}
+
+#customers-table .customer-name:hover {
+    cursor: pointer;
+    border-bottom: 1px solid var(--dark);
+}
+
+#customers-table {
+    table-layout: fixed;
+    overflow: hidden;
+    border-collapse: collapse;
+    width: 100%;
+    color: var(--dark);
+    margin-bottom: 10px;
+}
+
+#customers-table td, th {
+    padding: 1rem;
+    border: 1px solid #ddd;
+}
+
+#customers-table th {
+    font-weight: 600;
+    text-align: left;
+    background-color: var(--dark);
+    color: #fff;
+}
+
+#customer-search-error {
+    margin-top: 3rem;
+    font-size: 22px;
+    color: var(--dark);
+}
+
+#pagination {
+    margin-top: 0.5rem;
+    display: inline-block;
+    margin-bottom: 2rem;
+}
+
+#pagination a {
+    color: #333;
+    padding: 8px 16px;
+    text-decoration: none;
+    border: 1px solid #ddd;
+    margin-right: 0.5rem;
+}
+
+#pagination a:hover {
+    cursor: pointer;
+}

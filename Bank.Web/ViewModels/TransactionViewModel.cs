@@ -12,5 +12,9 @@ namespace Bank.Web.ViewModels
         public decimal Amount { get; set; }
         public decimal Balance { get; set; }
         public string Bank { get; set; }
+
+        public string DisplayAmount => Amount.ToString("C2");
+        public string DisplayBalance => Balance.ToString("C2");
+        public string DisplayDate => Date.ToShortDateString();
     }
 }

@@ -25,20 +25,17 @@ namespace Bank.Web.Controllers
 
         [HttpGet]
         [Authorize(Roles = "Admin, Cashier")]
-        public IActionResult Index()
+        public IActionResult Index(int? currentPage, string searchWord)
         {
-            var customerList = _customerService.GetAllCustomers();
-            var model = _mapper.Map<List<CustomerViewModel>>(customerList);
+            var customers = _customerService.GetAllCustomers();
+
+            var model = new CustomerListViewModelBuilder()
+                .WithCustomers(customers)
+                .WithSearch(searchWord)
+                .WithPaging(currentPage)
+                .Build();
 
             return View(model);
-        }
-
-        [HttpPost]
-        [Authorize(Roles = "Admin, Cashier")]
-        [ValidateAntiForgeryToken]
-        public IActionResult Search()
-        {
-            return View();
         }
 
         [HttpGet]

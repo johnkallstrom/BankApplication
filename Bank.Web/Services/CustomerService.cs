@@ -15,7 +15,7 @@ namespace Bank.Web.Services
             _context = context;
         }
 
-        public IEnumerable<Customers> GetAllCustomers()
+        public IQueryable<Customers> GetAllCustomers()
         {
             return _context.Customers;
         }

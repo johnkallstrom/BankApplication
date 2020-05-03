@@ -1,7 +1,7 @@
 ﻿@model CustomerProfileViewModel
 
 @{
-    ViewData["Title"] = "Customer Profile";
+    ViewData["Title"] = "Profile";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -41,6 +41,7 @@
                         <th>ID</th>
                         <th>Balance</th>
                         <th>Created</th>
+                        <th>Details</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -51,12 +52,18 @@
                                 <a asp-controller="Account"
                                    asp-action="AccountDetails"
                                    asp-route-id="@account.AccountId"
-                                   class="account-id">
-                                    @account.AccountId
+                                   class="account-id">@account.AccountId
                                 </a>
                             </td>
                             <td>@account.DisplayBalance</td>
                             <td>@account.DisplayCreated</td>
+                            <td>
+                                <a asp-controller="Account"
+                                   asp-action="AccountDetails"
+                                   asp-route-id="@account.AccountId"
+                                   class="account-details">Details
+                                </a>
+                            </td>
                         </tr>
                     }
                 </tbody>
