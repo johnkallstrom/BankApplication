@@ -22,11 +22,11 @@
     margin-bottom: 2rem;
 }
 
-#customer-search .form-group {
+.customer-search .form-group {
     margin-bottom: 2rem;
 }
 
-#customer-search input[type="text"] {
+.customer-search input[type="text"] {
     width: 30%;
     font-family: var(--font);
     font-size: 17px;
@@ -35,11 +35,11 @@
     border-radius: 8px;
 }
 
-#customer-search input[type="text"]:focus {
+.customer-search input[type="text"]:focus {
     outline: none;
 }
 
-#customer-search input[type="submit"] {
+.customer-search input[type="submit"] {
     padding: 0.8rem;
     font-size: 17px;
     font-family: var(--font);
@@ -51,7 +51,7 @@
     margin-left: 0.4rem;
 }
 
-#customer-search input[type="submit"]:hover {
+.customer-search input[type="submit"]:hover {
     cursor: pointer;
 }
 

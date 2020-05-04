@@ -1,4 +1,5 @@
 ﻿using Bank.Infrastructure.Entities;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Bank.Web.Services
@@ -7,5 +8,6 @@ namespace Bank.Web.Services
     {
         IQueryable<Customers> GetAllCustomers();
         Customers GetCustomer(int id);
+        IEnumerable<Accounts> GetCustomerAccounts(int id);
     }
 }

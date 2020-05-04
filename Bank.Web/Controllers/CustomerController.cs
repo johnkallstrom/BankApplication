@@ -10,15 +10,12 @@ namespace Bank.Web.Controllers
     public class CustomerController : Controller
     {
         private readonly IMapper _mapper;
-        private readonly IAccountService _accountService;
         private readonly ICustomerService _customerService;
 
         public CustomerController(
-            IMapper mapper, 
-            IAccountService accountService, 
+            IMapper mapper,  
             ICustomerService customerService)
         {
-            _accountService = accountService;
             _mapper = mapper;
             _customerService = customerService;
         }
@@ -43,7 +40,7 @@ namespace Bank.Web.Controllers
         public IActionResult CustomerProfile(int id)
         {
             var customer = _customerService.GetCustomer(id);
-            var accounts = _accountService.GetCustomerAccounts(id);
+            var accounts = _customerService.GetCustomerAccounts(id);
 
             var model = _mapper.Map<CustomerProfileViewModel>(customer);
             model.Accounts = _mapper.Map<List<AccountViewModel>>(accounts);

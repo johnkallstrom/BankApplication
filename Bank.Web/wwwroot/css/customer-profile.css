@@ -19,10 +19,15 @@
     background-color: var(--white);
     border: 1px solid var(--light);
     border-radius: 8px;
+    width: 49%;
 }
 
 .profile {
-    margin-bottom: 2rem;
+    float: left;
+}
+
+.accounts {
+    float: right;
 }
 
 .accounts h1, .profile h1 {
@@ -83,4 +88,23 @@
     text-align: left;
     background-color: var(--dark);
     color: #fff;
+}
+
+@media (max-width: 992px){
+    .profile, .accounts {
+        padding: 3rem;
+        background-color: var(--white);
+        border: 1px solid var(--light);
+        border-radius: 8px;
+        width: 100%;
+    }
+
+    .profile {
+        margin-bottom: 2rem;
+        float: none;
+    }
+
+    .accounts {
+        float: none;
+    }
 }

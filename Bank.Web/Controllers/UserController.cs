@@ -50,6 +50,7 @@ namespace Bank.Web.Controllers
             }
         }
 
+        [AllowAnonymous]
         public IActionResult Logout()
         {
             _userService.SignOutUser();

@@ -8,10 +8,10 @@
 <div id="customer-list">
     <div class="container">
         <h1>Customers</h1>
-        <div id="customer-search">
+        <div class="customer-search">
             <form>
                 <div class="form-group">
-                    <input type="text" asp-for="@Model.SearchWord" placeholder="Search..." />
+                    <input type="text" asp-for="@Model.SearchWord" placeholder="Search by name or city" />
                     <input type="submit" value="Search" />
                 </div>
             </form>
@@ -43,20 +43,22 @@
                                 <a asp-controller="Customer"
                                    asp-action="CustomerProfile"
                                    asp-route-id="@customer.CustomerId"
-                                   class="customer-name">@customer.Fullname
-                                </a>
-                            </td>
-                            <td>@customer.Address</td>
-                            <td>@customer.City</td>
-                            <td>
-                                <a asp-controller="Customer"
-                                   asp-action="CustomerProfile"
-                                   asp-route-id="@customer.CustomerId"
-                                   class="customer-details">Details
-                                </a>
-                            </td>
-                        </tr>
-                    }
+                                   class="customer-name">
+                                    @customer.Fullname
+                            </a>
+                        </td>
+                        <td>@customer.Address</td>
+                        <td>@customer.City</td>
+                        <td>
+                            <a asp-controller="Customer"
+                               asp-action="CustomerProfile"
+                               asp-route-id="@customer.CustomerId"
+                               class="customer-details">
+                                Details
+                            </a>
+                        </td>
+                    </tr>
+                }
                 </tbody>
             </table>
             <div id="pagination">

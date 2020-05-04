@@ -1,5 +1,6 @@
 ﻿using Bank.Web.Services;
 using Bank.Web.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Bank.Web.Controllers
@@ -13,6 +14,8 @@ namespace Bank.Web.Controllers
             _bankStatisticsService = bankStatisticsService;
         }
 
+        [HttpGet]
+        [AllowAnonymous]
         public IActionResult Index()
         {
             var model = new BankStatisticsViewModel

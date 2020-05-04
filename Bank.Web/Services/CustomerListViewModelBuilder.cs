@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace Bank.Web.Services
 {
-    public class CustomerListViewModelBuilder : ICustomerListViewModelBuilder
+    public class CustomerListViewModelBuilder
     {
         public int CurrentPage { get; set; }
         public int PageSize { get; set; }

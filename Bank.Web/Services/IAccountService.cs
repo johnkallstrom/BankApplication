@@ -8,6 +8,5 @@ namespace Bank.Web.Services
     {
         IQueryable<Transactions> GetAccountTransactions(int id);
         Accounts GetAccount(int id);
-        IEnumerable<Accounts> GetCustomerAccounts(int id);
     }
 }

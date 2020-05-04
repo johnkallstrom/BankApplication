@@ -15,18 +15,32 @@ namespace Bank.Web.Services
             _context = context;
         }
 
-        public IQueryable<Customers> GetAllCustomers()
-        {
-            return _context.Customers;
-        }
+        public IQueryable<Customers> GetAllCustomers() => _context.Customers;
 
         public Customers GetCustomer(int id)
         {
             return _context.Customers
                 .Include(x => x.Dispositions)
                 .ThenInclude(x => x.Account)
-                .ThenInclude(x => x.Transactions)
                 .FirstOrDefault(x => x.CustomerId == id);
+        }
+
+        public IEnumerable<Accounts> GetCustomerAccounts(int id)
+        {
+            return _context.Dispositions
+                .Include(a => a.Account)
+                .Where(d => d.CustomerId == id)
+                .Select(x => new Accounts
+                {
+                    AccountId = x.Account.AccountId,
+                    Balance = x.Account.Balance,
+                    Created = x.Account.Created,
+                    Frequency = x.Account.Frequency,
+                    Loans = x.Account.Loans,
+                    Dispositions = x.Account.Dispositions,
+                    PermenentOrder = x.Account.PermenentOrder,
+                    Transactions = x.Account.Transactions
+                }).ToList();
         }
     }
 }

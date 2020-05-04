@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
 using Bank.Web.Services;
 using Bank.Web.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace Bank.Web.Controllers
 {
@@ -18,6 +18,8 @@ namespace Bank.Web.Controllers
             _mapper = mapper;
         }
 
+        [HttpGet]
+        [Authorize(Roles = "Admin, Cashier")]
         public IActionResult AccountDetails(int id)
         {
             var account = _accountService.GetAccount(id);

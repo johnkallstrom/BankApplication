@@ -21,11 +21,11 @@
     border-radius: 8px;
 }
 
-.account {
+.account h1, .transactions h1 {
     margin-bottom: 2rem;
 }
 
-.account h1, .transactions h1 {
+.account {
     margin-bottom: 2rem;
 }
 

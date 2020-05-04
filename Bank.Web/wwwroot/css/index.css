@@ -13,7 +13,7 @@
     color: var(--dark);
 }
 
-#showcase .container {
+#showcase .wrapper {
     padding: 3rem 3rem 3rem 3rem;
     background-color: var(--white);
     border: 1px solid var(--light);
