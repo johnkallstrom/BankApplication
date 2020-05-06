@@ -1,0 +1,37 @@
+﻿@model CreateDepositViewModel
+
+@{
+    ViewData["Title"] = "Deposit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="transaction">
+    <div class="container">
+        <div class="wrapper">
+            <div>
+                <h1>Deposit</h1>
+            </div>
+            <form asp-controller="Account" asp-action="Deposit" method="post" id="form">
+
+                <input type="hidden" asp-for="@Model.AccountId" />
+
+                <div class="form-group">
+                    <label asp-for="@Model.AccountId"></label>
+                    <span asp-validation-for="@Model.AccountId"></span>
+                    <input type="text" value="Account #@Model.AccountId" class="account-number" readonly />
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="@Model.Amount"></label>
+                    <span asp-validation-for="@Model.Amount"></span>
+                    <input type="text" asp-for="@Model.Amount" id="input" maxlength="15" required />
+                </div>
+
+                <div class="form-group">
+                    <input type="submit" value="Deposit" />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+

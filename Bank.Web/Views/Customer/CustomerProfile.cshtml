@@ -38,10 +38,10 @@
             <table id="account-table">
                 <thead>
                     <tr>
-                        <th>ID</th>
+                        <th>Number</th>
                         <th>Balance</th>
                         <th>Created</th>
-                        <th>Details</th>
+                        <th>Manage</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -61,7 +61,7 @@
                                 <a asp-controller="Account"
                                    asp-action="AccountDetails"
                                    asp-route-id="@account.AccountId"
-                                   class="account-details">Details
+                                   class="account-details">Manage
                                 </a>
                             </td>
                         </tr>

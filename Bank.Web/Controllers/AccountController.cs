@@ -4,6 +4,7 @@ using Bank.Web.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Bank.Web.Controllers
 {
@@ -29,6 +30,70 @@ namespace Bank.Web.Controllers
             model.Transactions = _mapper.Map<List<TransactionViewModel>>(transactions);
 
             return View(model);
+        }
+
+
+        [HttpGet]
+        [Authorize(Roles = "Admin, Cashier")]
+        public IActionResult Deposit(int id)
+        {
+            var account = _accountService.GetAccount(id);
+            var model = _mapper.Map<CreateDepositViewModel>(account);
+
+            return View(model);
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "Admin, Cashier")]
+        public async Task<IActionResult> Deposit(CreateDepositViewModel model)
+        {
+            if (!ModelState.IsValid) return View(model);
+
+            var succeeded = await _accountService.Deposit(model.AccountId, model.Amount);
+            if (succeeded) return RedirectToAction("AccountDetails", new { id = model.AccountId });
+
+            return View();
+        }
+
+        [HttpGet]
+        [Authorize(Roles = "Admin, Cashier")]
+        public IActionResult Withdrawal(int id)
+        {
+            var account = _accountService.GetAccount(id);
+            var model = _mapper.Map<CreateWithdrawalViewModel>(account);
+
+            return View(model);
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "Admin, Cashier")]
+        public async Task<ActionResult> Withdrawal(CreateWithdrawalViewModel model)
+        {
+            if (!ModelState.IsValid) return View(model);
+
+            var succeeded = await _accountService.Withdrawal(model.AccountId, model.Amount);
+            if (succeeded) return RedirectToAction("AccountDetails", new { id = model.AccountId });
+
+            return View();
+        }
+
+        [HttpGet]
+        [Authorize(Roles = "Admin, Cashier")]
+        public IActionResult Transfer(int id)
+        {
+            var account = _accountService.GetAccount(id);
+            var model = _mapper.Map<CreateTransferViewModel>(account);
+
+            return View(model);
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "Admin, Cashier")]
+        public IActionResult Transfer(CreateTransferViewModel model)
+        {
+            if (!ModelState.IsValid) return View(model);
+
+            return View();
         }
     }
 }

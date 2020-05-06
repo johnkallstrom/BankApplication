@@ -9,12 +9,12 @@
     --danger: #d92550;
 }
 
-#login {
+#transaction {
     margin-top: 3rem;
     padding-bottom: 1rem;
 }
 
-#login .wrapper {
+#transaction .wrapper {
     background-color: var(--white);
     border: 1px solid var(--light);
     border-radius: 8px;
@@ -22,17 +22,17 @@
     width: 465px;
 }
 
-#login label {
+#transaction label {
     display: block;
 }
 
-#login h1 {
+#transaction h1 {
     font-size: 35px;
     color: var(--dark);
-    margin-bottom: 1.5rem;
+    margin-bottom: 2rem;
 }
 
-#login input[type="email"], input[type="password"] {
+#transaction input[type="text"] {
     width: 365px;
     padding: 10px;
     height: 45px;
@@ -44,7 +44,15 @@
     outline: none;
 }
 
-#login input[type="submit"] {
+#transaction .account-number:read-only {
+    background-color: var(--light);
+}
+
+#transaction .account-number:hover {
+    cursor: not-allowed;
+}
+
+#transaction input[type="submit"] {
     margin-top: 5px;
     height: 50px;
     font-size: 16px;
@@ -57,6 +65,6 @@
     outline: none;
 }
 
-#login input[type="submit"]:hover {
+#transaction input[type="submit"]:hover {
     cursor: pointer;
 }

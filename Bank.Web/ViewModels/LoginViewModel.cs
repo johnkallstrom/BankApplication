@@ -5,7 +5,7 @@ namespace Bank.Web.ViewModels
     public class LoginViewModel
     {
         [Required(ErrorMessage = "Please enter your email.")]
-        [Display(Name = "Username")]
+        [Display(Name = "Email")]
         [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
         [Required(ErrorMessage = "Please enter your password.")]

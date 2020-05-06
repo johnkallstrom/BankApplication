@@ -8,7 +8,12 @@
 <div id="account-details">
     <div class="container">
         <div class="account">
-            <h1>Account #@Model.AccountId</h1>
+            <h1>Account details</h1>
+
+            <div class="account-group">
+                <strong>Number</strong>
+                <p>@Model.AccountId</p>
+            </div>
 
             <div class="account-group">
                 <strong>Balance</strong>
@@ -19,28 +24,40 @@
                 <strong>Created</strong>
                 <p>@Model.DisplayCreated</p>
             </div>
+
+            <div class="options">
+                <div class="option-group">
+                    <a asp-controller="Account" asp-action="Deposit" asp-route-id="@Model.AccountId">Deposit</a>
+                </div>
+
+                <div class="option-group">
+                    <a asp-controller="Account" asp-action="Withdrawal" asp-route-id="@Model.AccountId">Withdrawal</a>
+                </div>
+
+                <div class="option-group">
+                    <a asp-controller="Account" asp-action="Transfer" asp-route-id="@Model.AccountId">Transfer</a>
+                </div>
+            </div>
         </div>
-        <div class="transactions">
+        <div class="transaction-list">
             <h1>Transactions</h1>
             <table id="transactions-table">
                 <thead>
                     <tr>
-                        <th>ID</th>
+                        <th>Date</th>
+                        <th>Type</th>
                         <th>Amount</th>
                         <th>Balance</th>
-                        <th>Type</th>
-                        <th>Date</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach (var transaction in Model.Transactions)
                     {
                         <tr>
-                            <td>@transaction.TransactionId</td>
+                            <td>@transaction.DisplayDate</td>
+                            <td>@transaction.Type</td>
                             <td>@transaction.DisplayAmount</td>
                             <td>@transaction.DisplayBalance</td>
-                            <td>@transaction.Type</td>
-                            <td>@transaction.DisplayDate</td>
                         </tr>
                     }
                 </tbody>
