@@ -8,13 +8,16 @@ namespace Bank.Web.ViewModels
         [Required]
         [Display(Name = "From")]
         public int FromAccountId { get; set; }
-        [Required]
+
+        [Required(ErrorMessage = "Please enter a valid account number.")]
         [Display(Name = "To")]
+        [Range(1, int.MaxValue, ErrorMessage = ("Please enter a valid account number."))]
         public int ToAccountId { get; set; }
-        [Required(ErrorMessage = "Please enter amount")]
+
+        [Required(ErrorMessage = "Please enter amount.")]
         [Display(Name = "Amount")]
-        [DataType(DataType.Currency, ErrorMessage = "Please enter a number")]
-        [Range(1, double.MaxValue, ErrorMessage = "The amount must be higher than 0")]
+        [DataType(DataType.Currency, ErrorMessage = "Please enter a number.")]
+        [Range(1, double.MaxValue, ErrorMessage = "The amount must be higher than 0.")]
         public decimal Amount { get; set; }
     }
 }

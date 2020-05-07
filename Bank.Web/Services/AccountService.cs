@@ -1,9 +1,11 @@
-﻿using Bank.Infrastructure;
+﻿
+using Bank.Infrastructure;
 using Bank.Infrastructure.Entities;
 using Bank.Infrastructure.Enums;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Transactions;
 
 namespace Bank.Web.Services
 {
@@ -14,6 +16,44 @@ namespace Bank.Web.Services
         public AccountService(ApplicationDbContext context)
         {
             _context = context;
+        }
+
+        public async Task<bool> Transfer(int fromAccountId, int toAccountId, decimal amount)
+        {
+            var fromAccount = _context.Accounts.FirstOrDefault(a => a.AccountId == fromAccountId);
+            var toAccount = _context.Accounts.FirstOrDefault(a => a.AccountId == toAccountId);
+
+            if (fromAccount == null || toAccount == null) return false;
+            if (fromAccountId == toAccountId) return false;
+            if (fromAccount.Balance - amount < 0) return false;
+
+            fromAccount.Balance -= Math.Round(amount, 2);
+            toAccount.Balance += Math.Round(amount, 2);
+
+            var fromTransaction = new Transactions
+            {
+                AccountId = fromAccount.AccountId,
+                Amount = -amount,
+                Balance = fromAccount.Balance,
+                Date = DateTime.Now,
+                Type = TransactionType.Debit.ToString(),
+                Operation = OperationType.RemittanceToAnotherBank.Value
+            };
+
+            var toTransaction = new Transactions
+            {
+                AccountId = toAccount.AccountId,
+                Amount = amount,
+                Balance = toAccount.Balance,
+                Date = DateTime.Now,
+                Type = TransactionType.Credit.ToString(),
+                Operation = OperationType.CollectionFromAnotherBank.Value
+            };
+
+            _context.Accounts.UpdateRange(fromAccount, toAccount);
+            await _context.Transactions.AddRangeAsync(fromTransaction, toTransaction);
+            await _context.SaveChangesAsync();
+            return true;
         }
 
         public async Task<bool> Withdrawal(int id, decimal amount)

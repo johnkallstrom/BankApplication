@@ -11,20 +11,18 @@
             <div>
                 <h1>Withdrawal</h1>
             </div>
-            <form asp-controller="Account" asp-action="Withdrawal" method="post" id="form">
-
+            <form asp-controller="Account" asp-action="Withdrawal" method="post">
+                <div asp-validation-summary="All"></div>
                 <input type="hidden" asp-for="@Model.AccountId" />
 
                 <div class="form-group">
                     <label asp-for="@Model.AccountId"></label>
-                    <span asp-validation-for="@Model.AccountId"></span>
-                    <input type="text" value="Account #@Model.AccountId" class="account-number" readonly />
+                    <input type="text" value="@Model.AccountId" class="account-number" readonly />
                 </div>
 
                 <div class="form-group">
                     <label asp-for="@Model.Amount"></label>
-                    <span asp-validation-for="@Model.Amount"></span>
-                    <input type="text" asp-for="@Model.Amount" id="input" maxlength="15" required />
+                    <input type="text" asp-for="@Model.Amount" value="@String.Empty" maxlength="15" />
                 </div>
 
                 <div class="form-group">

@@ -52,7 +52,9 @@ namespace Bank.Web.Controllers
             var succeeded = await _accountService.Deposit(model.AccountId, model.Amount);
             if (succeeded) return RedirectToAction("AccountDetails", new { id = model.AccountId });
 
-            return View();
+            ModelState.AddModelError(string.Empty, "Deposit failed.");
+
+            return View(model);
         }
 
         [HttpGet]
@@ -74,7 +76,9 @@ namespace Bank.Web.Controllers
             var succeeded = await _accountService.Withdrawal(model.AccountId, model.Amount);
             if (succeeded) return RedirectToAction("AccountDetails", new { id = model.AccountId });
 
-            return View();
+            ModelState.AddModelError(string.Empty, "Withdrawal failed.");
+
+            return View(model);
         }
 
         [HttpGet]
@@ -89,11 +93,22 @@ namespace Bank.Web.Controllers
 
         [HttpPost]
         [Authorize(Roles = "Admin, Cashier")]
-        public IActionResult Transfer(CreateTransferViewModel model)
+        public async Task<IActionResult> Transfer(CreateTransferViewModel model)
         {
             if (!ModelState.IsValid) return View(model);
 
-            return View();
+            if (model.FromAccountId == model.ToAccountId)
+            {
+                ModelState.AddModelError(string.Empty, "You can't transfer to same account.");
+                return View(model);
+            }
+
+            var succeeded = await _accountService.Transfer(model.FromAccountId, model.ToAccountId, model.Amount);
+            if (succeeded) return RedirectToAction("AccountDetails", new { id = model.FromAccountId });
+
+            ModelState.AddModelError(string.Empty, "Transfer failed.");
+
+            return View(model);
         }
     }
 }
