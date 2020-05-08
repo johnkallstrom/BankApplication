@@ -1,0 +1,72 @@
+﻿@model AccountDetailsViewModel
+
+<h1>Transactions</h1>
+<table id="transactions-table">
+    <thead>
+        <tr>
+            <th>Date</th>
+            <th>Type</th>
+            <th>Amount</th>
+            <th>Balance</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var transaction in Model.Transactions)
+        {
+            <tr>
+                <td>@transaction.DisplayDate</td>
+                <td>@transaction.Type</td>
+                <td>@transaction.DisplayAmount</td>
+                <td>@transaction.DisplayBalance</td>
+            </tr>
+        }
+    </tbody>
+</table>
+<div id="pagination">
+    @if (Model.EnablePrevButton())
+    {
+        <a asp-controller="Account"
+           asp-action="Previous"
+           asp-route-id="@Model.AccountId"
+           asp-route-currentPage="@(Model.CurrentPage - 1)"
+           data-ajax="true"
+           data-ajax-method="GET"
+           data-ajax-mode="replace"
+           data-ajax-update=".transaction-list">&laquo;</a>
+    }
+    else
+    {
+        <a asp-controller="Account"
+           asp-action="Previous"
+           asp-route-id="@Model.AccountId"
+           asp-route-currentPage="@(Model.CurrentPage - 1)"
+           data-ajax="true"
+           data-ajax-method="GET"
+           data-ajax-mode="replace"
+           data-ajax-update=".transaction-list"
+           class="disabled">&laquo;</a>
+    }
+    @if (Model.EnableNextButton())
+    {
+        <a asp-controller="Account"
+           asp-action="Next"
+           asp-route-id="@Model.AccountId"
+           asp-route-currentPage="@(Model.CurrentPage + 1)"
+           data-ajax="true"
+           data-ajax-method="GET"
+           data-ajax-mode="replace"
+           data-ajax-update=".transaction-list">&raquo;</a>
+    }
+    else
+    {
+        <a asp-controller="Account"
+           asp-action="Next"
+           asp-route-id="@Model.AccountId"
+           asp-route-currentPage="@(Model.CurrentPage + 1)"
+           data-ajax="true"
+           data-ajax-method="GET"
+           data-ajax-mode="replace"
+           data-ajax-update=".transaction-list"
+           class="disabled">&raquo;</a>
+    }
+</div>

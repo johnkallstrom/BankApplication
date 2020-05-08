@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Bank.Web.Services;
+using Bank.Web.Services.Account;
 using Bank.Web.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -21,15 +22,50 @@ namespace Bank.Web.Controllers
 
         [HttpGet]
         [Authorize(Roles = "Admin, Cashier")]
-        public IActionResult AccountDetails(int id)
+        public IActionResult AccountDetails(int id, int? currentPage)
         {
             var account = _accountService.GetAccount(id);
             var transactions = _accountService.GetAccountTransactions(id);
 
-            var model = _mapper.Map<AccountDetailsViewModel>(account);
-            model.Transactions = _mapper.Map<List<TransactionViewModel>>(transactions);
+            var model = new AccountDetailsViewModelBuilder()
+                .WithAccount(account)
+                .WithTransactions(transactions)
+                .WithPaging(currentPage)
+                .Build();
 
             return View(model);
+        }
+
+        [HttpGet]
+        [Authorize(Roles = "Admin, Cashier")]
+        public IActionResult Previous(int id, int? currentPage)
+        {
+            var account = _accountService.GetAccount(id);
+            var transactions = _accountService.GetAccountTransactions(id);
+
+            var model = new AccountDetailsViewModelBuilder()
+                .WithAccount(account)
+                .WithTransactions(transactions)
+                .WithPaging(currentPage)
+                .Build();
+
+            return ViewComponent("TransactionList", model);
+        }
+
+        [HttpGet]
+        [Authorize(Roles = "Admin, Cashier")]
+        public IActionResult Next(int id, int? currentPage)
+        {
+            var account = _accountService.GetAccount(id);
+            var transactions = _accountService.GetAccountTransactions(id);
+
+            var model = new AccountDetailsViewModelBuilder()
+                .WithAccount(account)
+                .WithTransactions(transactions)
+                .WithPaging(currentPage)
+                .Build();
+
+            return ViewComponent("TransactionList", model);
         }
 
 

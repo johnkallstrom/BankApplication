@@ -44,8 +44,7 @@ namespace Bank.Web.Services
         {
             PageSize = 50;
             CurrentPage = currentPage.HasValue ? currentPage.Value : 1;
-            var pageTotal = (double)Customers.Count() / PageSize;
-            TotalPages = (int)Math.Ceiling(pageTotal);
+            TotalPages = (int)Math.Ceiling((double)Customers.Count() / PageSize);
 
             Customers = Customers.Skip((CurrentPage - 1) * PageSize).Take(PageSize);
 
