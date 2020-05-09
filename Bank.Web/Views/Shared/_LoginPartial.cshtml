@@ -6,7 +6,8 @@
 
     if (User.IsInRole("Cashier"))
     {
-        <nav>
+        <partial name="_SearchFormPartial" />
+        <nav id="navbar">
             <ul>
                 <li><a asp-controller="Customer" asp-action="Index">Customers</a></li>
                 <li><a asp-controller="User" asp-action="Logout">Sign out</a></li>
@@ -16,7 +17,8 @@
 
     if (User.IsInRole("Admin"))
     {
-        <nav>
+        <partial name="_SearchFormPartial" />
+        <nav id="navbar">
             <ul>
                 <li><a asp-controller="Admin" asp-action="Index">Admin</a></li>
                 <li><a asp-controller="Customer" asp-action="Index">Customers</a></li>
@@ -27,7 +29,8 @@
 }
 else
 {
-    <nav>
+    <partial name="_SearchFormPartial" />
+    <nav id="navbar">
         <ul>
             <li><a asp-controller="User" asp-action="Login">Sign in</a></li>
         </ul>

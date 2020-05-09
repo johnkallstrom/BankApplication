@@ -1,0 +1,42 @@
+﻿:root {
+    --font: 'Roboto', sans-serif;
+    --dark: #2a2b2b;
+    --light-dark: #ccc;
+    --light: #eee;
+    --white: #fff;
+    --blue: #0079D3;
+    --hover: #070707;
+    --danger: #d92550;
+}
+
+#search-form {
+    margin-left: 2rem;
+    justify-self: start;
+    width: 300px;
+}
+
+#input {
+    background-image: url(../img/search.svg);
+    background-size: 1.4rem;
+    background-position: 10px 9px;
+    background-repeat: no-repeat;
+    font-family: var(--font);
+    font-size: 17px;
+    padding: 0.6rem;
+    border: none;
+    border-radius: 8px;
+    text-indent: 35px;
+    width: 100%;
+}
+
+#input:focus {
+    outline: none;
+}
+
+@media (max-width: 992px) {
+    #search-form {
+        margin-left: 0rem;
+        justify-self: start;
+        width: 300px;
+    }
+}

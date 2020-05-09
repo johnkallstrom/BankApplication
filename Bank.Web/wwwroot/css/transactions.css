@@ -29,7 +29,7 @@
 #transaction h1 {
     font-size: 35px;
     color: var(--dark);
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem;
 }
 
 #transaction input[type="text"] {

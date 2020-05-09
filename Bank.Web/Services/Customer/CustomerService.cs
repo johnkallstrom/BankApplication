@@ -42,5 +42,14 @@ namespace Bank.Web.Services
                     Transactions = x.Account.Transactions
                 }).ToList();
         }
+
+        public Customers GetCustomerBySearch(string searchString)
+        {
+            if (string.IsNullOrEmpty(searchString)) return null;
+            if (int.TryParse(searchString, out int id) == false) return null;
+            if (id <= 0) return null;
+
+            return _context.Customers.FirstOrDefault(c => c.CustomerId == id);
+        }
     }
 }

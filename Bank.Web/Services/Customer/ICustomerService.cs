@@ -9,5 +9,6 @@ namespace Bank.Web.Services
         IQueryable<Customers> GetAllCustomers();
         Customers GetCustomer(int id);
         IEnumerable<Accounts> GetCustomerAccounts(int id);
+        Customers GetCustomerBySearch(string searchString);
     }
 }

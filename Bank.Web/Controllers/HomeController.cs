@@ -16,6 +16,7 @@ namespace Bank.Web.Controllers
 
         [HttpGet]
         [AllowAnonymous]
+        [ResponseCache(CacheProfileName = "Default")]
         public IActionResult Index()
         {
             var model = new BankStatisticsViewModel

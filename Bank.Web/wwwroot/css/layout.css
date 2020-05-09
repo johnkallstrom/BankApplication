@@ -33,45 +33,50 @@ body {
     overflow: hidden;
 }
 
-header {
+#header {
     padding-top: 1rem;
     padding-bottom: 1rem;
     background-color: var(--dark);
 }
 
-header .container {
-    padding: 0.6rem 0;
+#header .container {
+    display: grid;
+    grid-template-columns: auto 1fr 1fr;
+    justify-items: center;
+    padding: 0.3rem 0 0.3rem 0;
 }
 
-header #branding {
-    float: left;
+#header #branding {
+    justify-self: start;
 }
 
-header #branding h1 {
+#header #branding h1 {
+    padding-top: 0.5rem;
     font-size: 26px;
     letter-spacing: 0.1rem;
 }
 
-header a {
+#header a {
     color: var(--white);
     text-decoration: none;
 }
 
-header li {
+#header li {
     float: left;
     display: inline;
     padding: 0 15px 0 20px;
 }
 
-header li:last-child{
+#header li:last-child{
     padding-right: 0px;
 }
 
-header nav {
-    float: right;
+#header #navbar {
+    padding-top: 0.5rem;
+    justify-self: end;
 }
 
-header nav a {
+#header #navbar a {
     border-radius: 5px;
     padding: 0.6rem 1rem;
     background-color: var(--blue);
@@ -88,7 +93,26 @@ footer {
 @media (max-width: 992px){
     .container {
         margin: 0 auto;
-        width: 80%;
+        width: 90%;
         overflow: hidden;
+    }
+
+    #header .container {
+        display: grid;
+        grid-template-columns: auto;
+        grid-gap: 1rem;
+        justify-items: center;
+        padding: 0.3rem 0 0.8rem 0;
+    }
+
+    #header #navbar {
+        padding-top: 0.5rem;
+        justify-self: start;
+    }
+
+    #header li {
+        float: left;
+        display: inline;
+        padding: 0 15px 0 0;
     }
 }
