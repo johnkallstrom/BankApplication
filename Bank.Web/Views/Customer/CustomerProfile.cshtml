@@ -11,6 +11,11 @@
             <h1>@Model.FirstName @Model.LastName</h1>
 
             <div class="profile-group">
+                <strong>Number</strong>
+                <p>@Model.CustomerId</p>
+            </div>
+
+            <div class="profile-group">
                 <strong>Contact</strong>
                 <p>@Model.Email</p>
                 <p>+@Model.PhoneCountryCode @Model.Phone</p>

@@ -8,6 +8,7 @@ namespace Bank.Infrastructure.Entities
         public Customers()
         {
             Dispositions = new HashSet<Dispositions>();
+        
         }
 
         public int CustomerId { get; set; }

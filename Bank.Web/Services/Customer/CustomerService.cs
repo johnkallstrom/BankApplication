@@ -3,6 +3,7 @@ using Bank.Infrastructure.Entities;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Bank.Web.Services
 {
@@ -13,6 +14,12 @@ namespace Bank.Web.Services
         public CustomerService(ApplicationDbContext context)
         {
             _context = context;
+        }
+
+        public Task<bool> CreateCustomer()
+        {
+            // TODO: Create customer 
+            return null;
         }
 
         public IQueryable<Customers> GetAllCustomers() => _context.Customers;

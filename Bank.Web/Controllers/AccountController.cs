@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Bank.Web.Exceptions;
 using Bank.Web.Services;
 using Bank.Web.Services.Account;
 using Bank.Web.ViewModels;
@@ -85,10 +86,16 @@ namespace Bank.Web.Controllers
         {
             if (!ModelState.IsValid) return View(model);
 
-            var succeeded = await _accountService.Deposit(model.AccountId, model.Amount);
-            if (succeeded) return RedirectToAction("AccountDetails", new { id = model.AccountId });
-
-            ModelState.AddModelError(string.Empty, "Deposit failed.");
+            try
+            {
+                var succeeded = await _accountService.Deposit(model.AccountId, model.Amount);
+                if (succeeded) return RedirectToAction(nameof(AccountDetails), new { id = model.AccountId });
+            } 
+            catch(AccountNotFoundException e)
+            {
+                ModelState.AddModelError(string.Empty, e.Message);
+                return View(model);
+            }
 
             return View(model);
         }
@@ -109,10 +116,21 @@ namespace Bank.Web.Controllers
         {
             if (!ModelState.IsValid) return View(model);
 
-            var succeeded = await _accountService.Withdrawal(model.AccountId, model.Amount);
-            if (succeeded) return RedirectToAction("AccountDetails", new { id = model.AccountId });
-
-            ModelState.AddModelError(string.Empty, "Withdrawal failed.");
+            try
+            {
+                var succeeded = await _accountService.Withdrawal(model.AccountId, model.Amount);
+                if (succeeded) return RedirectToAction(nameof(AccountDetails), new { id = model.AccountId });
+            }
+            catch (AccountNotFoundException e)
+            {
+                ModelState.AddModelError(string.Empty, e.Message);
+                return View(model);
+            }
+            catch (InsufficientFundsException e)
+            {
+                ModelState.AddModelError(string.Empty, e.Message);
+                return View(model);
+            }
 
             return View(model);
         }
@@ -133,16 +151,26 @@ namespace Bank.Web.Controllers
         {
             if (!ModelState.IsValid) return View(model);
 
-            if (model.FromAccountId == model.ToAccountId)
+            try
             {
-                ModelState.AddModelError(string.Empty, "You can't transfer to same account.");
+                var succeeded = await _accountService.Transfer(model.FromAccountId, model.ToAccountId, model.Amount);
+                if (succeeded) return RedirectToAction("AccountDetails", new { id = model.FromAccountId });
+            }
+            catch (AccountNotFoundException e)
+            {
+                ModelState.AddModelError(string.Empty, e.Message);
                 return View(model);
             }
-
-            var succeeded = await _accountService.Transfer(model.FromAccountId, model.ToAccountId, model.Amount);
-            if (succeeded) return RedirectToAction("AccountDetails", new { id = model.FromAccountId });
-
-            ModelState.AddModelError(string.Empty, "Transfer failed.");
+            catch (InsufficientFundsException e)
+            {
+                ModelState.AddModelError(string.Empty, e.Message);
+                return View(model);
+            }
+            catch (MatchingAccountsException e)
+            {
+                ModelState.AddModelError(string.Empty, e.Message);
+                return View(model);
+            }
 
             return View(model);
         }

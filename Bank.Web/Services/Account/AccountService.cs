@@ -1,6 +1,7 @@
 ﻿using Bank.Infrastructure;
 using Bank.Infrastructure.Entities;
 using Bank.Infrastructure.Enums;
+using Bank.Web.Exceptions;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
@@ -21,9 +22,10 @@ namespace Bank.Web.Services
             var fromAccount = _context.Accounts.FirstOrDefault(a => a.AccountId == fromAccountId);
             var toAccount = _context.Accounts.FirstOrDefault(a => a.AccountId == toAccountId);
 
-            if (fromAccount == null || toAccount == null) return false;
-            if (fromAccountId == toAccountId) return false;
-            if (fromAccount.Balance - amount < 0) return false;
+            if (fromAccount == null) throw new AccountNotFoundException($"The account number '{fromAccountId}' could not be found.");
+            if (toAccount == null) throw new AccountNotFoundException($"The account number '{toAccountId}' could not be found.");
+            if (fromAccountId == toAccountId) throw new MatchingAccountsException($"The account you try to transfer from can't be the same account you deposit to.");
+            if (fromAccount.Balance - amount < 0) throw new InsufficientFundsException($"Insufficient funds. The account you tried to transfer from does not have enough funds.");
 
             fromAccount.Balance -= Math.Round(amount, 2);
             toAccount.Balance += Math.Round(amount, 2);
@@ -58,8 +60,8 @@ namespace Bank.Web.Services
         {
             var account = _context.Accounts.FirstOrDefault(a => a.AccountId == id);
 
-            if (account == null) return false;
-            if (account.Balance - amount < 0) return false;
+            if (account == null) throw new AccountNotFoundException($"The account number '{id}' could not be found.");
+            if (account.Balance - amount < 0) throw new InsufficientFundsException($"Insufficient funds. The account you tried to withdraw from does not have enough funds.");
 
             account.Balance -= Math.Round(amount, 2);
 
@@ -82,7 +84,8 @@ namespace Bank.Web.Services
         public async Task<bool> Deposit(int id, decimal amount)
         {
             var account = _context.Accounts.FirstOrDefault(a => a.AccountId == id);
-            if (account == null) return false;
+
+            if (account == null) throw new AccountNotFoundException($"The account number '{id}' could not be found.");
 
             account.Balance += Math.Round(amount, 2);
 
