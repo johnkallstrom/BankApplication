@@ -1,7 +1,7 @@
-﻿using Bank.Infrastructure;
-using Bank.Infrastructure.Entities;
+﻿using Bank.Infrastructure.Entities;
 using Bank.Infrastructure.Enums;
 using Bank.Web.Exceptions;
+using Bank.Web.Repositories;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
@@ -10,22 +10,31 @@ namespace Bank.Web.Services
 {
     public class AccountService : IAccountService
     {
-        private readonly ApplicationDbContext _context;
+        private readonly IAccountRepository _accountRepository;
+        private readonly ITransactionRepository _transactionRepository;
 
-        public AccountService(ApplicationDbContext context)
+        public AccountService(
+            IAccountRepository accountRepository, 
+            ITransactionRepository transactionRepository)
         {
-            _context = context;
+            _accountRepository = accountRepository;
+            _transactionRepository = transactionRepository;
         }
+
+
+        public Accounts GetAccount(int id) => _accountRepository.Get(id);
+
+        public IQueryable<Transactions> GetAccountTransactions(int id) => _transactionRepository.GetAll(id);
 
         public async Task<bool> Transfer(int fromAccountId, int toAccountId, decimal amount)
         {
-            var fromAccount = _context.Accounts.FirstOrDefault(a => a.AccountId == fromAccountId);
-            var toAccount = _context.Accounts.FirstOrDefault(a => a.AccountId == toAccountId);
+            var fromAccount = _accountRepository.Get(fromAccountId);
+            var toAccount = _accountRepository.Get(toAccountId);
 
             if (fromAccount == null) throw new AccountNotFoundException($"The account number '{fromAccountId}' could not be found.");
             if (toAccount == null) throw new AccountNotFoundException($"The account number '{toAccountId}' could not be found.");
-            if (fromAccountId == toAccountId) throw new MatchingAccountsException($"The account you try to transfer from can't be the same account you deposit to.");
-            if (fromAccount.Balance - amount < 0) throw new InsufficientFundsException($"Insufficient funds. The account you tried to transfer from does not have enough funds.");
+            if (fromAccountId == toAccountId) throw new MatchingAccountsException("The account you try to transfer from can't be the same account you deposit to.");
+            if (fromAccount.Balance - amount < 0) throw new InsufficientFundsException("Insufficient funds. The account you tried to transfer from does not have enough funds.");
 
             fromAccount.Balance -= Math.Round(amount, 2);
             toAccount.Balance += Math.Round(amount, 2);
@@ -50,18 +59,15 @@ namespace Bank.Web.Services
                 Operation = OperationType.CollectionFromAnotherBank.Value
             };
 
-            _context.Accounts.UpdateRange(fromAccount, toAccount);
-            await _context.Transactions.AddRangeAsync(fromTransaction, toTransaction);
-            await _context.SaveChangesAsync();
-            return true;
+            return await _transactionRepository.CreateMultiple(fromTransaction, toTransaction);
         }
 
         public async Task<bool> Withdrawal(int id, decimal amount)
         {
-            var account = _context.Accounts.FirstOrDefault(a => a.AccountId == id);
+            var account = _accountRepository.Get(id);
 
             if (account == null) throw new AccountNotFoundException($"The account number '{id}' could not be found.");
-            if (account.Balance - amount < 0) throw new InsufficientFundsException($"Insufficient funds. The account you tried to withdraw from does not have enough funds.");
+            if (account.Balance - amount < 0) throw new InsufficientFundsException("Insufficient funds. The account you tried to withdraw from does not have enough funds.");
 
             account.Balance -= Math.Round(amount, 2);
 
@@ -75,15 +81,12 @@ namespace Bank.Web.Services
                 Operation = OperationType.WithdrawalInCash.Value
             };
 
-            _context.Transactions.Add(transaction);
-            _context.Accounts.Update(account);
-            await _context.SaveChangesAsync();
-            return true;
+            return await _transactionRepository.Create(transaction);
         }
 
         public async Task<bool> Deposit(int id, decimal amount)
         {
-            var account = _context.Accounts.FirstOrDefault(a => a.AccountId == id);
+            var account = _accountRepository.Get(id);
 
             if (account == null) throw new AccountNotFoundException($"The account number '{id}' could not be found.");
 
@@ -98,21 +101,8 @@ namespace Bank.Web.Services
                 Type = TransactionType.Credit.ToString(),
                 Operation = OperationType.CreditInCash.Value
             };
-             
-            _context.Transactions.Add(transaction);
-            _context.Accounts.Update(account);
-            await _context.SaveChangesAsync();
-            return true;
-        }
 
-        public Accounts GetAccount(int id) => _context.Accounts.FirstOrDefault(a => a.AccountId == id);
-
-        public IQueryable<Transactions> GetAccountTransactions(int id)
-        {
-            return _context.Transactions
-                .Where(t => t.AccountId == id)
-                .OrderByDescending(t => t.TransactionId)
-                .ThenByDescending(t => t.Date);
+            return await _transactionRepository.Create(transaction);
         }
     }
 }

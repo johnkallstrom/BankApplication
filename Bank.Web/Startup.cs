@@ -1,6 +1,7 @@
 using AutoMapper;
 using Bank.Infrastructure;
 using Bank.Infrastructure.Identity;
+using Bank.Web.Repositories;
 using Bank.Web.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -28,13 +29,18 @@ namespace Bank.Web
                 options.EnableEndpointRouting = false;
                 options.CacheProfiles.Add("Default", new CacheProfile
                 {
+                    Location = ResponseCacheLocation.Client,
                     Duration = 30
                 });
             });
 
+            services.AddHttpContextAccessor();
             services.AddDbContext<ApplicationDbContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
+            services.AddTransient<ICustomerRepository, CustomerRepository>();
+            services.AddTransient<ITransactionRepository, TransactionRepository>();
+            services.AddTransient<IAccountRepository, AccountRepository>();
             services.AddTransient<IAccountService, AccountService>();
             services.AddTransient<ICustomerService, CustomerService>();
             services.AddTransient<IBankStatisticsService, BankStatisticsService>();

@@ -8,6 +8,7 @@ namespace Bank.Web.Services
     {
         Task<ApplicationUser> GetByEmail(string email);
         Task<SignInResult> SignInUser(string username, string password);
-        void SignOutUser();
+        Task SignOutUser();
+        bool IsUserLoggedIn();
     }
 }

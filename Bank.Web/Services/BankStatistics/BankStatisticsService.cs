@@ -1,30 +1,25 @@
-﻿using Bank.Infrastructure;
+﻿using Bank.Web.Repositories;
 using System.Linq;
 
 namespace Bank.Web.Services
 {
     public class BankStatisticsService : IBankStatisticsService
     {
-        private readonly ApplicationDbContext _context;
+        private readonly IAccountRepository _accountRepository;
+        private readonly ICustomerRepository _customerRepository;
 
-        public BankStatisticsService(ApplicationDbContext context)
+        public BankStatisticsService(
+            IAccountRepository accountRepository, 
+            ICustomerRepository customerRepository)
         {
-            _context = context;
+            _accountRepository = accountRepository;
+            _customerRepository = customerRepository;
         }
 
-        public int GetTotalAccountsAmount()
-        {
-            return _context.Accounts.Count();
-        }
+        public int GetTotalAccountsAmount() => _accountRepository.GetAll().Count();
 
-        public decimal GetTotalBalanceAmount()
-        {
-            return _context.Accounts.Sum(a => a.Balance);
-        }
+        public decimal GetTotalBalanceAmount() => _accountRepository.GetAll().Sum(x => x.Balance);
 
-        public int GetTotalCustomersAmount()
-        {
-            return _context.Customers.Count();
-        }
+        public int GetTotalCustomersAmount() => _customerRepository.GetAll().Count();
     }
 }

@@ -1,54 +1,28 @@
-﻿using Bank.Infrastructure;
-using Bank.Infrastructure.Entities;
-using Microsoft.EntityFrameworkCore;
+﻿using Bank.Infrastructure.Entities;
+using Bank.Web.Repositories;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace Bank.Web.Services
 {
     public class CustomerService : ICustomerService
     {
-        private readonly ApplicationDbContext _context;
+        private readonly IAccountRepository _accountRepository;
+        private readonly ICustomerRepository _customerRepository;
 
-        public CustomerService(ApplicationDbContext context)
+        public CustomerService(
+            IAccountRepository accountRepository, 
+            ICustomerRepository customerRepository)
         {
-            _context = context;
+            _accountRepository = accountRepository;
+            _customerRepository = customerRepository;
         }
 
-        public Task<bool> CreateCustomer()
-        {
-            // TODO: Create customer 
-            return null;
-        }
+        public IQueryable<Customers> GetAllCustomers() => _customerRepository.GetAll();
 
-        public IQueryable<Customers> GetAllCustomers() => _context.Customers;
+        public Customers GetCustomer(int id) => _customerRepository.Get(id);
 
-        public Customers GetCustomer(int id)
-        {
-            return _context.Customers
-                .Include(x => x.Dispositions)
-                .ThenInclude(x => x.Account)
-                .FirstOrDefault(x => x.CustomerId == id);
-        }
-
-        public IEnumerable<Accounts> GetCustomerAccounts(int id)
-        {
-            return _context.Dispositions
-                .Include(a => a.Account)
-                .Where(d => d.CustomerId == id)
-                .Select(x => new Accounts
-                {
-                    AccountId = x.Account.AccountId,
-                    Balance = x.Account.Balance,
-                    Created = x.Account.Created,
-                    Frequency = x.Account.Frequency,
-                    Loans = x.Account.Loans,
-                    Dispositions = x.Account.Dispositions,
-                    PermenentOrder = x.Account.PermenentOrder,
-                    Transactions = x.Account.Transactions
-                }).ToList();
-        }
+        public IEnumerable<Accounts> GetCustomerAccounts(int id) => _accountRepository.GetAllCustomerAccounts(id);
 
         public Customers GetCustomerBySearch(string searchString)
         {
@@ -56,7 +30,7 @@ namespace Bank.Web.Services
             if (int.TryParse(searchString, out int id) == false) return null;
             if (id <= 0) return null;
 
-            return _context.Customers.FirstOrDefault(c => c.CustomerId == id);
+            return _customerRepository.Get(id);
         }
     }
 }

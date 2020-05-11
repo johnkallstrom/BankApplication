@@ -50,11 +50,12 @@ namespace Bank.Web.Controllers
             }
         }
 
+        [HttpGet]
         [AllowAnonymous]
-        public IActionResult Logout()
+        public async Task<IActionResult> Logout()
         {
-            _userService.SignOutUser();
-            return RedirectToAction("Index", "Home");
+            await _userService.SignOutUser();
+            return RedirectToAction(nameof(Login));
         }
     }
 }

@@ -5,7 +5,6 @@ using Bank.Web.Services.Account;
 using Bank.Web.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Bank.Web.Controllers
@@ -154,7 +153,7 @@ namespace Bank.Web.Controllers
             try
             {
                 var succeeded = await _accountService.Transfer(model.FromAccountId, model.ToAccountId, model.Amount);
-                if (succeeded) return RedirectToAction("AccountDetails", new { id = model.FromAccountId });
+                if (succeeded) return RedirectToAction(nameof(AccountDetails), new { id = model.FromAccountId });
             }
             catch (AccountNotFoundException e)
             {
