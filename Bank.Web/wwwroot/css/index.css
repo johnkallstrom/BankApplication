@@ -9,11 +9,11 @@
     --danger: #d92550;
 }
 
-#showcase {
+#statistics {
     color: var(--dark);
 }
 
-#showcase .wrapper {
+#statistics .wrapper {
     padding: 3rem 3rem 3rem 3rem;
     background-color: var(--white);
     border: 1px solid var(--light);
@@ -21,23 +21,23 @@
     margin-top: 3rem;
 }
 
-#showcase .showcase-header h1 {
+#statistics .statistics-header h1 {
     font-size: 35px;
     margin-bottom: 2rem;
 }
 
-#showcase .showcase-group {
+#statistics .statistics-group {
     padding: 1rem;
     border: 1px solid var(--light);
     border-radius: 8px;
     margin-bottom: 1rem;
 }
 
-#showcase .showcase-group:last-child{
+#statistics .statistics-group:last-child {
     margin-bottom: 0rem;
 }
 
-#showcase .showcase-group h3 {
+#statistics .statistics-group h3 {
     font-size: 26px;
     float: right;
     display: inline;

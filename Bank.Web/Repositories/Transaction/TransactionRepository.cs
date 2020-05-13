@@ -40,5 +40,7 @@ namespace Bank.Web.Repositories
                  .OrderByDescending(t => t.TransactionId)
                  .ThenByDescending(t => t.Date);
         }
+
+        public Transactions GetByAccountId(int id) => _context.Transactions.FirstOrDefault(x => x.AccountId == id);
     }
 }

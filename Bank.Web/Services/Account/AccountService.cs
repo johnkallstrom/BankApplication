@@ -35,6 +35,7 @@ namespace Bank.Web.Services
             if (toAccount == null) throw new AccountNotFoundException($"The account number '{toAccountId}' could not be found.");
             if (fromAccountId == toAccountId) throw new MatchingAccountsException("The account you try to transfer from can't be the same account you deposit to.");
             if (fromAccount.Balance - amount < 0) throw new InsufficientFundsException("Insufficient funds. The account you tried to transfer from does not have enough funds.");
+            if (amount < 0) throw new NoNegativeAmountException("No negative amount is allowed.");
 
             fromAccount.Balance -= Math.Round(amount, 2);
             toAccount.Balance += Math.Round(amount, 2);
@@ -59,7 +60,9 @@ namespace Bank.Web.Services
                 Operation = OperationType.CollectionFromAnotherBank.Value
             };
 
-            return await _transactionRepository.CreateMultiple(fromTransaction, toTransaction);
+            await _transactionRepository.CreateMultiple(fromTransaction, toTransaction);
+            await _accountRepository.UpdateMultiple(fromAccount, toAccount);
+            return true;
         }
 
         public async Task<bool> Withdrawal(int id, decimal amount)
@@ -68,6 +71,7 @@ namespace Bank.Web.Services
 
             if (account == null) throw new AccountNotFoundException($"The account number '{id}' could not be found.");
             if (account.Balance - amount < 0) throw new InsufficientFundsException("Insufficient funds. The account you tried to withdraw from does not have enough funds.");
+            if (amount < 0) throw new NoNegativeAmountException("No negative amount is allowed.");
 
             account.Balance -= Math.Round(amount, 2);
 
@@ -81,7 +85,9 @@ namespace Bank.Web.Services
                 Operation = OperationType.WithdrawalInCash.Value
             };
 
-            return await _transactionRepository.Create(transaction);
+            await _transactionRepository.Create(transaction);
+            await _accountRepository.Update(account);
+            return true;
         }
 
         public async Task<bool> Deposit(int id, decimal amount)
@@ -89,6 +95,7 @@ namespace Bank.Web.Services
             var account = _accountRepository.Get(id);
 
             if (account == null) throw new AccountNotFoundException($"The account number '{id}' could not be found.");
+            if (amount < 0) throw new NoNegativeAmountException("No negative amount is allowed.");
 
             account.Balance += Math.Round(amount, 2);
 
@@ -101,8 +108,10 @@ namespace Bank.Web.Services
                 Type = TransactionType.Credit.ToString(),
                 Operation = OperationType.CreditInCash.Value
             };
-
-            return await _transactionRepository.Create(transaction);
+            
+            await _transactionRepository.Create(transaction);
+            await _accountRepository.Update(account);
+            return true;
         }
     }
 }

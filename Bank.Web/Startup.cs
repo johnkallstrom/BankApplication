@@ -29,7 +29,6 @@ namespace Bank.Web
                 options.EnableEndpointRouting = false;
                 options.CacheProfiles.Add("Default", new CacheProfile
                 {
-                    Location = ResponseCacheLocation.Client,
                     Duration = 30
                 });
             });

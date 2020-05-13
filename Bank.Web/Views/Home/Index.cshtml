@@ -5,27 +5,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<section id="showcase">
-    <div class="container">
-        <div class="wrapper">
-            <div class="showcase-header">
-                <h1>Statistics</h1>
-            </div>
-            <div class="showcase-group">
-                <span>Total customers: </span>
-                <h3>@Model.TotalCustomersAmount</h3>
-            </div>
-            <div class="showcase-group">
-                <span>Total accounts: </span>
-                <h3>@Model.TotalAccountsAmount</h3>
-            </div>
-            <div class="showcase-group">
-                <span>Total balance: </span>
-                <h3>@Model.DisplayTotalBalance</h3>
-            </div>
-        </div>
-    </div>
-</section>
+<partial name="_BankStatisticsPartial" for="@Model" />
 
 <section id="boxes">
     <div class="container">

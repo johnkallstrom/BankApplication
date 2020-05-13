@@ -6,6 +6,7 @@ namespace Bank.Web.Repositories
 {
     public interface ITransactionRepository
     {
+        Transactions GetByAccountId(int id);
         IQueryable<Transactions> GetAll(int id);
         Task<bool> Create(Transactions transaction);
         Task<bool> CreateMultiple(Transactions firstTransaction, Transactions secondTransaction);

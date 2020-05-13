@@ -3,6 +3,7 @@ using Bank.Infrastructure.Entities;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Bank.Web.Repositories
 {
@@ -13,6 +14,20 @@ namespace Bank.Web.Repositories
         public AccountRepository(ApplicationDbContext context)
         {
             _context = context;
+        }
+
+        public async Task<bool> UpdateMultiple(Accounts firstAccount, Accounts secondAccount)
+        {
+            _context.Accounts.UpdateRange(firstAccount, secondAccount);
+            await _context.SaveChangesAsync();
+            return true;
+        }
+
+        public async Task<bool> Update(Accounts account)
+        {
+            _context.Accounts.Update(account);
+            await _context.SaveChangesAsync();
+            return true;
         }
 
         public Accounts Get(int id) => _context.Accounts.FirstOrDefault(a => a.AccountId == id);

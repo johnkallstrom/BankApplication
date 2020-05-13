@@ -36,15 +36,7 @@
     }
     else
     {
-        <a asp-controller="Account"
-           asp-action="Previous"
-           asp-route-id="@Model.AccountId"
-           asp-route-currentPage="@(Model.CurrentPage - 1)"
-           data-ajax="true"
-           data-ajax-method="GET"
-           data-ajax-mode="replace"
-           data-ajax-update=".transaction-list"
-           class="disabled">&laquo;</a>
+        <a class="disabled">&laquo;</a>
     }
     @if (Model.EnableNextButton())
     {
@@ -59,14 +51,6 @@
     }
     else
     {
-        <a asp-controller="Account"
-           asp-action="Next"
-           asp-route-id="@Model.AccountId"
-           asp-route-currentPage="@(Model.CurrentPage + 1)"
-           data-ajax="true"
-           data-ajax-method="GET"
-           data-ajax-mode="replace"
-           data-ajax-update=".transaction-list"
-           class="disabled">&raquo;</a>
+        <a class="disabled">&raquo;</a>
     }
 </div>

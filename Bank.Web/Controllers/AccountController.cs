@@ -95,6 +95,11 @@ namespace Bank.Web.Controllers
                 ModelState.AddModelError(string.Empty, e.Message);
                 return View(model);
             }
+            catch (NoNegativeAmountException e)
+            {
+                ModelState.AddModelError(string.Empty, e.Message);
+                return View(model);
+            }
 
             return View(model);
         }
@@ -126,6 +131,11 @@ namespace Bank.Web.Controllers
                 return View(model);
             }
             catch (InsufficientFundsException e)
+            {
+                ModelState.AddModelError(string.Empty, e.Message);
+                return View(model);
+            }
+            catch (NoNegativeAmountException e)
             {
                 ModelState.AddModelError(string.Empty, e.Message);
                 return View(model);
@@ -166,6 +176,11 @@ namespace Bank.Web.Controllers
                 return View(model);
             }
             catch (MatchingAccountsException e)
+            {
+                ModelState.AddModelError(string.Empty, e.Message);
+                return View(model);
+            }
+            catch (NoNegativeAmountException e)
             {
                 ModelState.AddModelError(string.Empty, e.Message);
                 return View(model);

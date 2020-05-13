@@ -3,7 +3,6 @@
 
 @if (SignInManager.IsSignedIn(User))
 {
-
     if (User.IsInRole("Cashier"))
     {
         <partial name="_SearchFormPartial" />
