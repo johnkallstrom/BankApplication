@@ -2,6 +2,7 @@ using AutoMapper;
 using Bank.Infrastructure;
 using Bank.Infrastructure.Identity;
 using Bank.Web.Repositories;
+using Bank.Web.Repositories.Disposition;
 using Bank.Web.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -37,6 +38,7 @@ namespace Bank.Web
             services.AddDbContext<ApplicationDbContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
+            services.AddTransient<IDispositionRepository, DispositionRepository>();
             services.AddTransient<ICustomerRepository, CustomerRepository>();
             services.AddTransient<ITransactionRepository, TransactionRepository>();
             services.AddTransient<IAccountRepository, AccountRepository>();

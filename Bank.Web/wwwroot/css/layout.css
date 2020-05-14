@@ -51,7 +51,7 @@ body {
 }
 
 #header #branding h1 {
-    padding-top: 0.5rem;
+    margin-top: 1.2rem;
     font-size: 26px;
     letter-spacing: 0.1rem;
 }
@@ -72,7 +72,7 @@ body {
 }
 
 #header #navbar {
-    padding-top: 0.5rem;
+    margin-top: 1.2rem;
     justify-self: end;
 }
 
@@ -106,7 +106,8 @@ footer {
     }
 
     #header #navbar {
-        padding-top: 0.5rem;
+        margin-top: 0rem;
+        padding-top: 0.3rem;
         justify-self: start;
     }
 

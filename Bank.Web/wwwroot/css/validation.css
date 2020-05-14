@@ -9,6 +9,22 @@
     --danger: #d92550;
 }
 
+/*.field-validation-error {
+    color: #f00;
+    font-family: var(--font);
+    font-size: 14px;
+}
+
+.field-validation-valid {
+    display: none;
+}
+
+.input-validation-error {
+    border: 1px solid #f00;
+    background-color: #fee;
+    display: block;
+}*/
+
 .validation-summary-errors {
     padding: 1rem;
     background-color: var(--danger);

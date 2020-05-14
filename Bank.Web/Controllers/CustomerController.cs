@@ -1,9 +1,11 @@
 ﻿using AutoMapper;
+using Bank.Infrastructure.Entities;
 using Bank.Web.Services;
 using Bank.Web.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Bank.Web.Controllers
 {
@@ -34,6 +36,29 @@ namespace Bank.Web.Controllers
                 .WithSearch(searchWord)
                 .WithPaging(currentPage)
                 .Build();
+
+            return View(model);
+        }
+
+        [HttpGet]
+        [Authorize(Roles = "Admin, Cashier")]
+        public IActionResult CreateCustomer()
+        {
+            var model = new CreateCustomerViewModel();
+
+            return View(model);
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "Admin, Cashier")]
+        public async Task<IActionResult> CreateCustomer(CreateCustomerViewModel model)
+        {
+            if (!ModelState.IsValid) return View(model);
+
+            var customer = _mapper.Map<Customers>(model);
+
+            var succeeded = await _customerService.CreateCustomer(customer);
+            if (succeeded) RedirectToAction(nameof(Index));
 
             return View(model);
         }

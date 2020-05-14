@@ -16,6 +16,15 @@ namespace Bank.Web.Repositories
             _context = context;
         }
 
+        public async Task<bool> Create(Accounts account)
+        {
+            if (account == null) return false;
+
+            await _context.Accounts.AddAsync(account);
+            await _context.SaveChangesAsync();
+            return true;
+        }
+
         public async Task<bool> UpdateMultiple(Accounts firstAccount, Accounts secondAccount)
         {
             _context.Accounts.UpdateRange(firstAccount, secondAccount);

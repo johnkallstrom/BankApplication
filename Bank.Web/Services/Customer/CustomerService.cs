@@ -1,21 +1,74 @@
 ﻿using Bank.Infrastructure.Entities;
+using Bank.Infrastructure.Enums;
 using Bank.Web.Repositories;
+using Bank.Web.Repositories.Disposition;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Bank.Web.Services
 {
     public class CustomerService : ICustomerService
     {
+        private readonly IDispositionRepository _dispositionRepository;
         private readonly IAccountRepository _accountRepository;
         private readonly ICustomerRepository _customerRepository;
 
         public CustomerService(
+            IDispositionRepository dispositionRepository,
             IAccountRepository accountRepository, 
             ICustomerRepository customerRepository)
         {
+            _dispositionRepository = dispositionRepository;
             _accountRepository = accountRepository;
             _customerRepository = customerRepository;
+        }
+
+        public async Task<bool> CreateCustomer(Customers customer)
+        {
+            if (customer == null) return false;
+
+            switch (customer.Country)
+            {
+                case "Sweden":
+                    customer.CountryCode = CountryCodeType.SE.ToString();
+                    customer.Telephonecountrycode = "46";
+                    break;
+                case "Denmark":
+                    customer.CountryCode = CountryCodeType.DK.ToString();
+                    customer.Telephonecountrycode = "45";
+                    break;
+                case "Norway":
+                    customer.CountryCode = CountryCodeType.NO.ToString();
+                    customer.Telephonecountrycode = "47";
+                    break;
+                case "Finland":
+                    customer.CountryCode = CountryCodeType.FI.ToString();
+                    customer.Telephonecountrycode = "358";
+                    break;
+            }
+
+            var account = new Accounts
+            {
+                Balance = 0m,
+                Created = DateTime.Now,
+                Frequency = FrequencyType.Monthly.ToString()
+            };
+
+            await _customerRepository.Create(customer);
+            await _accountRepository.Create(account);
+
+            var disposition = new Dispositions
+            {
+                CustomerId = customer.CustomerId,
+                AccountId = account.AccountId,
+                Type = DispositionType.OWNER.ToString()
+            };
+
+            await _dispositionRepository.Create(disposition);
+
+            return true;
         }
 
         public IQueryable<Customers> GetAllCustomers() => _customerRepository.GetAll();

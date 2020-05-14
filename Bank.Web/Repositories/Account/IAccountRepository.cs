@@ -6,6 +6,7 @@ namespace Bank.Web.Repositories
 {
     public interface IAccountRepository
     {
+        Task<bool> Create(Accounts account);
         Task<bool> Update(Accounts account);
         Task<bool> UpdateMultiple(Accounts firstAccount, Accounts secondAccount);
         Accounts Get(int id);
