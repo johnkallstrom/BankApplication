@@ -7,6 +7,7 @@ namespace Bank.Web.Services
 {
     public interface ICustomerService
     {
+        Task<bool> EditCustomer(Customers customer);
         Task<bool> CreateCustomer(Customers customer);
         IQueryable<Customers> GetAllCustomers();
         Customers GetCustomer(int id);

@@ -25,6 +25,16 @@ namespace Bank.Web.Services
             _customerRepository = customerRepository;
         }
 
+
+        public async Task<bool> EditCustomer(Customers customer)
+        {
+            if (customer == null) return false;
+
+            await _customerRepository.Update(customer);
+            return true;
+        }
+
+
         public async Task<bool> CreateCustomer(Customers customer)
         {
             if (customer == null) return false;
@@ -67,7 +77,6 @@ namespace Bank.Web.Services
             };
 
             await _dispositionRepository.Create(disposition);
-
             return true;
         }
 

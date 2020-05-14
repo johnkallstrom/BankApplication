@@ -37,6 +37,12 @@
                 <p>@Model.PostalCode, @Model.City</p>
                 <p>@Model.Country, @Model.CountryCode</p>
             </div>
+
+            <div class="options">
+                <div class="option-group">
+                    <a asp-controller="Customer" asp-action="EditCustomer" asp-route-id="@Model.CustomerId">Edit</a>
+                </div>
+            </div>
         </div>
         <div class="accounts">
             <h1>Accounts</h1>

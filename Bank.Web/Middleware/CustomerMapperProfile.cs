@@ -30,6 +30,26 @@ namespace Bank.Web.Middleware
                 .ForMember(dest => dest.Telephonenumber, opt => opt.MapFrom(src => src.Phone))
                 .ForMember(dest => dest.Zipcode, dest => dest.MapFrom(src => src.PostalCode))
                 .ForMember(dest => dest.NationalId, dest => dest.MapFrom(src => src.SocialSecurityNumber));
+
+            CreateMap<Customers, EditCustomerViewModel>()
+                .ForMember(dest => dest.Address, opt => opt.MapFrom(src => src.Streetaddress))
+                .ForMember(dest => dest.Email, opt => opt.MapFrom(src => src.Emailaddress))
+                .ForMember(dest => dest.FirstName, opt => opt.MapFrom(src => src.Givenname))
+                .ForMember(dest => dest.LastName, opt => opt.MapFrom(src => src.Surname))
+                .ForMember(dest => dest.Phone, opt => opt.MapFrom(src => src.Telephonenumber))
+                .ForMember(dest => dest.PostalCode, opt => opt.MapFrom(src => src.Zipcode))
+                .ForMember(dest => dest.SocialSecurityNumber, dest => dest.MapFrom(src => src.NationalId))
+                .ForMember(dest => dest.PhoneCountryCode, dest => dest.MapFrom(src => src.Telephonecountrycode));
+
+            CreateMap<EditCustomerViewModel, Customers>()
+                .ForMember(dest => dest.Streetaddress, opt => opt.MapFrom(src => src.Address))
+                .ForMember(dest => dest.Emailaddress, opt => opt.MapFrom(src => src.Email))
+                .ForMember(dest => dest.Givenname, opt => opt.MapFrom(src => src.FirstName))
+                .ForMember(dest => dest.Surname, opt => opt.MapFrom(src => src.LastName))
+                .ForMember(dest => dest.Telephonenumber, opt => opt.MapFrom(src => src.Phone))
+                .ForMember(dest => dest.Zipcode, dest => dest.MapFrom(src => src.PostalCode))
+                .ForMember(dest => dest.NationalId, dest => dest.MapFrom(src => src.SocialSecurityNumber))
+                .ForMember(dest => dest.Telephonecountrycode, dest => dest.MapFrom(src => src.PhoneCountryCode));
         }
     }
 }

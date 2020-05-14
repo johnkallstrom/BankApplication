@@ -14,6 +14,27 @@
     padding-bottom: 4rem;
 }
 
+.options {
+    margin-top: 2rem;
+}
+
+.option-group {
+    display: inline;
+    margin-right: 1rem;
+}
+
+.option-group:last-child {
+    margin-right: 0rem;
+}
+
+#customer-profile .option-group a {
+    border-radius: 5px;
+    text-decoration: none;
+    color: var(--white);
+    padding: 0.8rem 1.5rem;
+    background-color: var(--blue);
+}
+
 .profile, .accounts {
     padding: 3rem;
     background-color: var(--white);

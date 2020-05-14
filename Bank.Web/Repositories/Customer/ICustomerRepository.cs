@@ -6,6 +6,7 @@ namespace Bank.Web.Repositories
 {
     public interface ICustomerRepository
     {
+        Task<bool> Update(Customers customer);
         Task<bool> Create(Customers customer);
         Customers Get(int id);
         IQueryable<Customers> GetAll();

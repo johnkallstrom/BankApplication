@@ -1,18 +1,22 @@
-﻿@model CreateCustomerViewModel
+﻿@model EditCustomerViewModel
 
 @{
-    ViewData["Title"] = "Create customer";
+    ViewData["Title"] = "Edit customer";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div id="create-customer">
+<div id="edit-customer">
     <div class="container">
         <div class="wrapper">
             <div>
-                <h1>Create customer</h1>
+                <h1>Edit customer</h1>
             </div>
-            <form asp-controller="Customer" asp-action="CreateCustomer" method="post">
+            <form asp-controller="Customer" asp-action="EditCustomer" method="post">
                 <div asp-validation-summary="All"></div>
+
+                <input type="hidden" asp-for="@Model.CustomerId" />
+                <input type="hidden" asp-for="@Model.PhoneCountryCode" />
+                <input type="hidden" asp-for="@Model.CountryCode" />
 
                 <div class="form-group">
                     <label asp-for="@Model.FirstName"></label>
@@ -75,7 +79,7 @@
                 </div>
 
                 <div class="form-group">
-                    <input type="submit" value="Create" />
+                    <input type="submit" value="Update" />
                 </div>
             </form>
         </div>

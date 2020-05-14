@@ -40,6 +40,31 @@ namespace Bank.Web.Controllers
             return View(model);
         }
 
+
+        [HttpGet]
+        [Authorize(Roles = "Admin, Cashier")]
+        public IActionResult EditCustomer(int id)
+        {
+            var customer = _customerService.GetCustomer(id);
+            var model = _mapper.Map<EditCustomerViewModel>(customer);
+
+            return View(model);
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "Admin, Cashier")]
+        public async Task<IActionResult> EditCustomer(EditCustomerViewModel model)
+        {
+            if (!ModelState.IsValid) return View(model);
+
+            var customer = _mapper.Map<Customers>(model);
+
+            var succeeded = await _customerService.EditCustomer(customer);
+            if (succeeded) return RedirectToAction("CustomerProfile", new { id = customer.CustomerId });
+
+            return View(model);
+        }
+
         [HttpGet]
         [Authorize(Roles = "Admin, Cashier")]
         public IActionResult CreateCustomer()
@@ -58,7 +83,7 @@ namespace Bank.Web.Controllers
             var customer = _mapper.Map<Customers>(model);
 
             var succeeded = await _customerService.CreateCustomer(customer);
-            if (succeeded) RedirectToAction(nameof(Index));
+            if (succeeded) return RedirectToAction("CustomerProfile", new { id = customer.CustomerId });
 
             return View(model);
         }

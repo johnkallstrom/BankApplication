@@ -15,6 +15,15 @@ namespace Bank.Web.Repositories
             _context = context;
         }
 
+        public async Task<bool> Update(Customers customer)
+        {
+            if (customer == null) return false;
+            
+            _context.Customers.Update(customer);
+            await _context.SaveChangesAsync();
+            return true;
+        }
+
         public async Task<bool> Create(Customers customer)
         {
             if (customer == null) return false;
