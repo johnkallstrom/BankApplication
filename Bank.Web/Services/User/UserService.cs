@@ -1,6 +1,8 @@
 ﻿using Bank.Infrastructure.Identity;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Bank.Web.Services
@@ -20,6 +22,16 @@ namespace Bank.Web.Services
             _userManager = userManager;
             _signInManager = signInManager;
         }
+
+        public async Task<string> GetUserRole(ApplicationUser user)
+        {
+            var roles = await _userManager.GetRolesAsync(user);
+            return roles.FirstOrDefault();
+        }
+
+        public async Task<ApplicationUser> Get(string id) => await _userManager.FindByIdAsync(id);
+
+        public IEnumerable<ApplicationUser> GetAll() => _userManager.Users.ToList();
 
         public async Task<ApplicationUser> GetByEmail(string email) => await _userManager.FindByEmailAsync(email);
 

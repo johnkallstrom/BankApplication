@@ -1,18 +1,49 @@
-﻿using Bank.Web.Services;
+﻿using AutoMapper;
+using Bank.Web.Services;
 using Bank.Web.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Bank.Web.Controllers
 {
     public class UserController : Controller
     {
+        private readonly IMapper _mapper;
         private readonly IUserService _userService;
 
-        public UserController(IUserService userService)
+        public UserController(IMapper mapper, IUserService userService)
         {
+            _mapper = mapper;
             _userService = userService;
+        }
+
+        [HttpGet]
+        [Authorize(Roles = "Admin")]
+        public IActionResult Index()
+        {
+            var users = _userService.GetAll();
+
+            var model = new UserListViewModel
+            {
+                Users = _mapper.Map<List<UserViewModel>>(users)
+            };
+
+            return View(model);
+        }
+
+        [HttpGet]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> UserProfile(string id)
+        {
+            var user = await _userService.Get(id);
+
+            var model = _mapper.Map<UserProfileViewModel>(user);
+            model.Role = await _userService.GetUserRole(user);
+
+            return View(model);
         }
 
         [HttpGet]

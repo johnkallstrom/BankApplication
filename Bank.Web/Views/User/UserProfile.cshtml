@@ -1,0 +1,41 @@
+﻿@model UserProfileViewModel
+
+@{
+    ViewData["Title"] = "User";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="user-profile">
+    <div class="container">
+        <div class="wrapper">
+            <h1>@Model.Email</h1>
+
+            <div class="profile-group">
+                <strong>ID</strong>
+                <p>@Model.UserId</p>
+            </div>
+
+            <div class="profile-group">
+                <strong>Username</strong>
+                <p>@Model.Username</p>
+            </div>
+
+            <div class="profile-group">
+                <strong>Role</strong>
+                <p>@Model.Role</p>
+            </div>
+
+            <div class="options">
+                <div class="option-group">
+                    <a asp-controller="User" asp-action="EditUser" asp-route-id="@Model.UserId">Edit</a>
+                </div>
+                <div class="option-group">
+                    <a asp-controller="User" asp-action="DeleteUser" asp-route-id="@Model.UserId">Delete</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
