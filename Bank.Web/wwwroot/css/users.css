@@ -9,6 +9,59 @@
     --danger: #d92550;
 }
 
+#login {
+    margin-top: 3rem;
+    padding-bottom: 1rem;
+}
+
+#login .wrapper {
+    background-color: var(--white);
+    border: 1px solid var(--light);
+    border-radius: 8px;
+    padding: 3rem 3rem 3rem 3rem;
+    width: 465px;
+}
+
+#login label {
+    display: block;
+}
+
+#login h1 {
+    font-size: 35px;
+    color: var(--dark);
+    margin-bottom: 1.5rem;
+}
+
+#login .login-input {
+    width: 365px;
+    padding: 10px;
+    height: 45px;
+    margin-bottom: 10px;
+    font-size: 17px;
+    font-family: var(--font);
+    border-radius: 8px;
+    border: 1px solid var(--light-dark);
+    outline: none;
+}
+
+#login input[type="submit"] {
+    margin-top: 5px;
+    height: 50px;
+    font-size: 16px;
+    font-family: var(--font);
+    border: none;
+    background-color: var(--blue);
+    color: #fff;
+    width: 120px;
+    border-radius: 8px;
+    outline: none;
+}
+
+#login input[type="submit"]:hover {
+    cursor: pointer;
+}
+
+
 #user-list .container {
     padding: 3rem 3rem 3rem 3rem;
     background-color: var(--white);
@@ -100,5 +153,69 @@
 
 .option-group:last-child {
     margin-right: 0rem;
+}
+
+#create-user select {
+    color: var(--dark);
+    font-size: 17px;
+    font-family: var(--font);
+    border-radius: 8px;
+    border: 1px solid var(--light-dark);
+    padding: 10px;
+    height: 45px;
+    font-family: var(--font);
+    width: 550px;
+}
+
+#create-user {
+    margin-top: 3rem;
+    padding-bottom: 1rem;
+}
+
+#create-user .wrapper {
+    background-color: var(--white);
+    border: 1px solid var(--light);
+    border-radius: 8px;
+    padding: 3rem 3rem 3rem 3rem;
+    width: 645px;
+}
+
+#create-user label {
+    display: block;
+}
+
+#create-user h1 {
+    font-size: 35px;
+    color: var(--dark);
+    margin-bottom: 1.5rem;
+}
+
+#create-user .create-user-input {
+    width: 550px;
+    padding: 10px;
+    height: 45px;
+    margin-bottom: 10px;
+    font-size: 17px;
+    font-family: var(--font);
+    border-radius: 8px;
+    border: 1px solid var(--light-dark);
+    outline: none;
+}
+
+#create-user input[type="submit"] {
+    margin-top: 2rem;
+    height: 50px;
+    font-size: 16px;
+    font-family: var(--font);
+    border: none;
+    background-color: var(--blue);
+    color: #fff;
+    width: 120px;
+    border-radius: 8px;
+    outline: none;
+}
+
+#create-user input[type="submit"]:hover {
+    cursor: pointer;
 }
 

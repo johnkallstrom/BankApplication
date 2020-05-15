@@ -15,6 +15,13 @@ namespace Bank.Web.Middleware
             CreateMap<ApplicationUser, UserProfileViewModel>()
                 .ForMember(dest => dest.UserId, opt => opt.MapFrom(src => src.Id))
                 .ForMember(dest => dest.Username, opt => opt.MapFrom(src => src.UserName));
+
+            CreateMap<CreateUserViewModel, ApplicationUser>()
+                .ForMember(dest => dest.UserName, opt => opt.MapFrom(src => src.Email));
+
+            CreateMap<ApplicationUser, EditUserViewModel>()
+                .ForMember(dest => dest.UserId, opt => opt.MapFrom(src => src.Id))
+                .ForMember(dest => dest.Username, opt => opt.MapFrom(src => src.UserName));
         }
     }
 }

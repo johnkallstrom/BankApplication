@@ -23,6 +23,36 @@ namespace Bank.Web.Services
             _signInManager = signInManager;
         }
 
+        public async Task<bool> DeleteUser(ApplicationUser user)
+        {
+            if (user == null) return false;
+
+            var result = await _userManager.DeleteAsync(user);
+            if (result.Succeeded) return true;
+            else return false;
+        }
+
+        public async Task<bool> EditUser(ApplicationUser user, string password, string role)
+        {
+            // TODO: Edit User
+            return true;
+        }
+
+        public async Task<bool> CreateUser(ApplicationUser user, string password, string role)
+        {
+            if (await _userManager.FindByEmailAsync(user.Email) == null)
+            {
+
+                var result = await _userManager.CreateAsync(user, password);
+                if (result.Succeeded) await _userManager.AddToRoleAsync(user, role);
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
         public async Task<string> GetUserRole(ApplicationUser user)
         {
             var roles = await _userManager.GetRolesAsync(user);

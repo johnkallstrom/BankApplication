@@ -7,6 +7,9 @@ namespace Bank.Web.Services
 {
     public interface IUserService
     {
+        Task<bool> DeleteUser(ApplicationUser user);
+        Task<bool> EditUser(ApplicationUser user, string password, string role);
+        Task<bool> CreateUser(ApplicationUser user, string password, string role);
         Task<string> GetUserRole(ApplicationUser user);
         Task<ApplicationUser> Get(string id);
         IEnumerable<ApplicationUser> GetAll();

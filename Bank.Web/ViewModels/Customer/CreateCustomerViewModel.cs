@@ -72,6 +72,7 @@ namespace Bank.Web.ViewModels
 
         [Required(ErrorMessage = "Please enter email.")]
         [DisplayName("Email")]
+        [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
     }
 }

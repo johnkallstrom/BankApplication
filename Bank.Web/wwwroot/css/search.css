@@ -34,6 +34,15 @@
     outline: none;
 }
 
+#search-error .container {
+    text-align: center;
+    padding: 3rem 3rem 3rem 3rem;
+    background-color: var(--white);
+    border: 1px solid var(--light);
+    border-radius: 8px;
+    margin-top: 3rem;
+}
+
 @media (max-width: 992px) {
     #search-form {
         margin-top: 0.5rem;

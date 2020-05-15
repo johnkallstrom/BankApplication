@@ -1,10 +1,10 @@
 ﻿using AutoMapper;
+using Bank.Infrastructure.Identity;
 using Bank.Web.Services;
 using Bank.Web.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Bank.Web.Controllers
@@ -44,6 +44,63 @@ namespace Bank.Web.Controllers
             model.Role = await _userService.GetUserRole(user);
 
             return View(model);
+        }
+
+        [HttpGet]
+        [Authorize(Roles = "Admin")]
+        public IActionResult CreateUser()
+        {
+            var model = new CreateUserViewModel();
+
+            return View(model);
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> CreateUser(CreateUserViewModel model)
+        {
+            if (!ModelState.IsValid) return View(model);
+
+            var user = _mapper.Map<ApplicationUser>(model);
+            var succeeded = await _userService.CreateUser(user, model.Password, model.Role);
+            if (succeeded) return RedirectToAction(nameof(Index));
+
+            return View(model);
+        }
+
+        [HttpGet]
+        [Authorize(Roles = "Admin")]
+        public IActionResult EditUser(string id)
+        {
+            var user = _userService.Get(id);
+            var model = _mapper.Map<EditUserViewModel>(user);
+
+            return View(model);
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> EditUser(EditUserViewModel model)
+        {
+            if (!ModelState.IsValid) return View(model);
+
+            var user = _mapper.Map<ApplicationUser>(model);
+            var succeeded = await _userService.EditUser(user, model.Password, model.Role);
+            if (succeeded) return RedirectToAction(nameof(Index));
+
+            return View(model);
+        }
+
+        [HttpGet]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> DeleteUser(string id)
+        {
+            var user = await _userService.Get(id);
+
+            var succeeded = await _userService.DeleteUser(user);
+            if (succeeded) return RedirectToAction(nameof(Index));
+
+            return View();
         }
 
         [HttpGet]

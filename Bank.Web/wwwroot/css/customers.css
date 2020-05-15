@@ -1,0 +1,393 @@
+﻿:root {
+    --font: 'Roboto', sans-serif;
+    --dark: #2a2b2b;
+    --light-dark: #ccc;
+    --light: #eee;
+    --white: #fff;
+    --blue: #0079D3;
+    --hover: #070707;
+    --danger: #d92550;
+}
+
+#customer-list .container {
+    padding: 3rem 3rem 3rem 3rem;
+    background-color: var(--white);
+    border: 1px solid var(--light);
+    border-radius: 8px;
+    margin-top: 3rem;
+}
+
+#customer-list .create-customer-link {
+    margin-bottom: 1rem,
+}
+
+#customer-list .create-customer-link a {
+    text-decoration: none;
+    color: var(--white);
+    border-radius: 5px;
+    padding: 0.8rem 1.5rem;
+    font-size: 17px;
+    font-family: var(--font);
+    background-color: var(--blue);
+}
+
+#customer-list h1 {
+    font-size: 35px;
+    margin-bottom: 2rem;
+}
+
+.customer-search {
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+}
+
+.customer-search input[type="text"] {
+    background-image: url(../img/search.svg);
+    background-size: 1.4rem;
+    background-position: 10px 9px;
+    background-repeat: no-repeat;
+    text-indent: 35px;
+    width: 30%;
+    font-family: var(--font);
+    font-size: 17px;
+    padding: 0.8rem;
+    border: 1px solid var(--light-dark);
+    border-radius: 8px;
+}
+
+#customers-table .customer-name {
+    text-decoration: none;
+    color: var(--dark);
+}
+
+#customers-table .customer-details {
+    text-decoration: none;
+    color: var(--blue);
+    border-bottom: 1px solid var(--blue);
+}
+
+#customers-table .customer-name:hover {
+    cursor: pointer;
+    border-bottom: 1px solid var(--dark);
+}
+
+#customers-table {
+    table-layout: fixed;
+    overflow: hidden;
+    border-collapse: collapse;
+    width: 100%;
+    color: var(--dark);
+    margin-bottom: 10px;
+}
+
+#customers-table td, th {
+    padding: 1rem;
+    border: 1px solid #ddd;
+}
+
+#customers-table th {
+    font-weight: 600;
+    text-align: left;
+    background-color: var(--dark);
+    color: #fff;
+}
+
+#customer-search-error {
+    margin-top: 1.5rem;
+    font-size: 28px;
+    color: var(--dark);
+}
+
+#customer-profile .container {
+    margin-top: 3rem;
+    padding-bottom: 4rem;
+}
+
+.options {
+    margin-top: 2rem;
+}
+
+.option-group {
+    display: inline;
+    margin-right: 1rem;
+}
+
+.option-group:last-child {
+    margin-right: 0rem;
+}
+
+#customer-profile .option-group a {
+    border-radius: 5px;
+    text-decoration: none;
+    color: var(--white);
+    padding: 0.8rem 1.5rem;
+    background-color: var(--blue);
+}
+
+.profile, .accounts {
+    padding: 3rem;
+    background-color: var(--white);
+    border: 1px solid var(--light);
+    border-radius: 8px;
+    width: 49%;
+}
+
+.profile {
+    float: left;
+}
+
+.accounts {
+    float: right;
+}
+
+.accounts h1, .profile h1 {
+    margin-bottom: 2rem;
+}
+
+.accounts p {
+    margin-top: 3rem;
+}
+
+.accounts .total-balance {
+    font-size: 24px;
+    display: inline;
+    float: right;
+}
+
+.profile .profile-group {
+    margin-bottom: 1rem;
+}
+
+.profile .profile-group:last-child {
+    margin-bottom: 0rem;
+}
+
+#account-table .account-id {
+    text-decoration: none;
+    color: var(--dark);
+}
+
+#account-table .account-id:hover {
+    cursor: pointer;
+    border-bottom: 1px solid var(--dark);
+}
+
+#account-table .account-details {
+    text-decoration: none;
+    color: var(--blue);
+    border-bottom: 1px solid var(--blue);
+}
+
+#account-table {
+    table-layout: fixed;
+    overflow: hidden;
+    margin-top: 1rem;
+    border-collapse: collapse;
+    width: 100%;
+    color: var(--dark);
+    margin-bottom: 10px;
+}
+
+#account-table td, th {
+    padding: 1rem;
+    border: 1px solid #ddd;
+}
+
+#account-table th {
+    font-weight: 600;
+    text-align: left;
+    background-color: var(--dark);
+    color: #fff;
+}
+
+input[type="date"]::-webkit-inner-spin-button,
+input[type="date"]::-webkit-calendar-picker-indicator {
+    display: none;
+    -webkit-appearance: none;
+}
+
+#create-customer select {
+    color: var(--dark);
+    font-size: 17px;
+    font-family: var(--font);
+    border-radius: 8px;
+    border: 1px solid var(--light-dark);
+    padding: 10px;
+    height: 45px;
+    font-family: var(--font);
+    width: 550px;
+}
+
+#create-customer {
+    margin-top: 3rem;
+    padding-bottom: 1rem;
+}
+
+#create-customer .wrapper {
+    background-color: var(--white);
+    border: 1px solid var(--light);
+    border-radius: 8px;
+    padding: 3rem 3rem 3rem 3rem;
+    width: 645px;
+}
+
+#create-customer label {
+    display: block;
+}
+
+#create-customer h1 {
+    font-size: 35px;
+    color: var(--dark);
+    margin-bottom: 1.5rem;
+}
+
+#create-customer
+input[type="email"],
+input[type="text"],
+input[type="date"] {
+    width: 550px;
+    padding: 10px;
+    height: 45px;
+    margin-bottom: 10px;
+    font-size: 17px;
+    font-family: var(--font);
+    border-radius: 8px;
+    border: 1px solid var(--light-dark);
+    outline: none;
+}
+
+#create-customer .radio-group {
+    margin-top: 0.7rem;
+    margin-bottom: 0.8rem;
+}
+
+#create-customer .radio-group label {
+    display: inline;
+}
+
+#create-customer input[type="radio"]:hover {
+    cursor: pointer;
+}
+
+#create-customer input[type="submit"] {
+    margin-top: 2rem;
+    height: 50px;
+    font-size: 16px;
+    font-family: var(--font);
+    border: none;
+    background-color: var(--blue);
+    color: #fff;
+    width: 120px;
+    border-radius: 8px;
+    outline: none;
+}
+
+#create-customer input[type="submit"]:hover {
+    cursor: pointer;
+}
+
+input[type="date"]::-webkit-inner-spin-button,
+input[type="date"]::-webkit-calendar-picker-indicator {
+    display: none;
+    -webkit-appearance: none;
+}
+
+#edit-customer select {
+    color: var(--dark);
+    font-size: 17px;
+    font-family: var(--font);
+    border-radius: 8px;
+    border: 1px solid var(--light-dark);
+    padding: 10px;
+    height: 45px;
+    font-family: var(--font);
+    width: 550px;
+}
+
+#edit-customer {
+    margin-top: 3rem;
+    padding-bottom: 1rem;
+}
+
+#edit-customer .wrapper {
+    background-color: var(--white);
+    border: 1px solid var(--light);
+    border-radius: 8px;
+    padding: 3rem 3rem 3rem 3rem;
+    width: 645px;
+}
+
+#edit-customer label {
+    display: block;
+}
+
+#edit-customer h1 {
+    font-size: 35px;
+    color: var(--dark);
+    margin-bottom: 1.5rem;
+}
+
+#edit-customer
+input[type="email"],
+input[type="text"],
+input[type="date"] {
+    width: 550px;
+    padding: 10px;
+    height: 45px;
+    margin-bottom: 10px;
+    font-size: 17px;
+    font-family: var(--font);
+    border-radius: 8px;
+    border: 1px solid var(--light-dark);
+    outline: none;
+}
+
+#edit-customer .radio-group {
+    margin-top: 0.7rem;
+    margin-bottom: 0.8rem;
+}
+
+#edit-customer .radio-group label {
+    display: inline;
+}
+
+#edit-customer input[type="radio"]:hover {
+    cursor: pointer;
+}
+
+#edit-customer input[type="submit"] {
+    margin-top: 2rem;
+    height: 50px;
+    font-size: 16px;
+    font-family: var(--font);
+    border: none;
+    background-color: var(--blue);
+    color: #fff;
+    width: 120px;
+    border-radius: 8px;
+    outline: none;
+}
+
+#edit-customer input[type="submit"]:hover {
+    cursor: pointer;
+}
+
+
+@media (max-width: 992px) {
+    .profile, .accounts {
+        padding: 3rem;
+        background-color: var(--white);
+        border: 1px solid var(--light);
+        border-radius: 8px;
+        width: 100%;
+    }
+
+    .profile {
+        margin-bottom: 2rem;
+        float: none;
+    }
+
+    .accounts {
+        float: none;
+    }
+}
