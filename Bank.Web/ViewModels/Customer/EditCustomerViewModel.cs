@@ -36,9 +36,13 @@ namespace Bank.Web.ViewModels
         [DisplayName("Postal code")]
         public string PostalCode { get; set; }
 
+        [Required]
+        [DisplayName("Current country")]
+        public string CurrentCountry { get; set; }
+
         [Required(ErrorMessage = "Please enter country.")]
-        [DisplayName("Country")]
-        public string Country { get; set; }
+        [DisplayName("New country")]
+        public string NewCountry { get; set; }
 
         [Required]
         public string CountryCode { get; set; }
@@ -50,6 +54,7 @@ namespace Bank.Web.ViewModels
             {
                 return new List<SelectListItem>
                 {
+                    new SelectListItem("Choose new country", $"{string.Empty}", true, true),
                     new SelectListItem("Sweden", "Sweden"),
                     new SelectListItem("Denmark", "Denmark"),
                     new SelectListItem("Norway", "Norway"),

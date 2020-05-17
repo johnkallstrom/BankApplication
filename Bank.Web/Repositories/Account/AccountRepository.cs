@@ -16,6 +16,27 @@ namespace Bank.Web.Repositories
             _context = context;
         }
 
+        public IQueryable<Accounts> GetTop10ByCountry(string country)
+        {
+            var accounts = _context.Dispositions
+                  .Include(c => c.Customer)
+                  .Include(a => a.Account)
+                  .Where(x => x.Customer.Country == country)
+                  .OrderByDescending(a => a.Account.Balance)
+                  .Select(c => c.Account)
+                  .Take(10);
+
+            return accounts;
+        }
+
+        public IQueryable<Accounts> GetAllByCountry(string country)
+        {
+            return _context.Dispositions
+                 .Include(a => a.Account)
+                 .Where(d => d.Customer.Country == country)
+                 .Select(x => x.Account);
+        }
+
         public async Task<bool> Create(Accounts account)
         {
             if (account == null) return false;

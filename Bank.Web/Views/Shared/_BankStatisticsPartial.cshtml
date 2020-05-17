@@ -2,21 +2,36 @@
 
 <section id="statistics">
     <div class="container">
+        <div class="statistics-header">
+            <h1>Statistics</h1>
+        </div>
         <div class="wrapper">
-            <div class="statistics-header">
-                <h1>Statistics</h1>
-            </div>
             <div class="statistics-group">
-                <span>Total customers: </span>
-                <h3>@Model.TotalCustomersAmount</h3>
+                <h3><a asp-controller="Home" asp-action="CountryStatistics" asp-route-country="Sweden">Sweden</a></h3>
+                <p>Total customers: @Model.TotalCustomersInSweden</p>
+                <p>Total accounts: @Model.TotalAccountsInSweden</p>
+                <p>Total balance: @Model.TotalBalanceInSweden.ToString("C")</p>
             </div>
+
             <div class="statistics-group">
-                <span>Total accounts: </span>
-                <h3>@Model.TotalAccountsAmount</h3>
+                <h3><a asp-controller="Home" asp-action="CountryStatistics" asp-route-country="Denmark">Denmark</a></h3>
+                <p>Total customers: @Model.TotalCustomersInDenmark</p>
+                <p>Total accounts: @Model.TotalAccountsInDenmark</p>
+                <p>Total balance: @Model.TotalBalanceInDenmark.ToString("C")</p>
             </div>
+
             <div class="statistics-group">
-                <span>Total balance: </span>
-                <h3>@Model.DisplayTotalBalance</h3>
+                <h3><a asp-controller="Home" asp-action="CountryStatistics" asp-route-country="Norway">Norway</a></h3>
+                <p>Total customers: @Model.TotalCustomersInNorway</p>
+                <p>Total accounts: @Model.TotalAccountsInNorway</p>
+                <p>Total balance: @Model.TotalBalanceInNorway.ToString("C")</p>
+            </div>
+
+            <div class="statistics-group">
+                <h3><a asp-controller="Home" asp-action="CountryStatistics" asp-route-country="Finland">Finland</a></h3>
+                <p>Total customers: @Model.TotalCustomersInFinland</p>
+                <p>Total accounts: @Model.TotalAccountsInFinland</p>
+                <p>Total balance: @Model.TotalBalanceInFinland.ToString("C")</p>
             </div>
         </div>
     </div>

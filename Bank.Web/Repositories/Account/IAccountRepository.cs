@@ -1,5 +1,6 @@
 ﻿using Bank.Infrastructure.Entities;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Bank.Web.Repositories
@@ -12,5 +13,7 @@ namespace Bank.Web.Repositories
         Accounts Get(int id);
         IEnumerable<Accounts> GetAll();
         IEnumerable<Accounts> GetAllCustomerAccounts(int id);
+        IQueryable<Accounts> GetAllByCountry(string country);
+        IQueryable<Accounts> GetTop10ByCountry(string country);
     }
 }

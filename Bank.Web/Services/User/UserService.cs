@@ -1,4 +1,5 @@
 ﻿using Bank.Infrastructure.Identity;
+using Bank.Web.Exceptions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using System.Collections.Generic;
@@ -71,7 +72,7 @@ namespace Bank.Web.Services
             }
             else
             {
-                return false;
+                throw new UserExistsException("The email address entered already exists.");
             }
         }
 

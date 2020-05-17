@@ -1,0 +1,42 @@
+﻿@model CountryStatisticsViewModel
+
+@{
+    ViewData["Title"] = "Country statistics";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section id="country-statistics">
+    <div class="container">
+        <div class="statistics-header">
+            <h1>Top 10 wealthiest customers in @Model.Country</h1>
+        </div>
+        <table id="country-statistics-table">
+            <thead>
+                <tr>
+                    <th>Number</th>
+                    <th>Name</th>
+                    <th>Country</th>
+                    <th>Balance</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var customer in Model.Customers)
+                {
+                    <tr>
+                        <td>@customer.CustomerId</td>
+                        <td>
+                            <a asp-controller="Customer"
+                               asp-action="CustomerProfile"
+                               asp-route-id="@customer.CustomerId"
+                               class="customer-name">
+                                @customer.Fullname
+                            </a>
+                        </td>
+                        <td>@customer.Country</td>
+                        <td>@customer.DisplayTotalBalance</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</section>

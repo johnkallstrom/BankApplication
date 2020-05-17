@@ -1,4 +1,6 @@
-﻿using Bank.Web.Repositories;
+﻿using Bank.Infrastructure.Entities;
+using Bank.Web.Repositories;
+using Bank.Web.ViewModels;
 using System.Linq;
 
 namespace Bank.Web.Services
@@ -16,10 +18,18 @@ namespace Bank.Web.Services
             _customerRepository = customerRepository;
         }
 
-        public int GetTotalAccountsAmount() => _accountRepository.GetAll().Count();
+        public IQueryable<CustomerViewModel> GetTop10CustomersByCountry(string country) => _customerRepository.GetTop10ByCountry(country);
 
-        public decimal GetTotalBalanceAmount() => _accountRepository.GetAll().Sum(x => x.Balance);
+        public IQueryable<Accounts> GetTop10AccountsByCountry(string country)
+        {
+            var accounts = _accountRepository.GetTop10ByCountry(country);
+            return accounts;
+        }
 
-        public int GetTotalCustomersAmount() => _customerRepository.GetAll().Count();
+        public int GetCountryAccountStatistics(string country) => _accountRepository.GetAllByCountry(country).Count();
+
+        public int GetCountryCustomerStatistics(string country) => _customerRepository.GetAllByCountry(country).Count();
+
+        public decimal GetTotalBalanceByCountry(string country) => _accountRepository.GetAllByCountry(country).Sum(x => x.Balance);
     }
 }

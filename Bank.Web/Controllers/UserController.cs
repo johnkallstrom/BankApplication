@@ -62,9 +62,17 @@ namespace Bank.Web.Controllers
         {
             if (!ModelState.IsValid) return View(model);
 
-            var user = _mapper.Map<ApplicationUser>(model);
-            var succeeded = await _userService.CreateUser(user, model.Password, model.Role);
-            if (succeeded) return RedirectToAction(nameof(Index));
+            try
+            {
+                var user = _mapper.Map<ApplicationUser>(model);
+                var succeeded = await _userService.CreateUser(user, model.Password, model.Role);
+                if (succeeded) return RedirectToAction(nameof(Index));
+            }
+            catch (UserExistsException e)
+            {
+                ModelState.AddModelError(string.Empty, e.Message);
+                return View(model);
+            }
 
             return View(model);
         }

@@ -60,15 +60,15 @@
     color: var(--dark);
 }
 
+#customers-table .customer-name:hover {
+    cursor: pointer;
+    border-bottom: 1px solid var(--dark);
+}
+
 #customers-table .customer-details {
     text-decoration: none;
     color: var(--blue);
     border-bottom: 1px solid var(--blue);
-}
-
-#customers-table .customer-name:hover {
-    cursor: pointer;
-    border-bottom: 1px solid var(--dark);
 }
 
 #customers-table {
@@ -305,6 +305,14 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     font-family: var(--font);
     width: 550px;
     outline: none;
+}
+
+#edit-customer .customer-current-country:read-only {
+    background-color: var(--light);
+}
+
+#edit-customer .customer-current-country:hover {
+    cursor: not-allowed;
 }
 
 #edit-customer {

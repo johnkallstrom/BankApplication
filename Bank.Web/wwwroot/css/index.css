@@ -13,12 +13,20 @@
     color: var(--dark);
 }
 
-#statistics .wrapper {
+#statistics .container {
     padding: 3rem 3rem 3rem 3rem;
     background-color: var(--white);
     border: 1px solid var(--light);
     border-radius: 8px;
     margin-top: 3rem;
+}
+
+#statistics .wrapper {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-column-gap: 2rem;
+    grid-row-gap: 2rem;
+    justify-items: left;
 }
 
 #statistics .statistics-header h1 {
@@ -27,20 +35,25 @@
 }
 
 #statistics .statistics-group {
-    padding: 1rem;
+    width: 100%;
+    padding: 2rem;
     border: 1px solid var(--light);
     border-radius: 8px;
-    margin-bottom: 1rem;
-}
-
-#statistics .statistics-group:last-child {
-    margin-bottom: 0rem;
 }
 
 #statistics .statistics-group h3 {
-    font-size: 26px;
-    float: right;
-    display: inline;
+    margin-bottom: 1rem;
+}
+
+#statistics .statistics-group h3 a {
+    text-decoration: none;
+    color: var(--blue);
+    font-size: 24px;
+}
+
+#statistics .statistics-group h3 a:hover {
+    border-bottom: 2px solid var(--blue);
+    cursor: pointer;
 }
 
 #boxes {
@@ -72,4 +85,53 @@
 
 .fill {
     filter: invert(12%) sepia(17%) saturate(732%) hue-rotate(150deg) brightness(93%) contrast(93%);
+}
+
+#country-statistics {
+    color: var(--dark);
+}
+
+#country-statistics .container {
+    padding: 3rem 3rem 3rem 3rem;
+    background-color: var(--white);
+    border: 1px solid var(--light);
+    border-radius: 8px;
+    margin-top: 3rem;
+}
+
+#country-statistics .statistics-header h1 {
+    font-size: 35px;
+    margin-bottom: 2rem;
+}
+
+#country-statistics-table {
+    table-layout: fixed;
+    overflow: hidden;
+    border-collapse: collapse;
+    width: 100%;
+    color: var(--dark);
+    margin-bottom: 10px;
+}
+
+#country-statistics-table td, th {
+    overflow: hidden;
+    padding: 1rem;
+    border: 1px solid #ddd;
+}
+
+#country-statistics-table th {
+    font-weight: 600;
+    text-align: left;
+    background-color: var(--dark);
+    color: #fff;
+}
+
+#country-statistics-table .customer-name {
+    text-decoration: none;
+    color: var(--dark);
+}
+
+#country-statistics-table .customer-name:hover {
+    cursor: pointer;
+    border-bottom: 1px solid var(--dark);
 }
