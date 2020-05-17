@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Bank.Infrastructure.Identity;
+using Bank.Web.Exceptions;
 using Bank.Web.Services;
 using Bank.Web.ViewModels;
 using Microsoft.AspNetCore.Authorization;
@@ -70,10 +71,11 @@ namespace Bank.Web.Controllers
 
         [HttpGet]
         [Authorize(Roles = "Admin")]
-        public IActionResult EditUser(string id)
+        public async Task<IActionResult> EditUser(string id)
         {
-            var user = _userService.Get(id);
+            var user = await _userService.Get(id);
             var model = _mapper.Map<EditUserViewModel>(user);
+            model.CurrentRole = await _userService.GetUserRole(user);
 
             return View(model);
         }
@@ -84,9 +86,8 @@ namespace Bank.Web.Controllers
         {
             if (!ModelState.IsValid) return View(model);
 
-            var user = _mapper.Map<ApplicationUser>(model);
-            var succeeded = await _userService.EditUser(user, model.Password, model.Role);
-            if (succeeded) return RedirectToAction(nameof(Index));
+            var succeeded = await _userService.EditUser(model.UserId, model.Email, model.Password, model.CurrentRole, model.NewRole);
+            if (succeeded) return RedirectToAction(nameof(Index)); 
 
             return View(model);
         }

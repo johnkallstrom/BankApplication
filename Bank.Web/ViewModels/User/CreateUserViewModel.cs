@@ -17,7 +17,7 @@ namespace Bank.Web.ViewModels
         [DataType(DataType.Password)]
         public string Password { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Please choose a role.")]
         [DisplayName("Role")]
         public string Role { get; set; }
 
@@ -28,6 +28,7 @@ namespace Bank.Web.ViewModels
             {
                 return new List<SelectListItem>
                 {
+                    new SelectListItem("Choose role", $"{string.Empty}", true, true),
                     new SelectListItem("Admin", "Admin"),
                     new SelectListItem("Cashier", "Cashier"),
                 };

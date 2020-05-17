@@ -32,17 +32,39 @@ namespace Bank.Web.Services
             else return false;
         }
 
-        public async Task<bool> EditUser(ApplicationUser user, string password, string role)
+        public async Task<bool> EditUser(string id, string email, string password, string currentRole, string newRole)
         {
-            // TODO: Edit User
-            return true;
+            var user = await _userManager.FindByIdAsync(id);
+            if (user == null) return false;
+
+            if (user.Email != email)
+            {
+                var token = await _userManager.GenerateChangeEmailTokenAsync(user, email);
+                await _userManager.ChangeEmailAsync(user, email, token);
+            }
+
+            if (!string.IsNullOrWhiteSpace(password))
+            {
+                var token = await _userManager.GeneratePasswordResetTokenAsync(user);
+                await _userManager.ResetPasswordAsync(user, token, password);
+            }
+
+            if (currentRole != newRole && !string.IsNullOrEmpty(newRole))
+            {
+                await _userManager.RemoveFromRoleAsync(user, currentRole);
+                await _userManager.AddToRoleAsync(user, newRole);
+            }
+
+            user.UserName = email;
+            var result = await _userManager.UpdateAsync(user);
+            if (result.Succeeded) return true;
+            else return false;
         }
 
         public async Task<bool> CreateUser(ApplicationUser user, string password, string role)
         {
             if (await _userManager.FindByEmailAsync(user.Email) == null)
             {
-
                 var result = await _userManager.CreateAsync(user, password);
                 if (result.Succeeded) await _userManager.AddToRoleAsync(user, role);
                 return true;
@@ -61,7 +83,12 @@ namespace Bank.Web.Services
 
         public async Task<ApplicationUser> Get(string id) => await _userManager.FindByIdAsync(id);
 
-        public IEnumerable<ApplicationUser> GetAll() => _userManager.Users.ToList();
+        public IEnumerable<ApplicationUser> GetAll()
+        {
+            return _userManager.Users
+                .OrderBy(u => u.Email)
+                .ToList();
+        }
 
         public async Task<ApplicationUser> GetByEmail(string email) => await _userManager.FindByEmailAsync(email);
 

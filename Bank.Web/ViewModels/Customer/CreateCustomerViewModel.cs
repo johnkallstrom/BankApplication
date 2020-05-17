@@ -43,6 +43,7 @@ namespace Bank.Web.ViewModels
             {
                 return new List<SelectListItem>
                 {
+                    new SelectListItem("Choose country", $"{string.Empty}", true, true),
                     new SelectListItem("Sweden", "Sweden"),
                     new SelectListItem("Denmark", "Denmark"),
                     new SelectListItem("Norway", "Norway"),

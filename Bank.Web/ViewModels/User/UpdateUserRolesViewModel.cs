@@ -3,28 +3,18 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
-namespace Bank.Web.ViewModels
+namespace Bank.Web.ViewModels.User
 {
-    public class EditUserViewModel
+    public class UpdateUserRolesViewModel
     {
         [Required]
         public string UserId { get; set; }
-
-        [Required(ErrorMessage = "Please enter email.")]
-        [DisplayName("Email")]
-        [DataType(DataType.EmailAddress)]
-        public string Email { get; set; }
-
-        [Required(ErrorMessage = "Please enter password.")]
-        [DisplayName("Password")]
-        [DataType(DataType.Password)]
-        public string Password { get; set; }
 
         [Required]
         [DisplayName("Current role")]
         public string CurrentRole { get; set; }
 
-        [Required(ErrorMessage = "Please choose a role.")]
+        [Required]
         [DisplayName("New role")]
         public string NewRole { get; set; }
 

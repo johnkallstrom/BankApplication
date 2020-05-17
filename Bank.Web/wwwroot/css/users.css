@@ -102,6 +102,7 @@
 }
 
 #user-table td, th {
+    overflow: hidden;
     padding: 1rem;
     border: 1px solid #ddd;
 }
@@ -165,6 +166,7 @@
     height: 45px;
     font-family: var(--font);
     width: 550px;
+    outline: none;
 }
 
 #create-user {
@@ -217,5 +219,89 @@
 
 #create-user input[type="submit"]:hover {
     cursor: pointer;
+}
+
+#edit-user select {
+    color: var(--dark);
+    font-size: 17px;
+    font-family: var(--font);
+    border-radius: 8px;
+    border: 1px solid var(--light-dark);
+    padding: 10px;
+    height: 45px;
+    font-family: var(--font);
+    width: 550px;
+    outline: none;
+}
+
+#edit-user {
+    margin-top: 3rem;
+    padding-bottom: 1rem;
+}
+
+#edit-user .wrapper {
+    background-color: var(--white);
+    border: 1px solid var(--light);
+    border-radius: 8px;
+    padding: 3rem 3rem 3rem 3rem;
+    width: 645px;
+}
+
+#edit-user label {
+    display: block;
+}
+
+#edit-user h1 {
+    font-size: 35px;
+    color: var(--dark);
+    margin-bottom: 1.5rem;
+}
+
+#edit-user .edit-user-input {
+    width: 550px;
+    padding: 10px;
+    height: 45px;
+    margin-bottom: 10px;
+    font-size: 17px;
+    font-family: var(--font);
+    border-radius: 8px;
+    border: 1px solid var(--light-dark);
+    outline: none;
+}
+
+#edit-user input[type="submit"] {
+    margin-top: 1rem;
+    height: 50px;
+    font-size: 16px;
+    font-family: var(--font);
+    border: none;
+    background-color: var(--blue);
+    color: #fff;
+    width: 120px;
+    border-radius: 8px;
+    outline: none;
+}
+
+#edit-user input[type="submit"]:hover {
+    cursor: pointer;
+}
+
+#edit-user .user-current-role:read-only {
+    background-color: var(--light);
+}
+
+#edit-user .user-current-role:hover {
+    cursor: not-allowed;
+}
+
+    @media (max-width: 1280px) {
+        #user-profile .wrapper {
+        margin-top: 3rem;
+        padding: 3rem;
+        background-color: var(--white);
+        border: 1px solid var(--light);
+        border-radius: 8px;
+        width: 60%;
+    }
 }
 
