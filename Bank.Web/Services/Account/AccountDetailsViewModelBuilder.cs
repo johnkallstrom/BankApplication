@@ -10,10 +10,7 @@ namespace Bank.Web.Services.Account
         public int AccountId { get; set; }
         public DateTime Created { get; set; }
         public decimal Balance { get; set; }
-
-        public int CurrentPage { get; set; }
-        public int PageSize { get; set; }
-        public int TotalPages { get; set; }
+        public int StartPosition { get; set; }
         public IQueryable<TransactionViewModel> Transactions { get; set; }
 
         public AccountDetailsViewModelBuilder WithAccount(Accounts account)
@@ -25,8 +22,10 @@ namespace Bank.Web.Services.Account
             return this;
         }
 
-        public AccountDetailsViewModelBuilder WithTransactions(IQueryable<Transactions> transactions)
+        public AccountDetailsViewModelBuilder WithTransactions(IQueryable<Transactions> transactions, int? startPosition)
         {
+            StartPosition = startPosition.HasValue ? startPosition.Value : 0;
+
             Transactions = transactions.Select(x => new TransactionViewModel
             {
                 TransactionId = x.TransactionId,
@@ -37,17 +36,7 @@ namespace Bank.Web.Services.Account
                 Date = x.Date,
                 Operation = x.Operation,
                 Type = x.Type
-            });
-
-            return this;
-        }
-
-        public AccountDetailsViewModelBuilder WithPaging(int? currentPage)
-        {
-            PageSize = 20;
-            CurrentPage = currentPage.HasValue ? currentPage.Value : 1;
-            TotalPages = (int)Math.Ceiling((double)Transactions.Count() / PageSize);
-            Transactions = Transactions.Skip((CurrentPage - 1) * PageSize).Take(PageSize);
+            }).Skip(StartPosition).Take(20);
 
             return this;
         }
@@ -58,9 +47,7 @@ namespace Bank.Web.Services.Account
                 AccountId,
                 Created,
                 Balance,
-                CurrentPage,
-                PageSize,
-                TotalPages,
+                StartPosition,
                 Transactions.ToList());
 
             return model;

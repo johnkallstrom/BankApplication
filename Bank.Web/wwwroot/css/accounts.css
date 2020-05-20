@@ -42,6 +42,27 @@
     float: right;
 }
 
+.transaction-list .button-wrapper {
+    text-align: center;
+    margin-top: 2rem;
+    padding-bottom: 1.5rem;
+}
+
+.transaction-list button {
+    width: 145px;
+    height: 55px;
+    background-color: var(--blue);
+    color: var(--white);
+    border-radius: 8px;
+    font-size: 17px;
+    font-family: var(--font);
+    border: none;
+}
+
+.transaction-list button:hover {
+    cursor: pointer;
+}
+
 .account-group {
     margin-bottom: 1rem;
 }

@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Bank.Infrastructure.Entities;
 using Bank.Web.Exceptions;
 using Bank.Web.Services;
 using Bank.Web.Services.Account;
@@ -22,15 +23,14 @@ namespace Bank.Web.Controllers
 
         [HttpGet]
         [Authorize(Roles = "Admin, Cashier")]
-        public IActionResult AccountDetails(int id, int? currentPage)
+        public IActionResult AccountDetails(int id, int? startPosition)
         {
             var account = _accountService.GetAccount(id);
             var transactions = _accountService.GetAccountTransactions(id);
 
             var model = new AccountDetailsViewModelBuilder()
                 .WithAccount(account)
-                .WithTransactions(transactions)
-                .WithPaging(currentPage)
+                .WithTransactions(transactions, startPosition)
                 .Build();
 
             return View(model);
@@ -38,36 +38,18 @@ namespace Bank.Web.Controllers
 
         [HttpGet]
         [Authorize(Roles = "Admin, Cashier")]
-        public IActionResult Previous(int id, int? currentPage)
+        public IActionResult LoadTransactions(int id, int? startPosition)
         {
             var account = _accountService.GetAccount(id);
             var transactions = _accountService.GetAccountTransactions(id);
 
             var model = new AccountDetailsViewModelBuilder()
                 .WithAccount(account)
-                .WithTransactions(transactions)
-                .WithPaging(currentPage)
+                .WithTransactions(transactions, startPosition)
                 .Build();
 
             return ViewComponent("TransactionList", model);
         }
-
-        [HttpGet]
-        [Authorize(Roles = "Admin, Cashier")]
-        public IActionResult Next(int id, int? currentPage)
-        {
-            var account = _accountService.GetAccount(id);
-            var transactions = _accountService.GetAccountTransactions(id);
-
-            var model = new AccountDetailsViewModelBuilder()
-                .WithAccount(account)
-                .WithTransactions(transactions)
-                .WithPaging(currentPage)
-                .Build();
-
-            return ViewComponent("TransactionList", model);
-        }
-
 
         [HttpGet]
         [Authorize(Roles = "Admin, Cashier")]

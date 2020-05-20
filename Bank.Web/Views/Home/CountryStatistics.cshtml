@@ -17,6 +17,7 @@
                     <th>Name</th>
                     <th>Country</th>
                     <th>Balance</th>
+                    <th>Details</th>
                 </tr>
             </thead>
             <tbody>
@@ -34,6 +35,13 @@
                         </td>
                         <td>@customer.Country</td>
                         <td>@customer.DisplayTotalBalance</td>
+                        <td>
+                            <a asp-controller="Customer"
+                               asp-action="CustomerProfile"
+                               asp-route-id="@customer.CustomerId"
+                               class="customer-details">Details
+                            </a>
+                        </td>
                     </tr>
                 }
             </tbody>
