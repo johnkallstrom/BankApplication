@@ -22,7 +22,7 @@
 }
 
 .transaction-list {
-    padding: 3rem 3rem 1rem 3rem;
+    padding: 3rem 3rem 2rem 3rem;
     background-color: var(--white);
     border: 1px solid var(--light);
     border-radius: 8px;
@@ -45,7 +45,6 @@
 .transaction-list .button-wrapper {
     text-align: center;
     margin-top: 2rem;
-    padding-bottom: 1.5rem;
 }
 
 .transaction-list button {

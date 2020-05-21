@@ -1,27 +1,34 @@
-﻿using Bank.Web.Services;
+﻿using AutoMapper;
+using Bank.Application.Services;
+using Bank.Infrastructure.Identity;
 using Bank.Web.ViewModels;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Bank.Web.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly IUserService _userService;
+        private readonly IMapper _mapper;
+        private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly IBankStatisticsService _bankStatisticsService;
 
         public HomeController(
-            IUserService userService,
+            IMapper mapper,
+            SignInManager<ApplicationUser> signInManager,
             IBankStatisticsService bankStatisticsService)
         {
-            _userService = userService;
+            _mapper = mapper;
+            _signInManager = signInManager;
             _bankStatisticsService = bankStatisticsService;
         }
 
         [HttpGet]
         [AllowAnonymous]
-        //[ResponseCache(CacheProfileName = "Default")]
+        [ResponseCache(CacheProfileName = "Default")]
         public IActionResult Index()
         {
             var model = new BankStatisticsViewModel
@@ -50,14 +57,12 @@ namespace Bank.Web.Controllers
         [AllowAnonymous]
         public IActionResult CountryStatistics(string country)
         {
-            if (_userService.IsUserLoggedIn() == false) return RedirectToAction("Login", "User");
-
             var customers = _bankStatisticsService.GetTop10CustomersByCountry(country);
 
             var model = new CountryStatisticsViewModel
             {
                 Country = country,
-                Customers = customers.ToList(),
+                Customers = _mapper.Map<List<CustomerViewModel>>(customers)
             };
 
             return View(model);

@@ -20,6 +20,7 @@ namespace Bank.Web.ViewModels
         public string PhoneCountryCode { get; set; }
         public string Email { get; set; }
 
+        public string Fullname => $"{FirstName} {LastName}";
         public string DisplayGender => char.ToUpper(Gender[0]) + Gender.Substring(1);
         public string DisplayBirthday => Birthday.HasValue ? Birthday.Value.ToShortDateString() : "";
         public string DisplayTotalBalance => Accounts.Sum(a => a.Balance).ToString("C2");

@@ -1,9 +1,10 @@
 ﻿using AutoMapper;
+using Bank.Application.Exceptions;
+using Bank.Application.Services;
 using Bank.Infrastructure.Identity;
-using Bank.Web.Exceptions;
-using Bank.Web.Services;
 using Bank.Web.ViewModels;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -14,11 +15,16 @@ namespace Bank.Web.Controllers
     {
         private readonly IMapper _mapper;
         private readonly IUserService _userService;
+        private readonly SignInManager<ApplicationUser> _signInManager;
 
-        public UserController(IMapper mapper, IUserService userService)
+        public UserController(
+            IMapper mapper, 
+            IUserService userService,
+            SignInManager<ApplicationUser> signInManager)
         {
             _mapper = mapper;
             _userService = userService;
+            _signInManager = signInManager;
         }
 
         [HttpGet]
@@ -134,7 +140,7 @@ namespace Bank.Web.Controllers
                 return View(model);
             }
 
-            var result = await _userService.SignInUser(user.UserName, model.Password);
+            var result = await _signInManager.PasswordSignInAsync(user, model.Password, false, false);
 
             if (result.Succeeded)
             {
@@ -151,7 +157,7 @@ namespace Bank.Web.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> Logout()
         {
-            await _userService.SignOutUser();
+            await _signInManager.SignOutAsync();
             return RedirectToAction(nameof(Login));
         }
     }

@@ -32,7 +32,7 @@
     margin-bottom: 1.5rem;
 }
 
-#transaction input[type="text"] {
+#transaction input[type="text"], input[type="number"] {
     width: 365px;
     padding: 10px;
     height: 45px;

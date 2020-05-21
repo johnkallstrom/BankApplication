@@ -1,8 +1,10 @@
 ﻿using AutoMapper;
+using Bank.Application.Services;
 using Bank.Infrastructure.Entities;
-using Bank.Web.Services;
+using Bank.Infrastructure.Identity;
 using Bank.Web.ViewModels;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -13,14 +15,14 @@ namespace Bank.Web.Controllers
     {
         private readonly IMapper _mapper;
         private readonly ICustomerService _customerService;
-        private readonly IUserService _userService;
+        private readonly SignInManager<ApplicationUser> _signInManager;
 
         public CustomerController(
-            IUserService userService,
+            SignInManager<ApplicationUser> signInManager,
             IMapper mapper,  
             ICustomerService customerService)
         {
-            _userService = userService;
+            _signInManager = signInManager;
             _mapper = mapper;
             _customerService = customerService;
         }
@@ -92,7 +94,7 @@ namespace Bank.Web.Controllers
         [AllowAnonymous]
         public IActionResult Search(string searchString)
         {
-            if (_userService.IsUserLoggedIn() == false) return RedirectToAction("Login", "User");
+            if (_signInManager.IsSignedIn(User) == false) return RedirectToAction("Login", "User");
 
             var customer = _customerService.GetCustomerBySearch(searchString);
             if (customer == null) return RedirectToAction(nameof(SearchErrorResult));

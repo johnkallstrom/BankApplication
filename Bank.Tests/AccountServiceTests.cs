@@ -1,8 +1,8 @@
-﻿using Bank.Infrastructure.Entities;
+﻿using Bank.Application.Exceptions;
+using Bank.Application.Repositories;
+using Bank.Application.Services;
+using Bank.Infrastructure.Entities;
 using Bank.Infrastructure.Enums;
-using Bank.Web.Exceptions;
-using Bank.Web.Repositories;
-using Bank.Web.Services;
 using Moq;
 using System;
 using System.Threading.Tasks;

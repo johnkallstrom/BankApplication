@@ -12,25 +12,8 @@ namespace Bank.Web.ViewModels
         public int StartPosition { get; set; }
         public List<TransactionViewModel> Transactions { get; set; } = new List<TransactionViewModel>();
 
-        public AccountDetailsViewModel(
-            int accountId, 
-            DateTime created, 
-            decimal balance, 
-            int startPosition, 
-            List<TransactionViewModel> transactions)
-        {
-            AccountId = accountId;
-            Created = created;
-            Balance = balance;
-            StartPosition = startPosition;
-            Transactions = transactions;
-        }
-
         public string DisplayCreated => Created.ToShortDateString();
         public string DisplayBalance => Balance.ToString("C2");
-        public bool DisplayLoadButton()
-        {
-            return true;
-        }
+        public bool DisplayLoadButton() => Transactions.Count >= 20 ? true : false;
     }
 }
