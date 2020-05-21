@@ -1,11 +1,11 @@
 ﻿using AutoMapper;
-using Bank.Infrastructure.Entities;
-using Bank.Web.Exceptions;
-using Bank.Web.Services;
-using Bank.Web.Services.Account;
+using Bank.Application.Exceptions;
+using Bank.Application.Services;
 using Bank.Web.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Bank.Web.Controllers
@@ -28,10 +28,11 @@ namespace Bank.Web.Controllers
             var account = _accountService.GetAccount(id);
             var transactions = _accountService.GetAccountTransactions(id);
 
-            var model = new AccountDetailsViewModelBuilder()
-                .WithAccount(account)
-                .WithTransactions(transactions, startPosition)
-                .Build();
+            var startPos = startPosition.HasValue ? startPosition.Value : 0;
+            var transactionList = transactions.Skip(startPos).Take(20);
+
+            var model = _mapper.Map<AccountDetailsViewModel>(account);
+            model.Transactions = _mapper.Map<List<TransactionViewModel>>(transactionList);
 
             return View(model);
         }
@@ -43,10 +44,11 @@ namespace Bank.Web.Controllers
             var account = _accountService.GetAccount(id);
             var transactions = _accountService.GetAccountTransactions(id);
 
-            var model = new AccountDetailsViewModelBuilder()
-                .WithAccount(account)
-                .WithTransactions(transactions, startPosition)
-                .Build();
+            var startPos = startPosition.HasValue ? startPosition.Value : 0;
+            var transactionList = transactions.Skip(startPos).Take(20);
+
+            var model = _mapper.Map<AccountDetailsViewModel>(account);
+            model.Transactions = _mapper.Map<List<TransactionViewModel>>(transactionList);
 
             return ViewComponent("TransactionList", model);
         }

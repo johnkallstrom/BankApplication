@@ -62,9 +62,12 @@
                     }
                 </tbody>
             </table>
-            <div class="button-wrapper">
-                <button onclick="loadTransactions(@Model.AccountId)">View more</button>
-            </div>
+            @if (Model.DisplayLoadButton())
+            {
+                <div class="button-wrapper">
+                    <button onclick="loadTransactions(@Model.AccountId)">View more</button>
+                </div>
+            }
         </div>
     </div>
 </div>

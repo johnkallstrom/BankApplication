@@ -1,16 +1,17 @@
 using AutoMapper;
+using Bank.Application.Repositories;
+using Bank.Application.Services;
 using Bank.Infrastructure;
 using Bank.Infrastructure.Identity;
-using Bank.Web.Repositories;
-using Bank.Web.Repositories.Disposition;
-using Bank.Web.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using System.Globalization;
 
 namespace Bank.Web
 {
@@ -65,6 +66,18 @@ namespace Bank.Web
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            var supportedCultures = new[]
+            {
+                new CultureInfo("sv-SE")
+            };
+
+            app.UseRequestLocalization(new RequestLocalizationOptions
+            {
+                DefaultRequestCulture = new RequestCulture("sv-SE"),
+                SupportedCultures = supportedCultures,
+                SupportedUICultures = supportedCultures
+            });
+
             app.UseAuthentication();
             app.UseStaticFiles();
             app.UseMvc(routes =>
