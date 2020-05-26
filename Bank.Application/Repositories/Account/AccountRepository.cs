@@ -1,5 +1,6 @@
 ﻿using Bank.Infrastructure;
 using Bank.Infrastructure.Entities;
+using Bank.Infrastructure.Enums;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,6 +35,7 @@ namespace Bank.Application.Repositories
             return _context.Dispositions
                  .Include(a => a.Account)
                  .Where(d => d.Customer.Country == country)
+                 .Where(d => d.Type == DispositionType.OWNER.ToString())
                  .Select(x => x.Account);
         }
 

@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using System;
 using System.Globalization;
 
 namespace Bank.Web
@@ -37,8 +38,9 @@ namespace Bank.Web
             });
 
             services.AddHttpContextAccessor();
+
             services.AddDbContext<ApplicationDbContext>(options =>
-            options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+                    options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddTransient<IAzureSearchService, AzureSearchService>();
             services.AddTransient<IDispositionRepository, DispositionRepository>();
@@ -68,6 +70,18 @@ namespace Bank.Web
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            var supportedCultures = new[]
+            {
+                new CultureInfo("sv-SE")
+            };
+
+            app.UseRequestLocalization(new RequestLocalizationOptions
+            {
+                DefaultRequestCulture = new RequestCulture("sv-SE"),
+                SupportedCultures = supportedCultures,
+                SupportedUICultures = supportedCultures
+            });
+
             app.UseAuthentication();
             app.UseStaticFiles();
             app.UseMvc(routes =>
