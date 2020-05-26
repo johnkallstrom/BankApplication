@@ -8,7 +8,7 @@ using System;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace Bank.Tests
+namespace Bank.Tests.Services
 {
     public class AccountServiceTests
     {

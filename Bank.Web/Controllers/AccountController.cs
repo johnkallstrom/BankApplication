@@ -26,13 +26,10 @@ namespace Bank.Web.Controllers
         public IActionResult AccountDetails(int id, int? startPosition)
         {
             var account = _accountService.GetAccount(id);
-            var transactions = _accountService.GetAccountTransactions(id);
-
-            var startPos = startPosition.HasValue ? startPosition.Value : 0;
-            var transactionList = transactions.Skip(startPos).Take(20);
+            var transactions = _accountService.GetAccountTransactions(id, startPosition);
 
             var model = _mapper.Map<AccountDetailsViewModel>(account);
-            model.Transactions = _mapper.Map<List<TransactionViewModel>>(transactionList);
+            model.Transactions = _mapper.Map<List<TransactionViewModel>>(transactions);
 
             return View(model);
         }
@@ -42,13 +39,10 @@ namespace Bank.Web.Controllers
         public IActionResult LoadTransactions(int id, int? startPosition)
         {
             var account = _accountService.GetAccount(id);
-            var transactions = _accountService.GetAccountTransactions(id);
-
-            var startPos = startPosition.HasValue ? startPosition.Value : 0;
-            var transactionList = transactions.Skip(startPos).Take(20);
+            var transactions = _accountService.GetAccountTransactions(id, startPosition);
 
             var model = _mapper.Map<AccountDetailsViewModel>(account);
-            model.Transactions = _mapper.Map<List<TransactionViewModel>>(transactionList);
+            model.Transactions = _mapper.Map<List<TransactionViewModel>>(transactions);
 
             return ViewComponent("TransactionList", model);
         }

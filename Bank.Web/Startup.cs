@@ -1,6 +1,7 @@
 using AutoMapper;
 using Bank.Application.Repositories;
 using Bank.Application.Services;
+using Bank.Application.Services.Search;
 using Bank.Infrastructure;
 using Bank.Infrastructure.Identity;
 using Microsoft.AspNetCore.Builder;
@@ -39,6 +40,7 @@ namespace Bank.Web
             services.AddDbContext<ApplicationDbContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
+            services.AddTransient<IAzureSearchService, AzureSearchService>();
             services.AddTransient<IDispositionRepository, DispositionRepository>();
             services.AddTransient<ICustomerRepository, CustomerRepository>();
             services.AddTransient<ITransactionRepository, TransactionRepository>();
@@ -66,18 +68,6 @@ namespace Bank.Web
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            var supportedCultures = new[]
-            {
-                new CultureInfo("sv-SE")
-            };
-
-            app.UseRequestLocalization(new RequestLocalizationOptions
-            {
-                DefaultRequestCulture = new RequestCulture("sv-SE"),
-                SupportedCultures = supportedCultures,
-                SupportedUICultures = supportedCultures
-            });
-
             app.UseAuthentication();
             app.UseStaticFiles();
             app.UseMvc(routes =>

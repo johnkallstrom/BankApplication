@@ -43,6 +43,16 @@
     margin-top: 3rem;
 }
 
+#search-error .return-button {
+    margin-top: 3rem;
+}
+
+#search-error .return-button a {
+    text-decoration: none;
+    color: var(--blue);
+    border-bottom: 1px solid var(--blue);
+}
+
 @media (max-width: 992px) {
     #search-form {
         margin-top: 0.5rem;

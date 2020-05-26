@@ -1,6 +1,7 @@
 ﻿using Bank.Infrastructure;
 using Bank.Infrastructure.Entities;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -13,6 +14,21 @@ namespace Bank.Application.Repositories
         public CustomerRepository(ApplicationDbContext context)
         {
             _context = context;
+        }
+
+        public IEnumerable<Customers> GetAllByID(IEnumerable<int> ids)
+        {
+            var customers = new List<Customers>();
+
+            foreach (var customer in _context.Customers)
+            {
+                if (ids.Contains(customer.CustomerId))
+                {
+                    customers.Add(customer);
+                }
+            }
+
+            return customers;
         }
 
         public IQueryable<Customers> GetTop10ByCountry(string country)

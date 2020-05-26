@@ -16,8 +16,13 @@
                 <input type="hidden" asp-for="@Model.FromAccountId" />
 
                 <div class="form-group">
+                    <label asp-for="@Model.Balance"></label>
+                    <input type="text" value="@Model.DisplayBalance" readonly />
+                </div>
+
+                <div class="form-group">
                     <label asp-for="@Model.FromAccountId"></label>
-                    <input type="text" value="@Model.FromAccountId" class="account-number" readonly />
+                    <input type="text" value="@Model.FromAccountId" readonly />
                 </div>
 
                 <div class="form-group">
@@ -34,6 +39,9 @@
                     <input type="submit" value="Transfer" />
                 </div>
             </form>
+        </div>
+        <div class="return-wrapper">
+            <a asp-controller="Account" asp-action="AccountDetails" asp-route-id="@Model.FromAccountId">Back</a>
         </div>
     </div>
 </div>

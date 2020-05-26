@@ -1,6 +1,8 @@
 ﻿using Bank.Application.Repositories;
 using Bank.Infrastructure.Entities;
 using Bank.Infrastructure.Enums;
+using Bank.Infrastructure.SearchModels;
+using Microsoft.Azure.Search.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,6 +24,12 @@ namespace Bank.Application.Services
             _dispositionRepository = dispositionRepository;
             _accountRepository = accountRepository;
             _customerRepository = customerRepository;
+        }
+
+        public IEnumerable<Customers> GetCustomersByIndex(DocumentSearchResult<CustomerSearch> searchResults)
+        {
+            var ids = searchResults.Results.Select(x => int.Parse(x.Document.CustomerStringId));
+            return _customerRepository.GetAllByID(ids);
         }
 
         public async Task<bool> EditCustomer(Customers customer)

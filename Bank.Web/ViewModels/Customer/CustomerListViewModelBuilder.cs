@@ -26,14 +26,14 @@ namespace Bank.Web.ViewModels
             return this;
         }
 
-        public CustomerListViewModelBuilder WithSearch(string searchWord)
+        public CustomerListViewModelBuilder WithSearch(string searchString)
         {
-            if (!string.IsNullOrEmpty(searchWord))
+            if (!string.IsNullOrEmpty(searchString))
             {
                 Customers = Customers
-                    .Where(c => c.FirstName.Contains(searchWord) 
-                    || c.LastName.Contains(searchWord) 
-                    || c.City.Contains(searchWord));
+                    .Where(c => c.FirstName.Contains(searchString) 
+                    || c.LastName.Contains(searchString) 
+                    || c.City.Contains(searchString));
             }
 
             return this;

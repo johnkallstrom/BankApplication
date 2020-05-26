@@ -100,8 +100,16 @@ namespace Bank.Web.Controllers
         {
             if (!ModelState.IsValid) return View(model);
 
-            var succeeded = await _userService.EditUser(model.UserId, model.Email, model.Password, model.CurrentRole, model.NewRole);
-            if (succeeded) return RedirectToAction(nameof(Index)); 
+            try
+            {
+                var succeeded = await _userService.EditUser(model.UserId, model.Email, model.Password, model.CurrentRole, model.NewRole);
+                if (succeeded) return RedirectToAction(nameof(Index));
+            }
+            catch (MatchingRolesException e)
+            {
+                ModelState.AddModelError(string.Empty, e.Message);
+                return View(model);
+            }
 
             return View(model);
         }
@@ -132,23 +140,22 @@ namespace Bank.Web.Controllers
         {
             if (!ModelState.IsValid) return View(model);
 
-            var user = await _userService.GetByEmail(model.Email);
-
-            if (user == null)
+            try
             {
-                ModelState.AddModelError(string.Empty, "Incorrect username and/or password.");
-                return View(model);
-            }
+                var user = await _userService.GetByEmail(model.Email);
+                var result = await _signInManager.PasswordSignInAsync(user, model.Password, false, false);
 
-            var result = await _signInManager.PasswordSignInAsync(user, model.Password, false, false);
+                if (result.Succeeded == false)
+                {
+                    ModelState.AddModelError(string.Empty, "Incorrect password.");
+                    return View(model);
+                }
 
-            if (result.Succeeded)
-            {
                 return RedirectToAction("Index", "Home");
             }
-            else
+            catch (EmailNotFoundException e)
             {
-                ModelState.AddModelError(string.Empty, "Incorrect username and/or password.");
+                ModelState.AddModelError(string.Empty, e.Message);
                 return View(model);
             }
         }

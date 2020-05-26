@@ -1,8 +1,9 @@
-﻿using Microsoft.Azure.Search;
-using Microsoft.Azure.Search.Models;
+﻿using Bank.Application.Repositories;
+using Bank.Application.Services;
+using Bank.Infrastructure;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using System;
-using System.Collections.Generic;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Bank.Search
 {
@@ -10,44 +11,38 @@ namespace Bank.Search
     {
         static void Main(string[] args)
         {
-            var builder = new ConfigurationBuilder().AddJsonFile("appSettings.json");
-            var configuration = builder.Build();
-            var serviceClient = CreateSearchServiceClient(configuration);
+            var configuration = new ConfigurationBuilder()
+                   .AddJsonFile("appsettings.json")
+                   .Build();
 
-            string indexName = configuration["SearchIndexName"];
+            var services = ConfigureServices(configuration);
 
-            if (serviceClient.Indexes.Exists(indexName))
-            {
-                Console.WriteLine("Deleting index...");
-                serviceClient.Indexes.Delete(indexName);
-            }
-            else
-            {
-                Console.WriteLine("Creating index...");
-                CreateIndex(indexName, serviceClient);
-            }
+            services.AddSingleton<IConfiguration>(provider => configuration);
 
-            var actions = new List<IndexAction<Customer>>();
+            var serviceProvider = services.BuildServiceProvider();
+
+            serviceProvider.GetService<App>().Run();
         }
 
-        private static void CreateIndex(string indexName, SearchServiceClient serviceClient)
+        private static IServiceCollection ConfigureServices(IConfiguration configuration)
         {
-            var definition = new Microsoft.Azure.Search.Models.Index
-            {
-                Name = indexName,
-                Fields = FieldBuilder.BuildForType<Customer>()
-            };
+            IServiceCollection services = new ServiceCollection();
 
-            serviceClient.Indexes.Create(definition);
-        }
+            services.AddDbContext<ApplicationDbContext>(options =>
+            options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
 
-        private static SearchServiceClient CreateSearchServiceClient(IConfigurationRoot configuration)
-        {
-            string searchServiceName = configuration["SearchServiceName"];
-            string adminApiKey = configuration["SearchServiceAdminApiKey"];
+            services.AddTransient<IDispositionRepository, DispositionRepository>();
+            services.AddTransient<ICustomerRepository, CustomerRepository>();
+            services.AddTransient<ITransactionRepository, TransactionRepository>();
+            services.AddTransient<IAccountRepository, AccountRepository>();
+            services.AddTransient<IAccountService, AccountService>();
+            services.AddTransient<ICustomerService, CustomerService>();
+            services.AddTransient<IBankStatisticsService, BankStatisticsService>();
+            services.AddTransient<IUserService, UserService>();
+            services.AddTransient<ICustomerService, CustomerService>();
+            services.AddTransient<App>();
 
-            var serviceClient = new SearchServiceClient(searchServiceName, new SearchCredentials(adminApiKey));
-            return serviceClient;
+            return services;
         }
     }
 }

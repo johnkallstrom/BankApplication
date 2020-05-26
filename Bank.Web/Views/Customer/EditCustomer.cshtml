@@ -49,11 +49,6 @@
                 </div>
 
                 <div class="form-group">
-                    <label asp-for="@Model.SocialSecurityNumber"></label>
-                    <input type="text" asp-for="@Model.SocialSecurityNumber" maxlength="11" />
-                </div>
-
-                <div class="form-group">
                     <label asp-for="@Model.Birthday"></label>
                     <input type="date" asp-for="@Model.Birthday" />
                 </div>
@@ -65,7 +60,7 @@
 
                 <div class="form-group">
                     <label asp-for="@Model.PostalCode"></label>
-                    <input type="text" asp-for="@Model.PostalCode" />
+                    <input type="number" asp-for="@Model.PostalCode" />
                 </div>
 
                 <div class="form-group">
@@ -74,13 +69,8 @@
                 </div>
 
                 <div class="form-group">
-                    <label asp-for="@Model.CurrentCountry"></label>
-                    <input type="text" asp-for="@Model.CurrentCountry" readonly class="customer-current-country" />
-                </div>
-
-                <div class="form-group">
-                    <label asp-for="@Model.NewCountry"></label>
-                    <select asp-items="@Model.CountryOptions" asp-for="@Model.NewCountry"></select>
+                    <label asp-for="@Model.Country"></label>
+                    <select asp-items="@Model.CountryOptions" asp-for="@Model.Country"></select>
                 </div>
 
                 <div class="form-group">

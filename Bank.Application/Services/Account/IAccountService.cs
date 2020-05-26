@@ -6,7 +6,7 @@ namespace Bank.Application.Services
 {
     public interface IAccountService
     {
-        IQueryable<Transactions> GetAccountTransactions(int id);
+        IQueryable<Transactions> GetAccountTransactions(int id, int? startPosition);
         Accounts GetAccount(int id);
         Task<bool> Deposit(int id, decimal amount);
         Task<bool> Withdrawal(int id, decimal amount);

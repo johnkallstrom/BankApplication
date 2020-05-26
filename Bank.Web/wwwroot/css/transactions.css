@@ -14,6 +14,16 @@
     padding-bottom: 1rem;
 }
 
+#transaction .return-wrapper {
+    margin-top: 2rem;
+}
+
+#transaction .return-wrapper a {
+    text-decoration: none;
+    color: var(--blue);
+    border-bottom: 1px solid var(--blue);
+}
+
 #transaction .wrapper {
     background-color: var(--white);
     border: 1px solid var(--light);
@@ -44,11 +54,11 @@
     outline: none;
 }
 
-#transaction .account-number:read-only {
+#transaction input[type="text"]:read-only {
     background-color: var(--light);
 }
 
-#transaction .account-number:hover {
+#transaction input[type="text"]:read-only:hover {
     cursor: not-allowed;
 }
 

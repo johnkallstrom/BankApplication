@@ -29,6 +29,7 @@ namespace Bank.Application.Services
         {
             var user = await _userManager.FindByIdAsync(id);
             if (user == null) return false;
+            if (currentRole == newRole) throw new MatchingRolesException("The new role can't be the same as the existing role.");
 
             if (user.Email != email)
             {
@@ -83,6 +84,13 @@ namespace Bank.Application.Services
                 .ToList();
         }
 
-        public async Task<ApplicationUser> GetByEmail(string email) => await _userManager.FindByEmailAsync(email);
+        public async Task<ApplicationUser> GetByEmail(string email)
+        {
+            var user = await _userManager.FindByEmailAsync(email);
+
+            if (user == null) throw new EmailNotFoundException("The email you entered does not exist.");
+
+            return user;
+        }
     }
 }

@@ -12,7 +12,6 @@ namespace Bank.Infrastructure
             AddRole(roleManager, "Cashier").Wait();
             AddUser(userManager, "stefan.holmberg@systementor.se", "stefan.holmberg@systementor.se", "Hejsan123#", "Admin").Wait();
             AddUser(userManager, "stefan.holmberg@nackademin.se", "stefan.holmberg@nackademin.se", "Hejsan123#", "Cashier").Wait();
-            AddUser(userManager, "admin@mail.com", "admin@mail.com", "password", "Admin").Wait();
         }
 
         private async Task AddRole(RoleManager<IdentityRole> roleManager, string role)

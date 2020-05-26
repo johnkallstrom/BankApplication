@@ -24,7 +24,11 @@ namespace Bank.Application.Services
 
         public Accounts GetAccount(int id) => _accountRepository.Get(id);
 
-        public IQueryable<Transactions> GetAccountTransactions(int id) => _transactionRepository.GetAll(id);
+        public IQueryable<Transactions> GetAccountTransactions(int id, int? startPosition)
+        {
+            var startPos = startPosition.HasValue ? startPosition.Value : 0;
+            return _transactionRepository.GetAll(id).Skip(startPos).Take(20);
+        }
 
         public async Task<bool> Transfer(int fromAccountId, int toAccountId, decimal amount)
         {

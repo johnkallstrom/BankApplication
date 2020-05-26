@@ -13,16 +13,13 @@ namespace Bank.Web.Controllers
     public class HomeController : Controller
     {
         private readonly IMapper _mapper;
-        private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly IBankStatisticsService _bankStatisticsService;
 
         public HomeController(
             IMapper mapper,
-            SignInManager<ApplicationUser> signInManager,
             IBankStatisticsService bankStatisticsService)
         {
             _mapper = mapper;
-            _signInManager = signInManager;
             _bankStatisticsService = bankStatisticsService;
         }
 

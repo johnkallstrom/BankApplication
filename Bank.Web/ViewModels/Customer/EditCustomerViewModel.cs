@@ -1,5 +1,4 @@
-﻿using Bank.Infrastructure.Entities;
-using Microsoft.AspNetCore.Mvc.Rendering;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -36,13 +35,9 @@ namespace Bank.Web.ViewModels
         [DisplayName("Postal code")]
         public string PostalCode { get; set; }
 
-        [Required]
-        [DisplayName("Current country")]
-        public string CurrentCountry { get; set; }
-
         [Required(ErrorMessage = "Please enter country.")]
-        [DisplayName("New country")]
-        public string NewCountry { get; set; }
+        [DisplayName("Country")]
+        public string Country { get; set; }
 
         [Required]
         public string CountryCode { get; set; }
@@ -54,7 +49,6 @@ namespace Bank.Web.ViewModels
             {
                 return new List<SelectListItem>
                 {
-                    new SelectListItem("Choose new country", $"{string.Empty}", true, true),
                     new SelectListItem("Sweden", "Sweden"),
                     new SelectListItem("Denmark", "Denmark"),
                     new SelectListItem("Norway", "Norway"),
@@ -62,17 +56,6 @@ namespace Bank.Web.ViewModels
                 };
             }
         }
-
-        [Required(ErrorMessage = "Please enter social security number.")]
-        [DisplayName("Social security number (Ex 920505-0145)")]
-        [RegularExpression
-            ("^(?:19|[2-9][0-9]){0,1}(?:[0-9]{2})" +
-            "(?!0229|0230|0231|0431|0631|0931|1131)" +
-            "(?:(?:0[1-9])|(?:1[0-2]))(?:(?:0[1-9])" +
-            "|(?:1[0-9])|(?:2[0-9])|(?:3[01]))[-+](?!0000)" +
-            "(?:[0-9]{4})$",
-            ErrorMessage = "Please enter a correct social security number.")]
-        public string SocialSecurityNumber { get; set; }
 
         [Required(ErrorMessage = "Please enter birthday.")]
         [DisplayName("Birthday")]

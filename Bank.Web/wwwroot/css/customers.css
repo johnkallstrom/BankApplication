@@ -9,6 +9,16 @@
     --danger: #d92550;
 }
 
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0; 
+}
+
+input[type=number] {
+    -moz-appearance: textfield;
+}
+
 #customer-list .container {
     padding: 3rem 3rem 3rem 3rem;
     background-color: var(--white);
@@ -94,7 +104,7 @@
 }
 
 #customer-search-error {
-    margin-top: 1.5rem;
+    margin-top: 2rem;
     font-size: 28px;
     color: var(--dark);
 }
@@ -258,6 +268,18 @@ input[type="date"] {
     outline: none;
 }
 
+#create-customer #PostalCode {
+    width: 550px;
+    padding: 10px;
+    height: 45px;
+    margin-bottom: 10px;
+    font-size: 17px;
+    font-family: var(--font);
+    border-radius: 8px;
+    border: 1px solid var(--light-dark);
+    outline: none;
+}
+
 #create-customer .radio-group {
     margin-top: 0.7rem;
     margin-bottom: 0.8rem;
@@ -342,6 +364,18 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 input[type="email"],
 input[type="text"],
 input[type="date"] {
+    width: 550px;
+    padding: 10px;
+    height: 45px;
+    margin-bottom: 10px;
+    font-size: 17px;
+    font-family: var(--font);
+    border-radius: 8px;
+    border: 1px solid var(--light-dark);
+    outline: none;
+}
+
+#edit-customer #PostalCode {
     width: 550px;
     padding: 10px;
     height: 45px;

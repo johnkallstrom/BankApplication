@@ -1,4 +1,4 @@
-﻿@model CustomerListViewModel
+﻿@model AzureSearchViewModel
 
 @{
     ViewData["Title"] = "Customers";
@@ -14,7 +14,7 @@
         <div class="customer-search">
             <form>
                 <div class="form-group">
-                    <input type="text" asp-for="@Model.SearchWord" placeholder="Search customer by name or city" autocomplete="off" />
+                    <input type="text" asp-for="@Model.SearchString" placeholder="Search customer by name or city" autocomplete="off" />
                 </div>
             </form>
         </div>
@@ -29,7 +29,8 @@
             <table id="customers-table">
                 <thead>
                     <tr>
-                        <th>Number</th>
+                        <th>ID</th>
+                        <th>National ID</th>
                         <th>Name</th>
                         <th>Address</th>
                         <th>City</th>
@@ -41,6 +42,7 @@
                     {
                         <tr>
                             <td>@customer.CustomerId</td>
+                            <td>@customer.NationalId</td>
                             <td>
                                 <a asp-controller="Customer"
                                    asp-action="CustomerProfile"
