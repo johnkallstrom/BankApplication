@@ -1,16 +1,14 @@
-﻿@model CountryStatisticsViewModel
+﻿@model TopCustomerListViewModel
 
 @{
-    ViewData["Title"] = "Country statistics";
+    ViewData["Title"] = "TopCustomers";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<section id="country-statistics">
+<section id="customer-list">
     <div class="container">
-        <div class="statistics-header">
-            <h1>Top 10 wealthiest customers in @Model.Country</h1>
-        </div>
-        <table id="country-statistics-table">
+        <h1>Top 10 wealthiest customers in @Model.Country</h1>
+        <table id="customers-table">
             <thead>
                 <tr>
                     <th>ID</th>
@@ -30,19 +28,21 @@
                                asp-route-id="@customer.CustomerId"
                                class="customer-name">
                                 @customer.Fullname
-                            </a>
-                        </td>
-                        <td>@customer.Country</td>
-                        <td>
-                            <a asp-controller="Customer"
-                               asp-action="CustomerProfile"
-                               asp-route-id="@customer.CustomerId"
-                               class="customer-details">Details
-                            </a>
-                        </td>
-                    </tr>
-                }
+                        </a>
+                    </td>
+                    <td>@customer.Country</td>
+                    <td>
+                        <a asp-controller="Customer"
+                           asp-action="CustomerProfile"
+                           asp-route-id="@customer.CustomerId"
+                           class="customer-details">
+                            Details
+                        </a>
+                    </td>
+                </tr>
+            }
             </tbody>
         </table>
     </div>
 </section>
+

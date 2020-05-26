@@ -1,26 +1,20 @@
-﻿using AutoMapper;
-using Bank.Application.Services;
-using Bank.Infrastructure.Identity;
+﻿using Bank.Application.Services;
+using Bank.Infrastructure.Enums;
 using Bank.Web.ViewModels;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace Bank.Web.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly IMapper _mapper;
-        private readonly IBankStatisticsService _bankStatisticsService;
+        private readonly IStatisticsService _statisticsService;
 
         public HomeController(
-            IMapper mapper,
-            IBankStatisticsService bankStatisticsService)
+            IStatisticsService statisticsService)
         {
-            _mapper = mapper;
-            _bankStatisticsService = bankStatisticsService;
+            _statisticsService = statisticsService;
         }
 
         [HttpGet]
@@ -28,23 +22,30 @@ namespace Bank.Web.Controllers
         [ResponseCache(CacheProfileName = "Default")]
         public IActionResult Index()
         {
+            var countries = new string[]
+            {
+                CountryType.Sweden.ToString(),
+                CountryType.Norway.ToString(),
+                CountryType.Denmark.ToString(),
+                CountryType.Finland.ToString(),
+            };
+
             var model = new BankStatisticsViewModel
             {
-                TotalCustomersInSweden = _bankStatisticsService.GetCountryCustomerStatistics("Sweden"),
-                TotalAccountsInSweden = _bankStatisticsService.GetCountryAccountStatistics("Sweden"),
-                TotalBalanceInSweden = _bankStatisticsService.GetTotalBalanceByCountry("Sweden"),
+                TotalCustomers = _statisticsService.GetTotalCustomers(),
+                TotalAccounts = _statisticsService.GetTotalAccounts(),
+                TotalBalance = _statisticsService.GetTotalBalance(),
 
-                TotalCustomersInDenmark = _bankStatisticsService.GetCountryCustomerStatistics("Denmark"),
-                TotalAccountsInDenmark = _bankStatisticsService.GetCountryAccountStatistics("Denmark"),
-                TotalBalanceInDenmark = _bankStatisticsService.GetTotalBalanceByCountry("Denmark"),
-
-                TotalCustomersInNorway = _bankStatisticsService.GetCountryCustomerStatistics("Norway"),
-                TotalAccountsInNorway = _bankStatisticsService.GetCountryAccountStatistics("Norway"),
-                TotalBalanceInNorway = _bankStatisticsService.GetTotalBalanceByCountry("Norway"),
-
-                TotalCustomersInFinland = _bankStatisticsService.GetCountryCustomerStatistics("Finland"),
-                TotalAccountsInFinland = _bankStatisticsService.GetCountryAccountStatistics("Finland"),
-                TotalBalanceInFinland = _bankStatisticsService.GetTotalBalanceByCountry("Finland")
+                CountryStatisticsViewModel = new CountryStatisticsViewModel
+                {
+                    Countries = countries.Select(country => new CountryViewModel
+                    {
+                        Country = country,
+                        TotalCustomers = _statisticsService.GetTotalCustomersByCountry(country),
+                        TotalAccounts = _statisticsService.GetTotalAccountsByCountry(country),
+                        TotalBalance = _statisticsService.GetTotalBalanceByCountry(country)
+                    }).ToList()
+                }
             };
 
             return View(model);
@@ -52,17 +53,6 @@ namespace Bank.Web.Controllers
 
         [HttpGet]
         [AllowAnonymous]
-        public IActionResult CountryStatistics(string country)
-        {
-            var customers = _bankStatisticsService.GetTop10CustomersByCountry(country);
-
-            var model = new CountryStatisticsViewModel
-            {
-                Country = country,
-                Customers = _mapper.Map<List<CustomerViewModel>>(customers)
-            };
-
-            return View(model);
-        }
+        public IActionResult ViewSearchError() => View();
     }
 }

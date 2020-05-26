@@ -99,7 +99,7 @@ input[type=number] {
 #customers-table th {
     font-weight: 600;
     text-align: left;
-    background-color: var(--dark);
+    background-color: var(--blue);
     color: #fff;
 }
 
@@ -207,7 +207,7 @@ input[type=number] {
 #account-table th {
     font-weight: 600;
     text-align: left;
-    background-color: var(--dark);
+    background-color: var(--blue);
     color: #fff;
 }
 

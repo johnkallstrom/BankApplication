@@ -37,7 +37,7 @@ namespace Bank.Search
             services.AddTransient<IAccountRepository, AccountRepository>();
             services.AddTransient<IAccountService, AccountService>();
             services.AddTransient<ICustomerService, CustomerService>();
-            services.AddTransient<IBankStatisticsService, BankStatisticsService>();
+            services.AddTransient<IStatisticsService, StatisticsService>();
             services.AddTransient<IUserService, UserService>();
             services.AddTransient<ICustomerService, CustomerService>();
             services.AddTransient<App>();

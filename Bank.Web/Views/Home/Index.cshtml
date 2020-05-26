@@ -1,11 +1,32 @@
 ﻿@model BankStatisticsViewModel
 
 @{
-    ViewData["Title"] = "Home";
+    ViewData["Title"] = "Bank Administration";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<partial name="_BankStatisticsPartial" for="@Model" />
+<section id="statistics">
+    <div class="container">
+        <div class="statistics-header">
+            <h1>Overview</h1>
+        </div>
+        <div class="wrapper">
+            <div class="statistics-group">
+                <p>Customers: <span>@Model.TotalCustomers</span></p>
+            </div>
+
+            <div class="statistics-group">
+                <p>Accounts: <span>@Model.TotalAccounts</span></p>
+            </div>
+
+            <div class="statistics-group">
+                <p>Balance: <span>@Model.DisplayTotalBalance</span></p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<partial name="_CountryStatisticsPartial" for="@Model.CountryStatisticsViewModel" />
 
 <section id="boxes">
     <div class="container">

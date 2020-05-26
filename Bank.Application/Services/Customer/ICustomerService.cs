@@ -9,6 +9,7 @@ namespace Bank.Application.Services
 {
     public interface ICustomerService
     {
+        IEnumerable<Customers> GetTopCustomersByCountry(string country);
         IEnumerable<Customers> GetCustomersByIndex(DocumentSearchResult<CustomerSearch> searchResults);
         Task<bool> EditCustomer(Customers customer);
         Task<bool> CreateCustomer(Customers customer);

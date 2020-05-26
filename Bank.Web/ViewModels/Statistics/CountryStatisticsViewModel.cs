@@ -4,7 +4,6 @@ namespace Bank.Web.ViewModels
 {
     public class CountryStatisticsViewModel
     {
-        public string Country { get; set; }
-        public IEnumerable<CustomerViewModel> Customers { get; set; }
+        public List<CountryViewModel> Countries { get; set; }
     }
 }

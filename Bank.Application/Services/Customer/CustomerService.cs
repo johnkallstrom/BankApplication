@@ -26,6 +26,8 @@ namespace Bank.Application.Services
             _customerRepository = customerRepository;
         }
 
+        public IEnumerable<Customers> GetTopCustomersByCountry(string country) => _customerRepository.GetTopByCountry(country);
+
         public IEnumerable<Customers> GetCustomersByIndex(DocumentSearchResult<CustomerSearch> searchResults)
         {
             var ids = searchResults.Results.Select(x => int.Parse(x.Document.CustomerStringId));

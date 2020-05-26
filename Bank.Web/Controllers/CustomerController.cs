@@ -122,16 +122,24 @@ namespace Bank.Web.Controllers
             if (_signInManager.IsSignedIn(User) == false) return RedirectToAction("Login", "User");
 
             var customer = _customerService.GetCustomerBySearch(searchString);
-            if (customer == null) return RedirectToAction(nameof(SearchErrorResult));
+            if (customer == null) return RedirectToAction("ViewSearchError", "Home");
 
             return RedirectToAction("CustomerProfile", new { id = customer.CustomerId });
         }
 
         [HttpGet]
         [AllowAnonymous]
-        public IActionResult SearchErrorResult()
+        public IActionResult TopCustomers(string country)
         {
-            return View();
+            var customers = _customerService.GetTopCustomersByCountry(country);
+
+            var model = new TopCustomerListViewModel
+            {
+                Country = country,
+                Customers = _mapper.Map<List<CustomerViewModel>>(customers)
+            };
+
+            return View(model);
         }
     }
 }

@@ -49,7 +49,7 @@ namespace Bank.Web
             services.AddTransient<IAccountRepository, AccountRepository>();
             services.AddTransient<IAccountService, AccountService>();
             services.AddTransient<ICustomerService, CustomerService>();
-            services.AddTransient<IBankStatisticsService, BankStatisticsService>();
+            services.AddTransient<IStatisticsService, StatisticsService>();
             services.AddTransient<IUserService, UserService>();
 
             services.AddAutoMapper(typeof(Startup));

@@ -31,7 +31,7 @@ namespace Bank.Application.Repositories
             return customers;
         }
 
-        public IQueryable<Customers> GetTop10ByCountry(string country)
+        public IQueryable<Customers> GetTopByCountry(string country)
         {
             var customers = _context.Dispositions
                 .Include(c => c.Customer)

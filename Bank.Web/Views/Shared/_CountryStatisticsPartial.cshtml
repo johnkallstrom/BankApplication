@@ -1,0 +1,44 @@
+﻿@model CountryStatisticsViewModel
+
+<section id="statistics">
+    <div class="container">
+        <div class="statistics-header">
+            <h1>Country</h1>
+        </div>
+        <table id="statistics-table">
+            <thead>
+                <tr>
+                    <th>Country</th>
+                    <th>Customers</th>
+                    <th>Accounts</th>
+                    <th>Balance</th>
+                    <th>More</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var country in Model.Countries)
+	            {
+                    <tr>
+                        <td>
+                            <a asp-controller="Customer"
+                               asp-action="TopCustomers"
+                               asp-route-country="@country.Country"
+                               class="country-name">@country.Country
+                            </a>
+                        </td>
+                        <td>@country.TotalCustomers</td>
+                        <td>@country.TotalAccounts</td>
+                        <td>@country.DisplayTotalBalance</td>
+                        <td>
+                            <a asp-controller="Customer"
+                               asp-action="TopCustomers"
+                               asp-route-country="@country.Country"
+                               class="country-details">More
+                            </a>
+                        </td>
+                    </tr>
+	            }
+            </tbody>
+        </table>
+    </div>
+</section>

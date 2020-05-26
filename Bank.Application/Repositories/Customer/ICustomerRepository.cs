@@ -8,7 +8,7 @@ namespace Bank.Application.Repositories
     public interface ICustomerRepository
     {
         IEnumerable<Customers> GetAllByID(IEnumerable<int> ids);
-        IQueryable<Customers> GetTop10ByCountry(string country);
+        IQueryable<Customers> GetTopByCountry(string country);
         IQueryable<Customers> GetAllByCountry(string country);
         Task<bool> Update(Customers customer);
         Task<bool> Create(Customers customer);
