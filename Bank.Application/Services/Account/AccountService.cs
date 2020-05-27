@@ -39,7 +39,7 @@ namespace Bank.Application.Services
             if (toAccount == null) throw new AccountNotFoundException($"The account number '{toAccountId}' could not be found.");
             if (fromAccountId == toAccountId) throw new MatchingAccountsException("The account you try to transfer from can't be the same account you deposit to.");
             if (fromAccount.Balance - amount < 0) throw new InsufficientFundsException("Insufficient funds. The account you tried to transfer from does not have enough funds.");
-            if (amount < 0) throw new NoNegativeAmountException("No negative amount is allowed.");
+            if (amount <= 0) throw new NoNegativeAmountException("No negative amount is allowed.");
 
             fromAccount.Balance -= Math.Round(amount, 2);
             toAccount.Balance += Math.Round(amount, 2);
@@ -75,7 +75,7 @@ namespace Bank.Application.Services
 
             if (account == null) throw new AccountNotFoundException($"The account number '{id}' could not be found.");
             if (account.Balance - amount < 0) throw new InsufficientFundsException("Insufficient funds. The account you tried to withdraw from does not have enough funds.");
-            if (amount < 0) throw new NoNegativeAmountException("No negative amount is allowed.");
+            if (amount <= 0) throw new NoNegativeAmountException("No negative amount is allowed.");
 
             account.Balance -= Math.Round(amount, 2);
 
@@ -99,7 +99,7 @@ namespace Bank.Application.Services
             var account = _accountRepository.Get(id);
 
             if (account == null) throw new AccountNotFoundException($"The account number '{id}' could not be found.");
-            if (amount < 0) throw new NoNegativeAmountException("No negative amount is allowed.");
+            if (amount <= 0) throw new NoNegativeAmountException("No negative amount is allowed.");
 
             account.Balance += Math.Round(amount, 2);
 

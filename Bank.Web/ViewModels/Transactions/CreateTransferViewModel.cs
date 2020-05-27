@@ -21,6 +21,7 @@ namespace Bank.Web.ViewModels
         [Required(ErrorMessage = "Please enter amount.")]
         [Display(Name = "Amount")]
         [DataType(DataType.Currency, ErrorMessage = "Please enter a valid amount.")]
+        [Range(1, double.MaxValue, ErrorMessage = "Minimum amount allowed is 1.")]
         public decimal Amount { get; set; }
 
         public string DisplayBalance => Balance.ToString("C2");
