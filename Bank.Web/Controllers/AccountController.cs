@@ -71,11 +71,13 @@ namespace Bank.Web.Controllers
             catch(AccountNotFoundException e)
             {
                 ModelState.AddModelError(string.Empty, e.Message);
+                model.Balance = _accountService.GetAccount(model.AccountId).Balance;
                 return View(model);
             }
             catch (NoNegativeAmountException e)
             {
                 ModelState.AddModelError(string.Empty, e.Message);
+                model.Balance = _accountService.GetAccount(model.AccountId).Balance;
                 return View(model);
             }
 
@@ -106,16 +108,19 @@ namespace Bank.Web.Controllers
             catch (AccountNotFoundException e)
             {
                 ModelState.AddModelError(string.Empty, e.Message);
+                model.Balance = _accountService.GetAccount(model.AccountId).Balance;
                 return View(model);
             }
             catch (InsufficientFundsException e)
             {
                 ModelState.AddModelError(string.Empty, e.Message);
+                model.Balance = _accountService.GetAccount(model.AccountId).Balance;
                 return View(model);
             }
             catch (NoNegativeAmountException e)
             {
                 ModelState.AddModelError(string.Empty, e.Message);
+                model.Balance = _accountService.GetAccount(model.AccountId).Balance;
                 return View(model);
             }
 
@@ -146,21 +151,25 @@ namespace Bank.Web.Controllers
             catch (AccountNotFoundException e)
             {
                 ModelState.AddModelError(string.Empty, e.Message);
+                model.Balance = _accountService.GetAccount(model.FromAccountId).Balance;
                 return View(model);
             }
             catch (InsufficientFundsException e)
             {
                 ModelState.AddModelError(string.Empty, e.Message);
+                model.Balance = _accountService.GetAccount(model.FromAccountId).Balance;
                 return View(model);
             }
             catch (MatchingAccountsException e)
             {
                 ModelState.AddModelError(string.Empty, e.Message);
+                model.Balance = _accountService.GetAccount(model.FromAccountId).Balance;
                 return View(model);
             }
             catch (NoNegativeAmountException e)
             {
                 ModelState.AddModelError(string.Empty, e.Message);
+                model.Balance = _accountService.GetAccount(model.FromAccountId).Balance;
                 return View(model);
             }
 

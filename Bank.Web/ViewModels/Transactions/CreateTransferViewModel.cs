@@ -15,7 +15,7 @@ namespace Bank.Web.ViewModels
 
         [Required(ErrorMessage = "Please enter to account number.")]
         [Display(Name = "To")]
-        [Range(1, int.MaxValue, ErrorMessage = ("Please enter a valid account number."))]
+        [Range(1, int.MaxValue, ErrorMessage = ("Please enter a valid to account number."))]
         public int ToAccountId { get; set; }
 
         [Required(ErrorMessage = "Please enter amount.")]
