@@ -131,6 +131,8 @@ namespace Bank.Web.Controllers
         [AllowAnonymous]
         public IActionResult TopCustomers(string country)
         {
+            if (_signInManager.IsSignedIn(User) == false) return RedirectToAction("Login", "User");
+
             var customers = _customerService.GetTopCustomersByCountry(country);
 
             var model = new TopCustomerListViewModel
