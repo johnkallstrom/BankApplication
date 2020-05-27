@@ -5,13 +5,14 @@
 {
     <partial name="_SearchFormPartial" />
 
+    <div id="user-wrapper">
+        <a>@UserManager.GetUserAsync(User).Result.Email</a>
+    </div>
+
     if (User.IsInRole("Cashier"))
     {
         <nav id="navbar">
             <ul>
-                <li>
-                    <a class="disable">@UserManager.GetUserAsync(User).Result.Email</a>
-                </li>
                 <li><a asp-controller="Customer" asp-action="Index">Customers</a></li>
                 <li><a asp-controller="User" asp-action="Logout">Sign out</a></li>
             </ul>
@@ -22,9 +23,6 @@
     {
         <nav id="navbar">
             <ul>
-                <li>
-                    <a class="disable">@UserManager.GetUserAsync(User).Result.Email</a>
-                </li>
                 <li><a asp-controller="User" asp-action="Index">Users</a></li>
                 <li><a asp-controller="Customer" asp-action="Index">Customers</a></li>
                 <li><a asp-controller="User" asp-action="Logout">Sign out</a></li>
@@ -35,6 +33,8 @@
 else
 {
     <partial name="_SearchFormPartial" />
+
+    <div class="push"></div>
 
     <nav id="navbar">
         <ul>
