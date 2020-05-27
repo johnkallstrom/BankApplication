@@ -55,7 +55,7 @@
 
 @media (max-width: 992px) {
     #search-form {
-        margin-top: 0.5rem;
+        margin-top: 0rem;
         margin-left: 0rem;
         justify-self: start;
         width: 330px;

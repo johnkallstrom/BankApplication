@@ -3,11 +3,15 @@
 
 @if (SignInManager.IsSignedIn(User))
 {
+    <partial name="_SearchFormPartial" />
+
     if (User.IsInRole("Cashier"))
     {
-        <partial name="_SearchFormPartial" />
         <nav id="navbar">
             <ul>
+                <li>
+                    <a class="disable">@UserManager.GetUserAsync(User).Result.Email</a>
+                </li>
                 <li><a asp-controller="Customer" asp-action="Index">Customers</a></li>
                 <li><a asp-controller="User" asp-action="Logout">Sign out</a></li>
             </ul>
@@ -16,9 +20,11 @@
 
     if (User.IsInRole("Admin"))
     {
-        <partial name="_SearchFormPartial" />
         <nav id="navbar">
             <ul>
+                <li>
+                    <a class="disable">@UserManager.GetUserAsync(User).Result.Email</a>
+                </li>
                 <li><a asp-controller="User" asp-action="Index">Users</a></li>
                 <li><a asp-controller="Customer" asp-action="Index">Customers</a></li>
                 <li><a asp-controller="User" asp-action="Logout">Sign out</a></li>
@@ -29,6 +35,7 @@
 else
 {
     <partial name="_SearchFormPartial" />
+
     <nav id="navbar">
         <ul>
             <li><a asp-controller="User" asp-action="Login">Sign in</a></li>
