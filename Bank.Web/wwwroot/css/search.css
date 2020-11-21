@@ -30,7 +30,7 @@
     font-family: var(--font);
     font-size: 17px;
     padding: 0.6rem;
-    border: none;
+    border: 1px solid var(--light-dark);
     border-radius: 8px;
     text-indent: 35px;
     width: 100%;

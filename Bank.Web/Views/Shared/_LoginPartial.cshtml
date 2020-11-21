@@ -1,27 +1,36 @@
 ﻿@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+@{
+    string GetUserId()
+    {
+        return UserManager.GetUserAsync(User).Result.Id;
+    }
+}
+
 
 @if (SignInManager.IsSignedIn(User))
 {
-    if (User.IsInRole("Cashier"))
-    {
-        <nav id="navbar">
-            <ul>
+    <nav id="navbar">
+        <ul>
+            <li>
+                <a asp-controller="Users" asp-action="UserProfile" asp-route-id="@GetUserId()"><img src="~/img/user.svg" /></a>
+            </li>
+
+            @if (User.IsInRole("Cashier"))
+            {
                 <li><a asp-controller="Customers" asp-action="Index">Customers</a></li>
                 <li><a asp-controller="Users" asp-action="Logout">Sign out</a></li>
-            </ul>
-        </nav>
-    }
+            }
 
-    if (User.IsInRole("Admin"))
-    {
-        <nav id="navbar">
-            <ul>
+            @if (User.IsInRole("Admin"))
+            {
                 <li><a asp-controller="Users" asp-action="Index">Users</a></li>
                 <li><a asp-controller="Customers" asp-action="Index">Customers</a></li>
                 <li><a asp-controller="Users" asp-action="Logout">Sign out</a></li>
-            </ul>
-        </nav>
-    }
+            }
+        </ul>
+    </nav>
 }
 else
 {

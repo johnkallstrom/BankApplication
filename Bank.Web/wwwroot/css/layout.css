@@ -63,7 +63,7 @@ body {
 #header li {
     float: left;
     display: inline;
-    padding: 0 15px 0 20px;
+    padding: 0 10px 0 10px;
 }
 
 #header li:last-child{
@@ -75,13 +75,20 @@ body {
 }
 
 #header #navbar a {
-    border-radius: 5px;
-    padding: 0.6rem 1.2rem;
-    background-color: var(--blue);
+    padding: 0.5rem 0.7rem;
+    border-radius: 8px;
+    border: 1px solid var(--white);
 }
 
 #header #navbar .disable:hover {
     cursor: default;
+}
+
+#header #navbar img {
+    padding-top: 0.3rem;
+    width: 20px;
+    height: 20px;
+    filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(151deg) brightness(105%) contrast(101%);
 }
 
 footer {
