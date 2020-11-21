@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Localization;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -31,10 +30,6 @@ namespace Bank.Web
             services.AddMvc(options =>
             {
                 options.EnableEndpointRouting = false;
-                options.CacheProfiles.Add("Default", new CacheProfile
-                {
-                    Duration = 30
-                });
             });
 
             services.AddHttpContextAccessor();

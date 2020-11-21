@@ -1,9 +1,15 @@
 ﻿@model BankStatisticsViewModel
 
 @{
-    ViewData["Title"] = "Bank Administration";
+    ViewData["Title"] = "Bank Application - Home";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
+<div class="search">
+    <div class="container">
+        <partial name="_SearchFormPartial" />
+    </div>
+</div>
 
 <section id="statistics">
     <div class="container">

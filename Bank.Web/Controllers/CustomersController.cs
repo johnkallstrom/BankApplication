@@ -31,6 +31,7 @@ namespace Bank.Web.Controllers
 
         [HttpGet]
         [Authorize(Roles = "Admin, Cashier")]
+        [Route("customers")]
         public IActionResult Index(string searchString, int? currentPage)
         {
             int page = currentPage.HasValue ? currentPage.Value : 1;
@@ -53,6 +54,7 @@ namespace Bank.Web.Controllers
 
         [HttpGet]
         [Authorize(Roles = "Admin, Cashier")]
+        [Route("customers/edit/{id}")]
         public IActionResult EditCustomer(int id)
         {
             var customer = _customerService.GetCustomer(id);
@@ -63,6 +65,7 @@ namespace Bank.Web.Controllers
 
         [HttpPost]
         [Authorize(Roles = "Admin, Cashier")]
+        [Route("customers/edit/{id}")]
         public async Task<IActionResult> EditCustomer(EditCustomerViewModel model)
         {
             if (!ModelState.IsValid) return View(model);
@@ -77,6 +80,7 @@ namespace Bank.Web.Controllers
 
         [HttpGet]
         [Authorize(Roles = "Admin, Cashier")]
+        [Route("customers/create")]
         public IActionResult CreateCustomer()
         {
             var model = new CreateCustomerViewModel();
@@ -86,6 +90,7 @@ namespace Bank.Web.Controllers
 
         [HttpPost]
         [Authorize(Roles = "Admin, Cashier")]
+        [Route("customers/create")]
         public async Task<IActionResult> CreateCustomer(CreateCustomerViewModel model)
         {
             if (!ModelState.IsValid) return View(model);
@@ -100,6 +105,7 @@ namespace Bank.Web.Controllers
 
         [HttpGet]
         [Authorize(Roles = "Admin, Cashier")]
+        [Route("customers/{id}")]
         public IActionResult CustomerProfile(int id)
         {
             var customer = _customerService.GetCustomer(id);
@@ -113,9 +119,10 @@ namespace Bank.Web.Controllers
 
         [HttpGet]
         [AllowAnonymous]
+        [Route("customers/search")]
         public IActionResult SearchCustomerProfile(string searchString)
         {
-            if (_signInManager.IsSignedIn(User) == false) return RedirectToAction("Login", "User");
+            if (_signInManager.IsSignedIn(User) == false) return RedirectToAction("Login", "Users");
 
             var customer = _customerService.GetCustomerBySearch(searchString);
             if (customer == null) return RedirectToAction("ViewSearchError", "Home");
@@ -125,9 +132,10 @@ namespace Bank.Web.Controllers
 
         [HttpGet]
         [AllowAnonymous]
+        [Route("customers/top-customers")]
         public IActionResult TopCustomers(string country)
         {
-            if (_signInManager.IsSignedIn(User) == false) return RedirectToAction("Login", "User");
+            if (_signInManager.IsSignedIn(User) == false) return RedirectToAction("Login", "Users");
 
             var customers = _customerService.GetTopCustomersByCountry(country);
 

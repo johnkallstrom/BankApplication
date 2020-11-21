@@ -1,7 +1,7 @@
 ﻿@model CreateWithdrawalViewModel
 
 @{
-    ViewData["Title"] = "Withdrawal";
+    ViewData["Title"] = $"Withdrawal - Account {Model.AccountId}";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -32,11 +32,9 @@
 
                 <div class="form-group">
                     <input type="submit" value="Withdrawal" />
+                    <a asp-controller="Accounts" asp-action="AccountDetails" asp-route-id="@Model.AccountId">Back</a>
                 </div>
             </form>
-        </div>
-        <div class="return-wrapper">
-            <a asp-controller="Account" asp-action="AccountDetails" asp-route-id="@Model.AccountId">Back</a>
         </div>
     </div>
 </div>

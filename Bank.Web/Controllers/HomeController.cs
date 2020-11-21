@@ -19,7 +19,6 @@ namespace Bank.Web.Controllers
 
         [HttpGet]
         [AllowAnonymous]
-        [ResponseCache(CacheProfileName = "Default")]
         public IActionResult Index()
         {
             var countries = new string[]
@@ -53,6 +52,7 @@ namespace Bank.Web.Controllers
 
         [HttpGet]
         [AllowAnonymous]
+        [Route("search-error")]
         public IActionResult ViewSearchError() => View();
     }
 }

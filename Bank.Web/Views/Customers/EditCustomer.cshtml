@@ -1,7 +1,7 @@
 ﻿@model EditCustomerViewModel
 
 @{
-    ViewData["Title"] = "Edit Customer";
+    ViewData["Title"] = $"Edit - {Model.FirstName} {Model.LastName}";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -74,7 +74,8 @@
                 </div>
 
                 <div class="form-group">
-                    <input type="submit" value="Update" />
+                    <input type="submit" value="Save" />
+                    <a asp-controller="Customers" asp-action="CustomerProfile" asp-route-id="@Model.CustomerId">Back</a>
                 </div>
             </form>
         </div>

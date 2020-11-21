@@ -9,9 +9,17 @@
     --danger: #d92550;
 }
 
+.search {
+    margin-top: 2rem;
+}
+
 #search-form {
     margin-top: 0.7rem;
     width: 330px;
+}
+
+#search-form .container {
+    margin-top: 2rem;
 }
 
 #input {

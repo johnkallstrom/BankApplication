@@ -5,7 +5,6 @@ using Bank.Web.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Bank.Web.Controllers
@@ -23,6 +22,7 @@ namespace Bank.Web.Controllers
 
         [HttpGet]
         [Authorize(Roles = "Admin, Cashier")]
+        [Route("accounts/details/{id}")]
         public IActionResult AccountDetails(int id, int? startPosition)
         {
             var account = _accountService.GetAccount(id);
@@ -49,6 +49,7 @@ namespace Bank.Web.Controllers
 
         [HttpGet]
         [Authorize(Roles = "Admin, Cashier")]
+        [Route("accounts/deposit/{id}")]
         public IActionResult Deposit(int id)
         {
             var account = _accountService.GetAccount(id);
@@ -59,6 +60,7 @@ namespace Bank.Web.Controllers
 
         [HttpPost]
         [Authorize(Roles = "Admin, Cashier")]
+        [Route("accounts/deposit/{id}")]
         public async Task<IActionResult> Deposit(CreateDepositViewModel model)
         {
             if (!ModelState.IsValid) return View(model);
@@ -86,6 +88,7 @@ namespace Bank.Web.Controllers
 
         [HttpGet]
         [Authorize(Roles = "Admin, Cashier")]
+        [Route("accounts/withdrawal/{id}")]
         public IActionResult Withdrawal(int id)
         {
             var account = _accountService.GetAccount(id);
@@ -96,6 +99,7 @@ namespace Bank.Web.Controllers
 
         [HttpPost]
         [Authorize(Roles = "Admin, Cashier")]
+        [Route("accounts/withdrawal/{id}")]
         public async Task<ActionResult> Withdrawal(CreateWithdrawalViewModel model)
         {
             if (!ModelState.IsValid) return View(model);
@@ -129,6 +133,7 @@ namespace Bank.Web.Controllers
 
         [HttpGet]
         [Authorize(Roles = "Admin, Cashier")]
+        [Route("accounts/transfer/{id}")]
         public IActionResult Transfer(int id)
         {
             var account = _accountService.GetAccount(id);
@@ -139,6 +144,7 @@ namespace Bank.Web.Controllers
 
         [HttpPost]
         [Authorize(Roles = "Admin, Cashier")]
+        [Route("accounts/transfer/{id}")]
         public async Task<IActionResult> Transfer(CreateTransferViewModel model)
         {
             if (!ModelState.IsValid) return View(model);

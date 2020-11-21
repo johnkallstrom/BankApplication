@@ -29,6 +29,7 @@ namespace Bank.Web.Controllers
 
         [HttpGet]
         [Authorize(Roles = "Admin")]
+        [Route("users")]
         public IActionResult Index()
         {
             var users = _userService.GetAll();
@@ -43,6 +44,7 @@ namespace Bank.Web.Controllers
 
         [HttpGet]
         [Authorize(Roles = "Admin")]
+        [Route("users/{id}")]
         public async Task<IActionResult> UserProfile(string id)
         {
             var user = await _userService.Get(id);
@@ -55,6 +57,7 @@ namespace Bank.Web.Controllers
 
         [HttpGet]
         [Authorize(Roles = "Admin")]
+        [Route("users/create")]
         public IActionResult CreateUser()
         {
             var model = new CreateUserViewModel();
@@ -64,6 +67,7 @@ namespace Bank.Web.Controllers
 
         [HttpPost]
         [Authorize(Roles = "Admin")]
+        [Route("users/create")]
         public async Task<IActionResult> CreateUser(CreateUserViewModel model)
         {
             if (!ModelState.IsValid) return View(model);
@@ -85,6 +89,7 @@ namespace Bank.Web.Controllers
 
         [HttpGet]
         [Authorize(Roles = "Admin")]
+        [Route("users/edit/{id}")]
         public async Task<IActionResult> EditUser(string id)
         {
             var user = await _userService.Get(id);
@@ -96,6 +101,7 @@ namespace Bank.Web.Controllers
 
         [HttpPost]
         [Authorize(Roles = "Admin")]
+        [Route("users/edit/{id}")]
         public async Task<IActionResult> EditUser(EditUserViewModel model)
         {
             if (!ModelState.IsValid) return View(model);
@@ -116,6 +122,7 @@ namespace Bank.Web.Controllers
 
         [HttpGet]
         [Authorize(Roles = "Admin")]
+        [Route("users/delete")]
         public async Task<IActionResult> DeleteUser(string id)
         {
             var user = await _userService.Get(id);
@@ -128,6 +135,7 @@ namespace Bank.Web.Controllers
 
         [HttpGet]
         [AllowAnonymous]
+        [Route("login")]
         public IActionResult Login()
         {
             return View();
@@ -136,6 +144,7 @@ namespace Bank.Web.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
+        [Route("login")]
         public async Task<IActionResult> Login(LoginViewModel model)
         {
             if (!ModelState.IsValid) return View(model);
@@ -162,6 +171,7 @@ namespace Bank.Web.Controllers
 
         [HttpGet]
         [AllowAnonymous]
+        [Route("logout")]
         public async Task<IActionResult> Logout()
         {
             await _signInManager.SignOutAsync();

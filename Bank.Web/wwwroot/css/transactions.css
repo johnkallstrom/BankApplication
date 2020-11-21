@@ -14,14 +14,17 @@
     padding-bottom: 1rem;
 }
 
-#transaction .return-wrapper {
-    margin-top: 2rem;
-}
-
-#transaction .return-wrapper a {
+#transaction a {
+    margin-top: 5px;
+    padding: 1rem;
+    font-size: 16px;
+    font-family: var(--font);
+    border: none;
+    background-color: var(--blue);
+    color: #fff;
+    border-radius: 8px;
+    outline: none;
     text-decoration: none;
-    color: var(--blue);
-    border-bottom: 1px solid var(--blue);
 }
 
 #transaction .wrapper {

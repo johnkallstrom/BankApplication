@@ -1,7 +1,7 @@
 ﻿@model UserListViewModel
 
 @{
-    ViewData["Title"] = "Users";
+    ViewData["Title"] = "Bank Application - Users";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -36,6 +36,9 @@
                 }
             </tbody>
         </table>
+        <div class="back-user-link">
+            <a asp-controller="Home" asp-action="Index">Back</a>
+        </div>
     </div>
 </div>
 

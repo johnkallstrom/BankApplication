@@ -1,14 +1,7 @@
 ﻿@inject SignInManager<ApplicationUser> SignInManager
-@inject UserManager<ApplicationUser> UserManager
 
 @if (SignInManager.IsSignedIn(User))
 {
-    <partial name="_SearchFormPartial" />
-
-    <div id="user-wrapper">
-        <a>@UserManager.GetUserAsync(User).Result.Email</a>
-    </div>
-
     if (User.IsInRole("Cashier"))
     {
         <nav id="navbar">
@@ -32,10 +25,6 @@
 }
 else
 {
-    <partial name="_SearchFormPartial" />
-
-    <div class="push"></div>
-
     <nav id="navbar">
         <ul>
             <li><a asp-controller="Users" asp-action="Login">Sign in</a></li>
