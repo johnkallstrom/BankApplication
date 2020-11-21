@@ -132,7 +132,7 @@ namespace Bank.Web.Controllers
 
         [HttpGet]
         [AllowAnonymous]
-        [Route("customers/top-customers")]
+        [Route("customers/top/{country}")]
         public IActionResult TopCustomers(string country)
         {
             if (_signInManager.IsSignedIn(User) == false) return RedirectToAction("Login", "Users");

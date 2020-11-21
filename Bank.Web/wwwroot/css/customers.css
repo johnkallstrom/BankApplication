@@ -20,7 +20,7 @@ input[type=number] {
 }
 
 #customer-list .container {
-    padding: 3rem 3rem 3rem 3rem;
+    padding: 3rem 3rem 1rem 3rem;
     background-color: var(--white);
     border: 1px solid var(--light);
     border-radius: 8px;
