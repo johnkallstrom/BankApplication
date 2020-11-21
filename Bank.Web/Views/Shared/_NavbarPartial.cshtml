@@ -1,0 +1,39 @@
+﻿@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+<link href="~/css/navbar.css" rel="stylesheet" />
+
+@{
+    string GetUserId()
+    {
+        return UserManager.GetUserAsync(User).Result.Id;
+    }
+}
+
+<nav class="topnav" id="navbar">
+    <a asp-controller="Home" asp-action="Index">Bank</a>
+
+    @if (SignInManager.IsSignedIn(User))
+    {
+        <a asp-controller="Users" asp-action="UserProfile" asp-route-id="@GetUserId()">Account</a>
+
+        @if (User.IsInRole("Cashier"))
+        {
+            <a asp-controller="Customers" asp-action="Index">Customers</a>
+            <a asp-controller="Users" asp-action="Logout">Sign out</a>
+        }
+
+        @if (User.IsInRole("Admin"))
+        {
+            <a asp-controller="Users" asp-action="Index">Users</a>
+            <a asp-controller="Customers" asp-action="Index">Customers</a>
+            <a asp-controller="Users" asp-action="Logout">Sign out</a>
+        }
+    }
+    else
+    {
+        <a asp-controller="Users" asp-action="Login">Sign in</a>
+    }
+
+    <a href="javascript:void(0);" class="icon" onclick="myFunction()"><i class="fa fa-bars"></i></a>
+</nav>
