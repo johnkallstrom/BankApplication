@@ -310,6 +310,19 @@ input[type="date"] {
     cursor: pointer;
 }
 
+#create-customer a {
+    margin-top: 5px;
+    padding: 1rem;
+    font-size: 16px;
+    font-family: var(--font);
+    border: none;
+    background-color: var(--blue);
+    color: #fff;
+    border-radius: 8px;
+    outline: none;
+    text-decoration: none;
+}
+
 input[type="date"]::-webkit-inner-spin-button,
 input[type="date"]::-webkit-calendar-picker-indicator {
     display: none;
