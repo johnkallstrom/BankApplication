@@ -18,14 +18,14 @@
     padding: 3rem;
     background-color: var(--white);
     border: 1px solid var(--light);
-    border-radius: 8px;
+    /*border-radius: 8px;*/
 }
 
 .transaction-list {
     padding: 3rem 3rem 2rem 3rem;
     background-color: var(--white);
     border: 1px solid var(--light);
-    border-radius: 8px;
+    /*border-radius: 8px;*/
 }
 
 .account h1, .transaction-list h1 {
@@ -52,7 +52,7 @@
     height: 55px;
     background-color: var(--blue);
     color: var(--white);
-    border-radius: 8px;
+    /*border-radius: 8px;*/
     font-size: 17px;
     font-family: var(--font);
     border: none;
@@ -86,7 +86,7 @@
 }
 
 #transactions-table th {
-    font-weight: 600;
+    font-weight: 400;
     text-align: left;
     background-color: var(--blue);
     color: #fff;
@@ -106,22 +106,42 @@
 }
 
 .option-group a {
-    border-radius: 5px;
+    /*border-radius: 5px;*/
     text-decoration: none;
     color: var(--white);
     padding: 0.8rem 1rem;
     background-color: var(--blue);
 }
 
-@media (max-width: 992px){
+@media (max-width: 768px){
+    #transactions-table td {
+        padding: 0.5rem;
+    }
+
+    #transactions-table th {
+        padding: 0.5rem;
+    }
+
+    .options a {
+        display: block;
+        width: 50%;
+        text-align: center;
+    }
+
+    .option-group {
+
+    }
+
     .account {
         width: 100%;
         float: none;
         margin-bottom: 2rem;
+        padding: 2rem;
     }
 
     .transaction-list {
         width: 100%;
         float: none;
+        padding: 2rem;
     }
 }

@@ -23,9 +23,17 @@
     font-size: 17px;
 }
 
-.topnav a:hover {
-    background-color: var(--light-dark);
-    color: var(--dark);
+.topnav a:first-child {
+    padding: 14px 16px 14px 0px;
+}
+
+.topnav a:last-child {
+    padding: 14px 0px 14px 16px;
+}
+
+
+.topnav a:nth-last-child(2) {
+    padding: 14px 0px 14px 16px;
 }
 
 .topnav .icon {
@@ -44,6 +52,14 @@
 }
 
 @media screen and (max-width: 768px) {
+    .topnav a:first-child {
+        padding: 14px 16px;
+    }
+
+    .topnav a:last-child {
+        padding: 14px 16px;
+    }
+
     .topnav.responsive {
         position: relative;
     }

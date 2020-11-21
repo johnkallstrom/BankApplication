@@ -23,7 +23,7 @@ input[type=number] {
     padding: 3rem 3rem 1rem 3rem;
     background-color: var(--white);
     border: 1px solid var(--light);
-    border-radius: 8px;
+    /*border-radius: 8px;*/
     margin-top: 3rem;
 }
 
@@ -34,7 +34,7 @@ input[type=number] {
 #customer-list .create-customer-link a {
     text-decoration: none;
     color: var(--white);
-    border-radius: 5px;
+    /*border-radius: 5px;*/
     padding: 0.8rem 1.5rem;
     font-size: 17px;
     font-family: var(--font);
@@ -62,7 +62,7 @@ input[type=number] {
     font-size: 17px;
     padding: 0.8rem;
     border: 1px solid var(--light-dark);
-    border-radius: 8px;
+    /*border-radius: 8px;*/
 }
 
 #customers-table .customer-name {
@@ -97,7 +97,7 @@ input[type=number] {
 }
 
 #customers-table th {
-    font-weight: 600;
+    font-weight: 400;
     text-align: left;
     background-color: var(--blue);
     color: #fff;
@@ -128,7 +128,7 @@ input[type=number] {
 }
 
 #customer-profile .option-group a {
-    border-radius: 5px;
+    /*border-radius: 5px;*/
     text-decoration: none;
     color: var(--white);
     padding: 0.8rem 1.5rem;
@@ -139,7 +139,7 @@ input[type=number] {
     padding: 3rem;
     background-color: var(--white);
     border: 1px solid var(--light);
-    border-radius: 8px;
+    /*border-radius: 8px;*/
     width: 49%;
 }
 
@@ -205,7 +205,7 @@ input[type=number] {
 }
 
 #account-table th {
-    font-weight: 600;
+    font-weight: 400;
     text-align: left;
     background-color: var(--blue);
     color: #fff;
@@ -221,7 +221,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     color: var(--dark);
     font-size: 17px;
     font-family: var(--font);
-    border-radius: 8px;
+    /*border-radius: 8px;*/
     border: 1px solid var(--light-dark);
     padding: 10px;
     height: 45px;
@@ -238,7 +238,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 #create-customer .wrapper {
     background-color: var(--white);
     border: 1px solid var(--light);
-    border-radius: 8px;
+    /*border-radius: 8px;*/
     padding: 3rem 3rem 3rem 3rem;
     width: 645px;
 }
@@ -263,7 +263,7 @@ input[type="date"] {
     margin-bottom: 10px;
     font-size: 17px;
     font-family: var(--font);
-    border-radius: 8px;
+    /*border-radius: 8px;*/
     border: 1px solid var(--light-dark);
     outline: none;
 }
@@ -275,7 +275,7 @@ input[type="date"] {
     margin-bottom: 10px;
     font-size: 17px;
     font-family: var(--font);
-    border-radius: 8px;
+    /*border-radius: 8px;*/
     border: 1px solid var(--light-dark);
     outline: none;
 }
@@ -302,7 +302,7 @@ input[type="date"] {
     background-color: var(--blue);
     color: #fff;
     width: 120px;
-    border-radius: 8px;
+    /*border-radius: 8px;*/
     outline: none;
 }
 
@@ -318,7 +318,7 @@ input[type="date"] {
     border: none;
     background-color: var(--blue);
     color: #fff;
-    border-radius: 8px;
+    /*border-radius: 8px;*/
     outline: none;
     text-decoration: none;
 }
@@ -333,7 +333,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     color: var(--dark);
     font-size: 17px;
     font-family: var(--font);
-    border-radius: 8px;
+    /*border-radius: 8px;*/
     border: 1px solid var(--light-dark);
     padding: 10px;
     height: 45px;
@@ -358,7 +358,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 #edit-customer .wrapper {
     background-color: var(--white);
     border: 1px solid var(--light);
-    border-radius: 8px;
+    /*border-radius: 8px;*/
     padding: 3rem 3rem 3rem 3rem;
     width: 645px;
 }
@@ -383,7 +383,7 @@ input[type="date"] {
     margin-bottom: 10px;
     font-size: 17px;
     font-family: var(--font);
-    border-radius: 8px;
+    /*border-radius: 8px;*/
     border: 1px solid var(--light-dark);
     outline: none;
 }
@@ -395,7 +395,7 @@ input[type="date"] {
     margin-bottom: 10px;
     font-size: 17px;
     font-family: var(--font);
-    border-radius: 8px;
+    /*border-radius: 8px;*/
     border: 1px solid var(--light-dark);
     outline: none;
 }
@@ -422,7 +422,7 @@ input[type="date"] {
     background-color: var(--blue);
     color: #fff;
     width: 120px;
-    border-radius: 8px;
+    /*border-radius: 8px;*/
     outline: none;
 }
 
@@ -438,26 +438,98 @@ input[type="date"] {
     border: none;
     background-color: var(--blue);
     color: #fff;
-    border-radius: 8px;
+    /*border-radius: 8px;*/
     outline: none;
     text-decoration: none;
 }
 
-@media (max-width: 992px) {
-    .profile, .accounts {
-        padding: 3rem;
-        background-color: var(--white);
-        border: 1px solid var(--light);
-        border-radius: 8px;
+@media (max-width: 768px) {
+    #create-customer #PostalCode {
+        width: 100%;
+        border-radius: 0;
+    }
+
+    #create-customer
+    input[type="email"],
+    input[type="text"],
+    input[type="date"] {
         width: 100%;
     }
 
+    #create-customer select {
+        width: 100%;
+    }
+
+    #create-customer .wrapper {
+        padding: 2rem;
+        width: 100%;
+    }
+
+    #edit-customer .wrapper {
+        padding: 2rem;
+        width: 100%;
+    }
+
+    #edit-customer select {
+        width: 100%;
+    }
+
+    #edit-customer
+    input[type="email"],
+    input[type="text"],
+    input[type="date"] {
+        width: 100%;
+    }
+
+    #edit-customer #PostalCode {
+        border-radius: 0;
+        width: 100%;
+    }
+
+    #customer-list .container {
+        padding: 2rem;
+        margin-top: 2rem;
+    }
+
+    #customer-profile .container {
+        margin-top: 3rem;
+        padding-bottom: 0rem;
+    }
+
+    .customer-search input[type="text"] {
+        width: 100%;
+    }
+
+    [placeholder] {
+        text-overflow: ellipsis;
+    }
+
+    #customers-table td {
+        padding: 0.5rem;
+    }
+
+    #customers-table th {
+        padding: 0.5rem;
+    }
+
     .profile {
-        margin-bottom: 2rem;
+        padding: 2rem;
+        width: 100%;
         float: none;
     }
 
     .accounts {
+        margin-top: 2rem;
+        padding: 2rem;
+        width: 100%;
         float: none;
+    }
+
+    #account-table td {
+        padding: 0.5rem;
+    }
+
+    #account-table th {
+        padding: 0.5rem;
     }
 }

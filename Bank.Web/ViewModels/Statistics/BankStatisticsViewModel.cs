@@ -7,6 +7,6 @@
         public decimal TotalBalance { get; set; }
 
         public CountryStatisticsViewModel CountryStatisticsViewModel { get; set; }
-        public string DisplayTotalBalance => TotalBalance.ToString("C2");
+        public string DisplayTotalBalance => TotalBalance.ToString("C3");
     }
 }
