@@ -14,5 +14,6 @@ namespace Bank.Application.Repositories
         Task<bool> Create(Customers customer);
         Customers Get(int id);
         IQueryable<Customers> GetAll();
+        IEnumerable<Customers> GetAll(string searchString, int page);
     }
 }

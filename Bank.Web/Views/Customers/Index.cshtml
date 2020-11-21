@@ -1,4 +1,4 @@
-﻿@model AzureSearchViewModel
+﻿@model CustomerSearchViewModel
 
 @{
     ViewData["Title"] = "Customers";
@@ -9,7 +9,7 @@
     <div class="container">
         <h1>Customers</h1>
         <div class="create-customer-link">
-            <a asp-controller="Customer" asp-action="CreateCustomer">New</a>
+            <a asp-controller="Customers" asp-action="CreateCustomer">New</a>
         </div>
         <div class="customer-search">
             <form>
@@ -44,7 +44,7 @@
                             <td>@customer.CustomerId</td>
                             <td>@customer.NationalId</td>
                             <td>
-                                <a asp-controller="Customer"
+                                <a asp-controller="Customers"
                                    asp-action="CustomerProfile"
                                    asp-route-id="@customer.CustomerId"
                                    class="customer-name">
@@ -54,7 +54,7 @@
                             <td>@customer.Address</td>
                             <td>@customer.City</td>
                             <td>
-                                <a asp-controller="Customer"
+                                <a asp-controller="Customers"
                                    asp-action="CustomerProfile"
                                    asp-route-id="@customer.CustomerId"
                                    class="customer-details">

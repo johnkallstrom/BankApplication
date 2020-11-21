@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using Bank.Application.Services;
-using Bank.Application.Services.Search;
 using Bank.Infrastructure.Entities;
 using Bank.Infrastructure.Identity;
 using Bank.Web.ViewModels;
@@ -9,24 +8,22 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Bank.Web.Controllers
 {
-    public class CustomerController : Controller
+    public class CustomersController : Controller
     {
-        private readonly IAzureSearchService _azureSearchService;
         private readonly IMapper _mapper;
         private readonly ICustomerService _customerService;
         private readonly SignInManager<ApplicationUser> _signInManager;
 
-        public CustomerController(
-            IAzureSearchService azureSearchService,
+        public CustomersController(
             SignInManager<ApplicationUser> signInManager,
             IMapper mapper,  
             ICustomerService customerService)
         {
-            _azureSearchService = azureSearchService;
             _signInManager = signInManager;
             _mapper = mapper;
             _customerService = customerService;
@@ -34,20 +31,21 @@ namespace Bank.Web.Controllers
 
         [HttpGet]
         [Authorize(Roles = "Admin, Cashier")]
-        public async Task<IActionResult> Index(string searchString, int? currentPage)
+        public IActionResult Index(string searchString, int? currentPage)
         {
-            var page = currentPage.HasValue ? currentPage.Value : 1;
-            var searchResults = await _azureSearchService.RunQueryAsync(searchString, page);
-            var totalPages = (int)Math.Ceiling((double)searchResults.Count / 50);
+            int page = currentPage.HasValue ? currentPage.Value : 1;
 
-            var customers = _customerService.GetCustomersByIndex(searchResults);
+            int count = _customerService.GetAllCustomersCount();
 
-            var model = new AzureSearchViewModel
+            int totalPages = (int)Math.Ceiling((double)count / 50);
+
+            var customers = _customerService.GetAllCustomers(searchString, page);
+
+            var model = new CustomerSearchViewModel
             {
-                SearchString = searchString,
+                Customers = _mapper.Map<IEnumerable<CustomerViewModel>>(customers),
                 CurrentPage = page,
-                TotalPages = totalPages,
-                Customers = _mapper.Map<List<CustomerViewModel>>(customers)
+                TotalPages = totalPages
             };
 
             return View(model);
@@ -72,7 +70,6 @@ namespace Bank.Web.Controllers
             var customer = _mapper.Map<Customers>(model);
 
             var succeeded = await _customerService.EditCustomer(customer);
-            await _azureSearchService.MergeOrUploadCustomersAsync(_customerService.GetAllCustomers());
             if (succeeded) return RedirectToAction("CustomerProfile", new { id = customer.CustomerId });
 
             return View(model);
@@ -96,7 +93,6 @@ namespace Bank.Web.Controllers
             var customer = _mapper.Map<Customers>(model);
 
             var succeeded = await _customerService.CreateCustomer(customer);
-            await _azureSearchService.MergeOrUploadCustomersAsync(_customerService.GetAllCustomers());
             if (succeeded) return RedirectToAction("CustomerProfile", new { id = customer.CustomerId });
 
             return View(model);

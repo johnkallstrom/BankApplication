@@ -11,7 +11,7 @@
             <div>
                 <h1>Deposit</h1>
             </div>
-            <form asp-controller="Account" asp-action="Deposit" method="post">
+            <form asp-controller="Accounts" asp-action="Deposit" method="post">
                 <div asp-validation-summary="All"></div>
                 <input type="hidden" asp-for="@Model.AccountId" />
 

@@ -20,7 +20,7 @@
 	            {
                     <tr>
                         <td>
-                            <a asp-controller="Customer"
+                            <a asp-controller="Customers"
                                asp-action="TopCustomers"
                                asp-route-country="@country.Country"
                                class="country-name">@country.Country
@@ -30,7 +30,7 @@
                         <td>@country.TotalAccounts</td>
                         <td>@country.DisplayTotalBalance</td>
                         <td>
-                            <a asp-controller="Customer"
+                            <a asp-controller="Customers"
                                asp-action="TopCustomers"
                                asp-route-country="@country.Country"
                                class="country-details">More

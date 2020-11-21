@@ -11,13 +11,13 @@ using System.Threading.Tasks;
 
 namespace Bank.Web.Controllers
 {
-    public class UserController : Controller
+    public class UsersController : Controller
     {
         private readonly IMapper _mapper;
         private readonly IUserService _userService;
         private readonly SignInManager<ApplicationUser> _signInManager;
 
-        public UserController(
+        public UsersController(
             IMapper mapper, 
             IUserService userService,
             SignInManager<ApplicationUser> signInManager)

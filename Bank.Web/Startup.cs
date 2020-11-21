@@ -9,10 +9,10 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Routing;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using System;
 using System.Globalization;
 
 namespace Bank.Web
@@ -39,7 +39,7 @@ namespace Bank.Web
 
             services.AddHttpContextAccessor();
 
-            services.AddDbContext<ApplicationDbContext>(options =>
+            services.AddDbContext<BankAppDataContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddTransient<IAzureSearchService, AzureSearchService>();
@@ -55,7 +55,7 @@ namespace Bank.Web
             services.AddAutoMapper(typeof(Startup));
 
             services.AddIdentity<ApplicationUser, IdentityRole>()
-                .AddEntityFrameworkStores<ApplicationDbContext>()
+                .AddEntityFrameworkStores<BankAppDataContext>()
                 .AddDefaultTokenProviders();
 
             services.Configure<IdentityOptions>(options =>
@@ -65,6 +65,12 @@ namespace Bank.Web
                 options.Password.RequireLowercase = false;
                 options.Password.RequireNonAlphanumeric = false;
                 options.Password.RequireUppercase = false;
+            });
+
+            services.Configure<RouteOptions>(options =>
+            {
+                options.LowercaseUrls = true;
+                options.LowercaseQueryStrings = true;
             });
         }
 
@@ -83,7 +89,9 @@ namespace Bank.Web
             });
 
             app.UseAuthentication();
+
             app.UseStaticFiles();
+
             app.UseMvc(routes =>
             {
                 routes.MapRoute(

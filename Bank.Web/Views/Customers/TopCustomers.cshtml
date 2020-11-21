@@ -1,7 +1,7 @@
 ﻿@model TopCustomerListViewModel
 
 @{
-    ViewData["Title"] = "TopCustomers";
+    ViewData["Title"] = "Top Customers";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -23,7 +23,7 @@
                     <tr>
                         <td>@customer.CustomerId</td>
                         <td>
-                            <a asp-controller="Customer"
+                            <a asp-controller="Customers"
                                asp-action="CustomerProfile"
                                asp-route-id="@customer.CustomerId"
                                class="customer-name">
@@ -32,7 +32,7 @@
                     </td>
                     <td>@customer.Country</td>
                     <td>
-                        <a asp-controller="Customer"
+                        <a asp-controller="Customers"
                            asp-action="CustomerProfile"
                            asp-route-id="@customer.CustomerId"
                            class="customer-details">

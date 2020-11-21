@@ -21,14 +21,14 @@ namespace Bank.Search
 
             var serviceProvider = services.BuildServiceProvider();
 
-            serviceProvider.GetService<App>().Run();
+            //serviceProvider.GetService<App>().Run();
         }
 
         private static IServiceCollection ConfigureServices(IConfiguration configuration)
         {
             IServiceCollection services = new ServiceCollection();
 
-            services.AddDbContext<ApplicationDbContext>(options =>
+            services.AddDbContext<BankAppDataContext>(options =>
             options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
 
             services.AddTransient<IDispositionRepository, DispositionRepository>();

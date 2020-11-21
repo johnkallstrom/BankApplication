@@ -6,9 +6,9 @@ namespace Bank.Application.Repositories
 {
     public class DispositionRepository : IDispositionRepository
     {
-        private readonly ApplicationDbContext _context;
+        private readonly BankAppDataContext _context;
 
-        public DispositionRepository(ApplicationDbContext context)
+        public DispositionRepository(BankAppDataContext context)
         {
             _context = context;
         }

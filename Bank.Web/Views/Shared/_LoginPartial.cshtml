@@ -13,8 +13,8 @@
     {
         <nav id="navbar">
             <ul>
-                <li><a asp-controller="Customer" asp-action="Index">Customers</a></li>
-                <li><a asp-controller="User" asp-action="Logout">Sign out</a></li>
+                <li><a asp-controller="Customers" asp-action="Index">Customers</a></li>
+                <li><a asp-controller="Users" asp-action="Logout">Sign out</a></li>
             </ul>
         </nav>
     }
@@ -23,9 +23,9 @@
     {
         <nav id="navbar">
             <ul>
-                <li><a asp-controller="User" asp-action="Index">Users</a></li>
-                <li><a asp-controller="Customer" asp-action="Index">Customers</a></li>
-                <li><a asp-controller="User" asp-action="Logout">Sign out</a></li>
+                <li><a asp-controller="Users" asp-action="Index">Users</a></li>
+                <li><a asp-controller="Customers" asp-action="Index">Customers</a></li>
+                <li><a asp-controller="Users" asp-action="Logout">Sign out</a></li>
             </ul>
         </nav>
     }
@@ -38,7 +38,7 @@ else
 
     <nav id="navbar">
         <ul>
-            <li><a asp-controller="User" asp-action="Login">Sign in</a></li>
+            <li><a asp-controller="Users" asp-action="Login">Sign in</a></li>
         </ul>
     </nav>
 }

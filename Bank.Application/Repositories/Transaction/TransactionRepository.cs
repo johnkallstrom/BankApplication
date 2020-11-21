@@ -7,9 +7,9 @@ namespace Bank.Application.Repositories
 {
     public class TransactionRepository : ITransactionRepository
     {
-        private readonly ApplicationDbContext _context;
+        private readonly BankAppDataContext _context;
 
-        public TransactionRepository(ApplicationDbContext context)
+        public TransactionRepository(BankAppDataContext context)
         {
             _context = context;
         }

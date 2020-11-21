@@ -9,9 +9,9 @@ namespace Bank.Application.Repositories
 {
     public class CustomerRepository : ICustomerRepository
     {
-        private readonly ApplicationDbContext _context;
+        private readonly BankAppDataContext _context;
 
-        public CustomerRepository(ApplicationDbContext context)
+        public CustomerRepository(BankAppDataContext context)
         {
             _context = context;
         }
@@ -72,6 +72,36 @@ namespace Bank.Application.Repositories
                 .FirstOrDefault(x => x.CustomerId == id);
         }
 
-        public IQueryable<Customers> GetAll() => _context.Customers;
+        public IQueryable<Customers> GetAll()
+        {
+            return _context.Customers;
+        }
+
+        public IEnumerable<Customers> GetAll(string searchString, int page)
+        {
+            int take = 50;
+            int skip = (page - 1) * take;
+
+            if (string.IsNullOrWhiteSpace(searchString))
+            {
+                return _context.Customers.Skip(skip).Take(50).ToList();
+            }
+
+            var collection = _context.Customers as IQueryable<Customers>;
+
+            if (string.IsNullOrWhiteSpace(searchString) == false)
+            {
+                var query = searchString.Trim();
+
+                collection = collection
+                        .Where(x => x.Givenname.Contains(query)
+                        || x.Surname.Contains(query)
+                        || x.City.Contains(query)
+                        || x.Country.Contains(query)
+                        || x.Streetaddress.Contains(query));
+            }
+
+            return collection.ToList();
+        }
     }
 }

@@ -23,66 +23,66 @@ namespace Bank.Search
             _config = config;
         }
 
-        public void Run()
-        {
-            string searchServiceName = _config["SearchServiceName"];
-            string adminApiKey = _config["SearchServiceAdminApiKey"];
-            string indexName = _config["SearchIndexName"];
+        //public void Run()
+        //{
+        //    string searchServiceName = _config["SearchServiceName"];
+        //    string adminApiKey = _config["SearchServiceAdminApiKey"];
+        //    string indexName = _config["SearchIndexName"];
 
-            var serviceClient = CreateSearchServiceClient(searchServiceName, adminApiKey);
-            var indexClient = serviceClient.Indexes.GetClient(indexName);
+        //    var serviceClient = CreateSearchServiceClient(searchServiceName, adminApiKey);
+        //    var indexClient = serviceClient.Indexes.GetClient(indexName);
 
-            DeleteIndexIfExists(serviceClient, indexName);
-            CreateIndex(serviceClient, indexName);
-            UploadDocuments(indexClient);
-        }
+        //    DeleteIndexIfExists(serviceClient, indexName);
+        //    CreateIndex(serviceClient, indexName);
+        //    UploadDocuments(indexClient);
+        //}
 
-        private void UploadDocuments(ISearchIndexClient indexClient)
-        {
-            var customers = _customerService.GetAllCustomers();
-            var actions = new List<IndexAction<CustomerSearch>>();
+        //private void UploadDocuments(ISearchIndexClient indexClient)
+        //{
+        //    var customers = _customerService.GetAllCustomers();
+        //    var actions = new List<IndexAction<CustomerSearch>>();
 
-            Console.WriteLine("Uploading documents...");
-            foreach (var customer in customers)
-            {
-                actions.Add(new IndexAction<CustomerSearch>
-                {
-                    ActionType = IndexActionType.Upload,
-                    Document = new CustomerSearch
-                    {
-                        CustomerStringId = customer.CustomerId.ToString(),
-                        CustomerId = customer.CustomerId,
-                        Givenname = customer.Givenname,
-                        Surname = customer.Surname,
-                        Gender = customer.Gender,
-                        Emailaddress = customer.Emailaddress,
-                        Streetaddress = customer.Streetaddress,
-                        City = customer.City,
-                        Country = customer.Country,
-                        CountryCode = customer.CountryCode,
-                        NationalId = customer.NationalId,
-                        Telephonenumber = customer.Telephonenumber,
-                        Telephonecountrycode = customer.Telephonecountrycode,
-                        Zipcode = customer.Zipcode
-                    }
-                });
-            }
+        //    Console.WriteLine("Uploading documents...");
+        //    foreach (var customer in customers)
+        //    {
+        //        actions.Add(new IndexAction<CustomerSearch>
+        //        {
+        //            ActionType = IndexActionType.Upload,
+        //            Document = new CustomerSearch
+        //            {
+        //                CustomerStringId = customer.CustomerId.ToString(),
+        //                CustomerId = customer.CustomerId,
+        //                Givenname = customer.Givenname,
+        //                Surname = customer.Surname,
+        //                Gender = customer.Gender,
+        //                Emailaddress = customer.Emailaddress,
+        //                Streetaddress = customer.Streetaddress,
+        //                City = customer.City,
+        //                Country = customer.Country,
+        //                CountryCode = customer.CountryCode,
+        //                NationalId = customer.NationalId,
+        //                Telephonenumber = customer.Telephonenumber,
+        //                Telephonecountrycode = customer.Telephonecountrycode,
+        //                Zipcode = customer.Zipcode
+        //            }
+        //        });
+        //    }
 
-            try
-            {
-                var batch = IndexBatch.New(actions);
-                indexClient.Documents.Index(batch);
-            }
-            catch (IndexBatchException e)
-            {
-                Console.WriteLine(
-                    "Failed to index some of the documents: {0}",
-                    String.Join(", ", e.IndexingResults.Where(r => !r.Succeeded).Select(r => r.Key)));
-            }
+        //    try
+        //    {
+        //        var batch = IndexBatch.New(actions);
+        //        indexClient.Documents.Index(batch);
+        //    }
+        //    catch (IndexBatchException e)
+        //    {
+        //        Console.WriteLine(
+        //            "Failed to index some of the documents: {0}",
+        //            String.Join(", ", e.IndexingResults.Where(r => !r.Succeeded).Select(r => r.Key)));
+        //    }
 
-            Console.WriteLine("Waiting for indexing...");
-            Thread.Sleep(2000);
-        }
+        //    Console.WriteLine("Waiting for indexing...");
+        //    Thread.Sleep(2000);
+        //}
 
         private SearchServiceClient CreateSearchServiceClient(string searchServiceName, string adminApiKey)
         {

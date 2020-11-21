@@ -1,7 +1,7 @@
-﻿@model CreateWithdrawalViewModel
+﻿@model CreateTransferViewModel
 
 @{
-    ViewData["Title"] = "Withdrawal";
+    ViewData["Title"] = "Transfer";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -9,11 +9,11 @@
     <div class="container">
         <div class="wrapper">
             <div>
-                <h1>Withdrawal</h1>
+                <h1>Transfer</h1>
             </div>
-            <form asp-controller="Account" asp-action="Withdrawal" method="post">
+            <form asp-controller="Accounts" asp-action="Transfer" method="post">
                 <div asp-validation-summary="All"></div>
-                <input type="hidden" asp-for="@Model.AccountId" />
+                <input type="hidden" asp-for="@Model.FromAccountId" />
 
                 <div class="form-group">
                     <label asp-for="@Model.Balance"></label>
@@ -21,8 +21,13 @@
                 </div>
 
                 <div class="form-group">
-                    <label asp-for="@Model.AccountId"></label>
-                    <input type="text" value="@Model.AccountId" class="account-number" readonly />
+                    <label asp-for="@Model.FromAccountId"></label>
+                    <input type="text" value="@Model.FromAccountId" readonly />
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="@Model.ToAccountId"></label>
+                    <input type="text" asp-for="@Model.ToAccountId" value="@string.Empty" />
                 </div>
 
                 <div class="form-group">
@@ -31,12 +36,12 @@
                 </div>
 
                 <div class="form-group">
-                    <input type="submit" value="Withdrawal" />
+                    <input type="submit" value="Transfer" />
                 </div>
             </form>
         </div>
         <div class="return-wrapper">
-            <a asp-controller="Account" asp-action="AccountDetails" asp-route-id="@Model.AccountId">Back</a>
+            <a asp-controller="Account" asp-action="AccountDetails" asp-route-id="@Model.FromAccountId">Back</a>
         </div>
     </div>
 </div>

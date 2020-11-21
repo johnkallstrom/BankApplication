@@ -87,7 +87,10 @@ namespace Bank.Application.Services
             return true;
         }
 
-        public IQueryable<Customers> GetAllCustomers() => _customerRepository.GetAll();
+        public IEnumerable<Customers> GetAllCustomers(string searchString, int page)
+        {
+            return _customerRepository.GetAll(searchString, page);
+        }
 
         public Customers GetCustomer(int id) => _customerRepository.Get(id);
 
@@ -101,5 +104,7 @@ namespace Bank.Application.Services
 
             return _customerRepository.Get(id);
         }
+
+        public int GetAllCustomersCount() => _customerRepository.GetAll().Count();
     }
 }

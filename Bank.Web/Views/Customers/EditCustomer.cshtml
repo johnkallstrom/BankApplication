@@ -1,7 +1,7 @@
 ﻿@model EditCustomerViewModel
 
 @{
-    ViewData["Title"] = "Edit customer";
+    ViewData["Title"] = "Edit Customer";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -11,7 +11,7 @@
             <div>
                 <h1>Edit customer</h1>
             </div>
-            <form asp-controller="Customer" asp-action="EditCustomer" method="post">
+            <form asp-controller="Customers" asp-action="EditCustomer" method="post">
                 <div asp-validation-summary="All"></div>
 
                 <input type="hidden" asp-for="@Model.CustomerId" />

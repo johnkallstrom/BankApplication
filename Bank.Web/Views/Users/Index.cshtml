@@ -9,7 +9,7 @@
     <div class="container">
         <h1>Users</h1>
         <div class="create-user-link">
-            <a asp-controller="User" asp-action="CreateUser">New</a>
+            <a asp-controller="Users" asp-action="CreateUser">New</a>
         </div>
         <table id="user-table">
             <thead>
@@ -26,7 +26,7 @@
                         <td>@user.UserId</td>
                         <td>@user.Email</td>
                         <td>
-                            <a asp-controller="User"
+                            <a asp-controller="Users"
                                asp-action="UserProfile"
                                asp-route-id="@user.UserId"
                                class="user-details">Details

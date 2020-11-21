@@ -5,13 +5,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Bank.Infrastructure
 {
-    public partial class ApplicationDbContext : IdentityDbContext<ApplicationUser>
+    public partial class BankAppDataContext : IdentityDbContext<ApplicationUser>
     {
-        public ApplicationDbContext()
-        {
-        }
-
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
+        public BankAppDataContext(DbContextOptions<BankAppDataContext> options)
             : base(options)
         {
         }

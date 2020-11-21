@@ -10,9 +10,9 @@ namespace Bank.Application.Repositories
 {
     public class AccountRepository : IAccountRepository
     {
-        private readonly ApplicationDbContext _context;
+        private readonly BankAppDataContext _context;
 
-        public AccountRepository(ApplicationDbContext context)
+        public AccountRepository(BankAppDataContext context)
         {
             _context = context;
         }

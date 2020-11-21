@@ -1,4 +1,7 @@
-﻿namespace Bank.Infrastructure.Entities
+﻿using System;
+using System.Collections.Generic;
+
+namespace Bank.Infrastructure.Entities
 {
     public partial class User
     {

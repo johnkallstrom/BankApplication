@@ -1,7 +1,7 @@
 ﻿@model AccountDetailsViewModel
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = $"Account Details - {Model.AccountId}";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -27,15 +27,15 @@
 
             <div class="options">
                 <div class="option-group">
-                    <a asp-controller="Account" asp-action="Deposit" asp-route-id="@Model.AccountId">Deposit</a>
+                    <a asp-controller="Accounts" asp-action="Deposit" asp-route-id="@Model.AccountId">Deposit</a>
                 </div>
 
                 <div class="option-group">
-                    <a asp-controller="Account" asp-action="Withdrawal" asp-route-id="@Model.AccountId">Withdrawal</a>
+                    <a asp-controller="Accounts" asp-action="Withdrawal" asp-route-id="@Model.AccountId">Withdrawal</a>
                 </div>
 
                 <div class="option-group">
-                    <a asp-controller="Account" asp-action="Transfer" asp-route-id="@Model.AccountId">Transfer</a>
+                    <a asp-controller="Accounts" asp-action="Transfer" asp-route-id="@Model.AccountId">Transfer</a>
                 </div>
             </div>
         </div>
@@ -76,7 +76,7 @@
     var startPos = 0;
     function loadTransactions(id) {
         startPos += 20;
-        var url = `/Account/LoadTransactions?id=${id}&startPosition=${startPos}`;
+        var url = `/Accounts/LoadTransactions?id=${id}&startPosition=${startPos}`;
         fetch(url).then(res => res.text()).then(data => {
             $('#transactions-table > tbody:last-child').append(data);
         });

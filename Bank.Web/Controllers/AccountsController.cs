@@ -10,12 +10,12 @@ using System.Threading.Tasks;
 
 namespace Bank.Web.Controllers
 {
-    public class AccountController : Controller
+    public class AccountsController : Controller
     {
         private readonly IAccountService _accountService;
         private readonly IMapper _mapper;
 
-        public AccountController(IAccountService accountService, IMapper mapper)
+        public AccountsController(IAccountService accountService, IMapper mapper)
         {
             _accountService = accountService;
             _mapper = mapper;

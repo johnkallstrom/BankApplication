@@ -4,14 +4,16 @@ using Bank.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Bank.Infrastructure.Migrations
 {
-    [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [DbContext(typeof(BankAppDataContext))]
+    [Migration("20201121102004_AddIdentity")]
+    partial class AddIdentity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -19,7 +21,7 @@ namespace Bank.Infrastructure.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("Bank.Domain.Entities.Accounts", b =>
+            modelBuilder.Entity("Bank.Infrastructure.Entities.Accounts", b =>
                 {
                     b.Property<int>("AccountId")
                         .ValueGeneratedOnAdd()
@@ -43,7 +45,7 @@ namespace Bank.Infrastructure.Migrations
                     b.ToTable("Accounts");
                 });
 
-            modelBuilder.Entity("Bank.Domain.Entities.Cards", b =>
+            modelBuilder.Entity("Bank.Infrastructure.Entities.Cards", b =>
                 {
                     b.Property<int>("CardId")
                         .ValueGeneratedOnAdd()
@@ -92,7 +94,7 @@ namespace Bank.Infrastructure.Migrations
                     b.ToTable("Cards");
                 });
 
-            modelBuilder.Entity("Bank.Domain.Entities.Customers", b =>
+            modelBuilder.Entity("Bank.Infrastructure.Entities.Customers", b =>
                 {
                     b.Property<int>("CustomerId")
                         .ValueGeneratedOnAdd()
@@ -163,7 +165,7 @@ namespace Bank.Infrastructure.Migrations
                     b.ToTable("Customers");
                 });
 
-            modelBuilder.Entity("Bank.Domain.Entities.Dispositions", b =>
+            modelBuilder.Entity("Bank.Infrastructure.Entities.Dispositions", b =>
                 {
                     b.Property<int>("DispositionId")
                         .ValueGeneratedOnAdd()
@@ -191,7 +193,7 @@ namespace Bank.Infrastructure.Migrations
                     b.ToTable("Dispositions");
                 });
 
-            modelBuilder.Entity("Bank.Domain.Entities.Loans", b =>
+            modelBuilder.Entity("Bank.Infrastructure.Entities.Loans", b =>
                 {
                     b.Property<int>("LoanId")
                         .ValueGeneratedOnAdd()
@@ -226,7 +228,7 @@ namespace Bank.Infrastructure.Migrations
                     b.ToTable("Loans");
                 });
 
-            modelBuilder.Entity("Bank.Domain.Entities.PermenentOrder", b =>
+            modelBuilder.Entity("Bank.Infrastructure.Entities.PermenentOrder", b =>
                 {
                     b.Property<int>("OrderId")
                         .ValueGeneratedOnAdd()
@@ -261,7 +263,7 @@ namespace Bank.Infrastructure.Migrations
                     b.ToTable("PermenentOrder");
                 });
 
-            modelBuilder.Entity("Bank.Domain.Entities.Transactions", b =>
+            modelBuilder.Entity("Bank.Infrastructure.Entities.Transactions", b =>
                 {
                     b.Property<int>("TransactionId")
                         .ValueGeneratedOnAdd()
@@ -310,7 +312,7 @@ namespace Bank.Infrastructure.Migrations
                     b.ToTable("Transactions");
                 });
 
-            modelBuilder.Entity("Bank.Domain.Entities.User", b =>
+            modelBuilder.Entity("Bank.Infrastructure.Entities.User", b =>
                 {
                     b.Property<int>("UserId")
                         .ValueGeneratedOnAdd()
@@ -342,7 +344,7 @@ namespace Bank.Infrastructure.Migrations
                     b.ToTable("User");
                 });
 
-            modelBuilder.Entity("Bank.Web.Data.ApplicationUser", b =>
+            modelBuilder.Entity("Bank.Infrastructure.Identity.ApplicationUser", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
@@ -538,51 +540,51 @@ namespace Bank.Infrastructure.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("Bank.Domain.Entities.Cards", b =>
+            modelBuilder.Entity("Bank.Infrastructure.Entities.Cards", b =>
                 {
-                    b.HasOne("Bank.Domain.Entities.Dispositions", "Disposition")
+                    b.HasOne("Bank.Infrastructure.Entities.Dispositions", "Disposition")
                         .WithMany("Cards")
                         .HasForeignKey("DispositionId")
                         .HasConstraintName("FK_Cards_Dispositions")
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Bank.Domain.Entities.Dispositions", b =>
+            modelBuilder.Entity("Bank.Infrastructure.Entities.Dispositions", b =>
                 {
-                    b.HasOne("Bank.Domain.Entities.Accounts", "Account")
+                    b.HasOne("Bank.Infrastructure.Entities.Accounts", "Account")
                         .WithMany("Dispositions")
                         .HasForeignKey("AccountId")
                         .HasConstraintName("FK_Dispositions_Accounts")
                         .IsRequired();
 
-                    b.HasOne("Bank.Domain.Entities.Customers", "Customer")
+                    b.HasOne("Bank.Infrastructure.Entities.Customers", "Customer")
                         .WithMany("Dispositions")
                         .HasForeignKey("CustomerId")
                         .HasConstraintName("FK_Dispositions_Customers")
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Bank.Domain.Entities.Loans", b =>
+            modelBuilder.Entity("Bank.Infrastructure.Entities.Loans", b =>
                 {
-                    b.HasOne("Bank.Domain.Entities.Accounts", "Account")
+                    b.HasOne("Bank.Infrastructure.Entities.Accounts", "Account")
                         .WithMany("Loans")
                         .HasForeignKey("AccountId")
                         .HasConstraintName("FK_Loans_Accounts")
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Bank.Domain.Entities.PermenentOrder", b =>
+            modelBuilder.Entity("Bank.Infrastructure.Entities.PermenentOrder", b =>
                 {
-                    b.HasOne("Bank.Domain.Entities.Accounts", "Account")
+                    b.HasOne("Bank.Infrastructure.Entities.Accounts", "Account")
                         .WithMany("PermenentOrder")
                         .HasForeignKey("AccountId")
                         .HasConstraintName("FK_PermenentOrder_Accounts")
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Bank.Domain.Entities.Transactions", b =>
+            modelBuilder.Entity("Bank.Infrastructure.Entities.Transactions", b =>
                 {
-                    b.HasOne("Bank.Domain.Entities.Accounts", "AccountNavigation")
+                    b.HasOne("Bank.Infrastructure.Entities.Accounts", "AccountNavigation")
                         .WithMany("Transactions")
                         .HasForeignKey("AccountId")
                         .HasConstraintName("FK_Transactions_Accounts")
@@ -600,7 +602,7 @@ namespace Bank.Infrastructure.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("Bank.Web.Data.ApplicationUser", null)
+                    b.HasOne("Bank.Infrastructure.Identity.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -609,7 +611,7 @@ namespace Bank.Infrastructure.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("Bank.Web.Data.ApplicationUser", null)
+                    b.HasOne("Bank.Infrastructure.Identity.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -624,7 +626,7 @@ namespace Bank.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Bank.Web.Data.ApplicationUser", null)
+                    b.HasOne("Bank.Infrastructure.Identity.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -633,7 +635,7 @@ namespace Bank.Infrastructure.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("Bank.Web.Data.ApplicationUser", null)
+                    b.HasOne("Bank.Infrastructure.Identity.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)

@@ -1,7 +1,7 @@
 ﻿@model CustomerProfileViewModel
 
 @{
-    ViewData["Title"] = "Profile";
+    ViewData["Title"] = $"Profile - {Model.FirstName} {Model.LastName}";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -40,7 +40,7 @@
 
             <div class="options">
                 <div class="option-group">
-                    <a asp-controller="Customer" asp-action="EditCustomer" asp-route-id="@Model.CustomerId">Edit</a>
+                    <a asp-controller="Customers" asp-action="EditCustomer" asp-route-id="@Model.CustomerId">Edit</a>
                 </div>
             </div>
         </div>
@@ -60,7 +60,7 @@
                     {
                         <tr>
                             <td>
-                                <a asp-controller="Account"
+                                <a asp-controller="Accounts"
                                    asp-action="AccountDetails"
                                    asp-route-id="@account.AccountId"
                                    class="account-id">@account.AccountId
@@ -69,7 +69,7 @@
                             <td>@account.DisplayBalance</td>
                             <td>@account.DisplayCreated</td>
                             <td>
-                                <a asp-controller="Account"
+                                <a asp-controller="Accounts"
                                    asp-action="AccountDetails"
                                    asp-route-id="@account.AccountId"
                                    class="account-details">Manage
