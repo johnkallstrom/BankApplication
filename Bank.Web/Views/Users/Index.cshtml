@@ -5,40 +5,31 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div id="user-list">
-    <div class="container">
-        <h1>Users</h1>
-        <div class="create-user-link">
-            <a asp-controller="Users" asp-action="CreateUser">New</a>
-        </div>
-        <table id="user-table">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Email</th>
-                    <th>Details</th>
-                </tr>
-            </thead>
+<div id="users">
+    <h4>Users</h4>
+    <a asp-controller="Users" asp-action="CreateUser" class="btn btn-primary mb-3">New</a>
+    <table class="table table-bordered">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">Username</th>
+                <th scope="col">Email</th>
+                <th scope="col">Details</th>
+            </tr>
+        </thead>
+        @foreach (var user in Model.Users)
+        {
             <tbody>
-                @foreach (var user in Model.Users)
-                {
-                    <tr>
-                        <td>@user.UserId</td>
-                        <td>@user.Email</td>
-                        <td>
-                            <a asp-controller="Users"
-                               asp-action="UserProfile"
-                               asp-route-id="@user.UserId"
-                               class="user-details">Details
-                            </a>
-                        </td>
-                    </tr>
-                }
+                <tr>
+                    <td>@user.Username</td>
+                    <td>@user.Email</td>
+                    <td>
+                        <a asp-controller="Users"
+                           asp-action="UserProfile"
+                           asp-route-id="@user.UserId">Details</a>
+                    </td>
+                </tr>
             </tbody>
-        </table>
-        <div class="back-user-link">
-            <a asp-controller="Home" asp-action="Index">Back</a>
-        </div>
-    </div>
+        }
+    </table>
 </div>
 

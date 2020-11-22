@@ -5,7 +5,37 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div id="edit-user">
+<div id="users">
+    <h4>Edit User</h4>
+    <form asp-controller="Users" asp-action="EditUser" method="post">
+        <input type="hidden" asp-for="@Model.UserId" />
+
+        <div class="form-group">
+            <label>Email</label>
+            <input asp-for="@Model.Email" type="email" class="form-control" aria-describedby="emailHelp" placeholder="Enter email">
+        </div>
+        <div class="form-group">
+            <label>Password</label>
+            <input asp-for="@Model.Password" type="password" class="form-control" placeholder="Enter password">
+        </div>
+        <fieldset disabled>
+            <div class="form-group">
+                <label>Current role</label>
+                <input class="form-control" type="text" asp-for="@Model.CurrentRole" />
+            </div>
+        </fieldset>
+
+        <div class="form-group">
+            <label>New role</label>
+            <select class="form-control" asp-items="@Model.RoleOptions" asp-for="@Model.NewRole"></select>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Save</button>
+        <a asp-controller="Users" asp-action="Index" class="btn btn-primary">Back</a>
+    </form>
+</div>
+
+@*<div id="edit-user">
     <div class="container">
         <div class="wrapper">
             <div>
@@ -42,7 +72,7 @@
             </form>
         </div>
     </div>
-</div>
+</div>*@
 
 
 

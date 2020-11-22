@@ -5,57 +5,53 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="search">
-    <div class="container">
-        <partial name="_SearchFormPartial" />
-    </div>
-</div>
-
-<section id="statistics">
-    <div class="container">
-        <div class="statistics-header">
-            <h1>Overview</h1>
-        </div>
-        <div class="wrapper">
-            <div class="statistics-group">
-                <p>Customers: <span>@Model.TotalCustomers</span></p>
-            </div>
-
-            <div class="statistics-group">
-                <p>Accounts: <span>@Model.TotalAccounts</span></p>
-            </div>
-
-            <div class="statistics-group">
-                <p>Balance: <span>@Model.DisplayTotalBalance</span></p>
-            </div>
+<div id="index">
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Customers</h5>
+            <p>@Model.TotalCustomers</p>
         </div>
     </div>
-</section>
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Accounts</h5>
+            <p>@Model.TotalAccounts</p>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Balance</h5>
+            <p>@Model.TotalBalance</p>
+        </div>
+    </div>
 
-<partial name="_CountryStatisticsPartial" for="@Model.CountryStatisticsViewModel" />
+    <partial name="_CountryStatisticsPartial" for="@Model.CountryStatisticsViewModel" />
 
-<section id="boxes">
-    <div class="container">
-        <div class="box">
-            <img src="~/img/cogs.svg" class="fill" />
-            <p>
+    <div class="card">
+        <img src="~/img/cogs.svg" class="rounded mx-auto d-block fill">
+        <div class="card-body">
+            <p class="card-text">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                 Cras fermentum, dolor non lobortis dapibus, erat nisi iaculis velit, ac egestas ante ligula nec erat.
             </p>
         </div>
-        <div class="box">
-            <img src="~/img/users.svg" class="fill" />
-            <p>
+    </div>
+    <div class="card">
+        <img src="~/img/users.svg" class="rounded mx-auto d-block fill">
+        <div class="card-body">
+            <p class="card-text">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                 Cras fermentum, dolor non lobortis dapibus, erat nisi iaculis velit, ac egestas ante ligula nec erat.
             </p>
         </div>
-        <div class="box">
-            <img src="~/img/rocket.svg" class="fill" />
-            <p>
+    </div>
+    <div class="card">
+        <img src="~/img/rocket.svg" class="rounded mx-auto d-block fill">
+        <div class="card-body">
+            <p class="card-text">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                 Cras fermentum, dolor non lobortis dapibus, erat nisi iaculis velit, ac egestas ante ligula nec erat.
             </p>
         </div>
     </div>
-</section>
+</div>

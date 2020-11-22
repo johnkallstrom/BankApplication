@@ -5,39 +5,21 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div id="user-profile">
-    <div class="container">
-        <div class="wrapper">
-            <h1>User Profile</h1>
-
-            <div class="profile-group">
-                <strong>ID</strong>
-                <p>@Model.UserId</p>
-            </div>
-
-            <div class="profile-group">
-                <strong>Username</strong>
-                <p>@Model.Username</p>
-            </div>
-
-            <div class="profile-group">
-                <strong>Email</strong>
-                <p>@Model.Email</p>
-            </div>
-
-            <div class="profile-group">
-                <strong>Role</strong>
-                <p>@Model.Role</p>
-            </div>
-
-            <div class="options">
-                <div class="option-group">
-                    <a asp-controller="Users" asp-action="EditUser" asp-route-id="@Model.UserId">Edit</a>
-                </div>
-                <div class="option-group">
-                    <a asp-controller="Users" asp-action="DeleteUser" asp-route-id="@Model.UserId">Delete</a>
-                </div>
-            </div>
+<div id="users">
+    <h4>Profile</h4>
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">ID</h5>
+            <p class="card-text">@Model.UserId</p>
+            <h5 class="card-title">Username</h5>
+            <p class="card-text">@Model.Username</p>
+            <h5 class="card-title">Email</h5>
+            <p class="card-text">@Model.Email</p>
+            <h5 class="card-title">Role</h5>
+            <p class="card-text">@Model.Role</p>
+            <a asp-controller="Users" asp-action="EditUser" asp-route-id="@Model.UserId" class="btn btn-primary">Edit</a>
+            <a asp-controller="Users" asp-action="DeleteUser" asp-route-id="@Model.UserId" class="btn btn-primary">Delete</a>
+            <a asp-controller="Users" asp-action="Index" class="btn btn-primary">Back</a>
         </div>
     </div>
 </div>

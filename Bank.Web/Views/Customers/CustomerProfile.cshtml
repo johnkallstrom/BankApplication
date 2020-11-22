@@ -5,7 +5,30 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div id="customer-profile">
+<div id="customers">
+    <h4>@Model.FirstName @Model.LastName</h4>
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">ID</h5>
+            <p class="card-text">@Model.CustomerId</p>
+            <h5 class="card-title">Contact</h5>
+            <p class="card-text">@Model.Email</p>
+            <p>@Model.PhoneCountryCode @Model.Phone</p>
+            <h5 class="card-title">Gender</h5>
+            <p>@Model.DisplayGender</p>
+            <h5 class="card-title">Birthday</h5>
+            <p>@Model.DisplayBirthday</p>
+            <h5 class="card-title">Location</h5>
+            <p>@Model.Address</p>
+            <p>@Model.PostalCode, @Model.City</p>
+            <p>@Model.Country, @Model.CountryCode</p>
+            <a asp-controller="Customers" asp-action="EditCustomer" asp-route-id="@Model.CustomerId" class="btn btn-primary">Edit</a>
+            <a asp-controller="Customers" asp-action="Index" class="btn btn-primary">Back</a>
+        </div>
+    </div>
+</div>
+
+@*<div id="customer-profile">
     <div class="container">
         <div class="profile">
             <h1>@Model.FirstName @Model.LastName</h1>
@@ -83,5 +106,5 @@
             <p>Total balance: <span class="total-balance">@Model.DisplayTotalBalance</span></p>
         </div>
     </div>
-</div>
+</div>*@
 
