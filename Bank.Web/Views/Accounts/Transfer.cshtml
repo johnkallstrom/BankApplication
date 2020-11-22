@@ -5,41 +5,35 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div id="transaction">
-    <div class="container">
-        <div class="wrapper">
-            <div>
-                <h1>Transfer</h1>
+<div id="accounts">
+    <h4>Transfer</h4>
+    <form asp-controller="Accounts" asp-action="Transfer" method="post">
+
+        <input type="hidden" asp-for="@Model.FromAccountId" />
+
+        <fieldset disabled>
+            <div class="form-group">
+                <label asp-for="@Model.Balance"></label>
+                <input type="text" value="@Model.DisplayBalance" class="form-control" />
             </div>
-            <form asp-controller="Accounts" asp-action="Transfer" method="post">
-                <div asp-validation-summary="All"></div>
-                <input type="hidden" asp-for="@Model.FromAccountId" />
 
-                <div class="form-group">
-                    <label asp-for="@Model.Balance"></label>
-                    <input type="text" value="@Model.DisplayBalance" readonly />
-                </div>
+            <div class="form-group">
+                <label asp-for="@Model.FromAccountId"></label>
+                <input type="text" value="@Model.FromAccountId" class="form-control" />
+            </div>
+        </fieldset>
 
-                <div class="form-group">
-                    <label asp-for="@Model.FromAccountId"></label>
-                    <input type="text" value="@Model.FromAccountId" readonly />
-                </div>
-
-                <div class="form-group">
-                    <label asp-for="@Model.ToAccountId"></label>
-                    <input type="text" asp-for="@Model.ToAccountId" value="@string.Empty" />
-                </div>
-
-                <div class="form-group">
-                    <label asp-for="@Model.Amount"></label>
-                    <input type="text" asp-for="@Model.Amount" value="@string.Empty" />
-                </div>
-
-                <div class="form-group">
-                    <input type="submit" value="Transfer" />
-                    <a asp-controller="Accounts" asp-action="AccountDetails" asp-route-id="@Model.FromAccountId">Back</a>
-                </div>
-            </form>
+        <div class="form-group">
+            <label asp-for="@Model.ToAccountId"></label>
+            <input type="text" asp-for="@Model.ToAccountId" value="@string.Empty" class="form-control" />
         </div>
-    </div>
+
+        <div class="form-group">
+            <label asp-for="@Model.Amount"></label>
+            <input type="text" asp-for="@Model.Amount" value="@string.Empty" class="form-control" />
+        </div>
+
+        <button type="submit" class="btn btn-primary">Transfer</button>
+        <a asp-controller="Accounts" asp-action="AccountDetails" asp-route-id="@Model.FromAccountId" class="btn btn-primary">Back</a>
+    </form>
 </div>

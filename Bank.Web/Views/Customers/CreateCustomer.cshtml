@@ -5,76 +5,67 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div id="create-customer">
-    <div class="container">
-        <div class="wrapper">
-            <div>
-                <h1>Create customer</h1>
-            </div>
-            <form asp-controller="Customers" asp-action="CreateCustomer" method="post">
-                <div asp-validation-summary="All"></div>
-
-                <div class="form-group">
-                    <label asp-for="@Model.FirstName"></label>
-                    <input type="text" asp-for="@Model.FirstName" />
-                </div>
-
-                <div class="form-group">
-                    <label asp-for="@Model.LastName"></label>
-                    <input type="text" asp-for="@Model.LastName" />
-                </div>
-
-                <div class="radio-group">
-                    <input type="radio" asp-for="@Model.Gender" value="Male" checked="checked" />
-                    <label>Male</label>
-                </div>
-
-                <div class="radio-group">
-                    <input type="radio" asp-for="@Model.Gender" value="Female" />
-                    <label>Female</label>
-                </div>
-
-                <div class="form-group">
-                    <label asp-for="@Model.Email"></label>
-                    <input type="email" asp-for="@Model.Email" />
-                </div>
-
-                <div class="form-group">
-                    <label asp-for="@Model.Phone"></label>
-                    <input type="text" asp-for="@Model.Phone" />
-                </div>
-
-                <div class="form-group">
-                    <label asp-for="@Model.Birthday"></label>
-                    <input type="date" asp-for="@Model.Birthday" />
-                </div>
-
-                <div class="form-group">
-                    <label asp-for="@Model.Address"></label>
-                    <input type="text" asp-for="@Model.Address" />
-                </div>
-
-                <div class="form-group">
-                    <label asp-for="@Model.PostalCode"></label>
-                    <input type="number" asp-for="@Model.PostalCode" />
-                </div>
-
-                <div class="form-group">
-                    <label asp-for="@Model.City"></label>
-                    <input type="text" asp-for="@Model.City" />
-                </div>
-
-                <div class="form-group">
-                    <label asp-for="@Model.Country"></label>
-                    <select asp-items="@Model.CountryOptions" asp-for="@Model.Country"></select>
-                </div>
-
-                <div class="form-group">
-                    <input type="submit" value="Create" />
-                    <a asp-controller="Customers" asp-action="Index">Back</a>
-                </div>
-            </form>
+<div id="customers">
+    <h4>Create Customer</h4>
+    <form asp-controller="Customers" asp-action="CreateCustomer" method="post">
+        <div class="form-group">
+            <label asp-for="@Model.FirstName"></label>
+            <input type="text" asp-for="@Model.FirstName" class="form-control" />
         </div>
-    </div>
+
+        <div class="form-group">
+            <label asp-for="@Model.LastName"></label>
+            <input type="text" asp-for="@Model.LastName" class="form-control" />
+        </div>
+
+        <div class="form-check">
+            <input asp-for="@Model.Gender" class="form-check-input" type="radio" value="Male">
+            <label class="form-check-label">Male</label>
+        </div>
+
+        <div class="form-check">
+            <input asp-for="@Model.Gender" class="form-check-input" type="radio" value="Female">
+            <label class="form-check-label">Female</label>
+        </div>
+
+
+        <div class="form-group">
+            <label asp-for="@Model.Email"></label>
+            <input type="email" asp-for="@Model.Email" class="form-control" />
+        </div>
+
+        <div class="form-group">
+            <label asp-for="@Model.Phone"></label>
+            <input type="text" asp-for="@Model.Phone" class="form-control" />
+        </div>
+
+        <div class="form-group">
+            <label asp-for="@Model.Birthday"></label>
+            <input type="date" asp-for="@Model.Birthday" class="form-control" />
+        </div>
+
+        <div class="form-group">
+            <label asp-for="@Model.Address"></label>
+            <input type="text" asp-for="@Model.Address" class="form-control" />
+        </div>
+
+        <div class="form-group">
+            <label asp-for="@Model.PostalCode"></label>
+            <input type="number" asp-for="@Model.PostalCode" class="form-control" />
+        </div>
+
+        <div class="form-group">
+            <label asp-for="@Model.City"></label>
+            <input type="text" asp-for="@Model.City" class="form-control" />
+        </div>
+
+        <div class="form-group">
+            <label asp-for="@Model.Country"></label>
+            <select asp-items="@Model.CountryOptions" asp-for="@Model.Country" class="form-control"></select>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Save</button>
+        <a asp-controller="Customers" asp-action="Index" class="btn btn-primary">Back</a>
+    </form>
 </div>
 

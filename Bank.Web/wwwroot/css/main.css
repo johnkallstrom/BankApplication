@@ -32,3 +32,11 @@ footer p {
 #customers h4 {
     margin-bottom: 1rem;
 }
+
+#customers .card {
+    margin-bottom: 1rem;
+}
+
+#accounts .card {
+    margin-bottom: 1rem;
+}

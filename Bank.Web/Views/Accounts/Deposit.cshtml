@@ -5,37 +5,30 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div id="transaction">
-    <div class="container">
-        <div class="wrapper">
-            <div>
-                <h1>Deposit</h1>
-            </div>
-            <form asp-controller="Accounts" asp-action="Deposit" method="post">
-                <div asp-validation-summary="All"></div>
-                <input type="hidden" asp-for="@Model.AccountId" />
+<div id="accounts">
+    <h4>Deposit</h4>
+    <form asp-controller="Accounts" asp-action="Deposit" method="post">
 
-                <div class="form-group">
-                    <label asp-for="@Model.Balance"></label>
-                    <input type="text" value="@Model.DisplayBalance" readonly />
-                </div>
+        <input type="hidden" asp-for="@Model.AccountId" />
 
-                <div class="form-group">
-                    <label asp-for="@Model.AccountId"></label>
-                    <input type="text" value="@Model.AccountId" readonly />
-                </div>
-
-                <div class="form-group">
-                    <label asp-for="@Model.Amount"></label>
-                    <input type="text" asp-for="@Model.Amount" value="@string.Empty" />
-                </div>
-
-                <div class="form-group">
-                    <input type="submit" value="Deposit" />
-                    <a asp-controller="Accounts" asp-action="AccountDetails" asp-route-id="@Model.AccountId">Back</a>
-                </div>
-            </form>
+        <div class="form-group">
+            <label asp-for="@Model.Balance"></label>
+            <input type="text" value="@Model.DisplayBalance" class="form-control" />
         </div>
-    </div>
-</div>
 
+        <fieldset disabled>
+            <div class="form-group">
+                <label asp-for="@Model.AccountId"></label>
+                <input type="text" value="@Model.AccountId" class="form-control" />
+            </div>
+        </fieldset>
+
+        <div class="form-group">
+            <label asp-for="@Model.Amount"></label>
+            <input type="text" asp-for="@Model.Amount" value="@string.Empty" class="form-control" />
+        </div>
+
+        <button type="submit" class="btn btn-primary">Deposit</button>
+        <a asp-controller="Accounts" asp-action="AccountDetails" asp-route-id="@Model.AccountId" class="btn btn-primary">Back</a>
+    </form>
+</div>
