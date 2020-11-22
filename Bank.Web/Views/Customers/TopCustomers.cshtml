@@ -5,44 +5,32 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<section id="country-customer-list">
-    <div class="container">
-        <h1>Top 10 wealthiest customers in @Model.Country</h1>
-        <table id="country-customers-table">
-            <thead>
+<div id="customers">
+    <h4>Top 10 customers in @Model.Country</h4>
+    <table class="table table-bordered table-responsive-sm">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Name</th>
+                <th scope="col">Country</th>
+                <th scope="col">Details</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var customer in Model.Customers)
+            {
                 <tr>
-                    <th>ID</th>
-                    <th>Name</th>
-                    <th>Country</th>
-                    <th>Details</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var customer in Model.Customers)
-                {
-                    <tr>
-                        <td>@customer.CustomerId</td>
-                        <td>
-                            <a asp-controller="Customers"
-                               asp-action="CustomerProfile"
-                               asp-route-id="@customer.CustomerId"
-                               class="customer-name">
-                                @customer.Fullname
-                        </a>
-                    </td>
+                    <td>@customer.CustomerId</td>
+                    <td>@customer.Fullname</td>
                     <td>@customer.Country</td>
                     <td>
                         <a asp-controller="Customers"
                            asp-action="CustomerProfile"
-                           asp-route-id="@customer.CustomerId"
-                           class="customer-details">
-                            Details
-                        </a>
+                           asp-route-id="@customer.CustomerId">Details</a>
                     </td>
                 </tr>
             }
-            </tbody>
-        </table>
-    </div>
-</section>
+        </tbody>
+    </table>
+</div>
 
