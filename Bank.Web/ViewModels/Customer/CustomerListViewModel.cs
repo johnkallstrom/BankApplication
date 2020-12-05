@@ -7,6 +7,10 @@ namespace Bank.Web.ViewModels
     {
         public string SearchQuery { get; set; }
 
+        public string CurrentFilter { get; set; }
+
+        public string CurrentSort { get; set; }
+
         public string NameSortParam { get; set; }
 
         public string AddressSortParam { get; set; }

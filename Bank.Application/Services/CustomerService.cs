@@ -94,11 +94,9 @@ namespace Bank.Application.Services
 
         public IEnumerable<Customers> GetAllCustomers() => _customerRepository.GetAll();
 
-        public IEnumerable<Customers> GetAllCustomers(string sortOrder, string searchQuery) => _customerRepository.GetAll(sortOrder, searchQuery);
-
-        public IEnumerable<Customers> GetAllCustomers(string searchQuery, int currentPage, int pageSize)
+        public IEnumerable<Customers> GetAllCustomers(string sortOrder, string currentFilter, string searchQuery)
         {
-            return _customerRepository.GetAll(searchQuery, currentPage, pageSize);
+            return _customerRepository.GetAll(sortOrder, currentFilter, searchQuery);
         }
     }
 }

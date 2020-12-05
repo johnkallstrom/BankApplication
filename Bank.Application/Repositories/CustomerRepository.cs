@@ -37,7 +37,7 @@ namespace Bank.Application.Repositories
 
         public IEnumerable<Customers> GetAll() => _context.Customers;
 
-        public IEnumerable<Customers> GetAll(string sortOrder, string searchQuery)
+        public IEnumerable<Customers> GetAll(string sortOrder, string currentFilter, string searchQuery)
         {
             var collection = _context.Customers as IQueryable<Customers>;
 
@@ -79,31 +79,7 @@ namespace Bank.Application.Repositories
                     break;
             }
 
-            return collection.ToList();
-        }
-
-        public IEnumerable<Customers> GetAll(string searchQuery, int currentPage, int pageSize)
-        {
-            var skip = (currentPage - 1) * pageSize;
-            var take = pageSize;
-
-            if (string.IsNullOrWhiteSpace(searchQuery))
-            {
-                return _context.Customers.Skip(skip).Take(take);
-            }
-
-            var collection = _context.Customers as IQueryable<Customers>;
-
-            var query = searchQuery.Trim();
-
-            collection = collection
-                    .Where(x => x.Givenname.Contains(query)
-                    || x.Surname.Contains(query)
-                    || x.City.Contains(query)
-                    || x.Country.Contains(query)
-                    || x.Streetaddress.Contains(query));
-
-            return collection.Skip(skip).Take(take).ToList();
+            return collection;
         }
 
         public Customers Get(int id)

@@ -12,6 +12,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using X.PagedList;
 
 namespace Bank.Web.Controllers
 {
@@ -33,15 +34,31 @@ namespace Bank.Web.Controllers
 
         [HttpGet]
         [Authorize(Roles = "Admin, Cashier")]
-        [Route("customers/{query?}")]
-        public IActionResult Index(string sortOrder, string searchQuery)
+        [Route("customers")]
+        public IActionResult Index(string sortOrder, string currentFilter, string searchQuery, int? page)
         {
-            var customers = _customerService.GetAllCustomers(sortOrder, searchQuery);
+            var customers = _customerService.GetAllCustomers(sortOrder, currentFilter, searchQuery);
+
+            if (searchQuery != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchQuery = currentFilter;
+            }
+
+            int pageSize = 50;
+            int pageNumber = (page ?? 1);
+
+            customers.ToPagedList(pageNumber, pageSize);
 
             var model = new CustomerListViewModel
             {
                 Customers = _mapper.Map<IEnumerable<CustomerViewModel>>(customers),
                 SearchQuery = searchQuery,
+                CurrentSort = sortOrder,
+                CurrentFilter = searchQuery,
                 NameSortParam = string.IsNullOrEmpty(sortOrder) ? "name_desc" : string.Empty,
                 AddressSortParam = sortOrder == "address" ? "address_desc" : "address",
                 CountrySortParam = sortOrder == "country" ? "country_desc" : "country",

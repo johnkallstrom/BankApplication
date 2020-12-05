@@ -9,10 +9,16 @@
     <h4>Customers</h4>
     <a asp-controller="Customers" asp-action="CreateCustomer" class="btn btn-primary mb-3">New</a>
 
-    <form class="form-inline mb-3" method="get">
+    @*<form class="form-inline mb-3" method="get">
         <input asp-for="@Model.SearchQuery" type="text" class="form-control w-100" placeholder="Search customer by name and city">
         <button type="submit" class="btn btn-primary my-1">Search</button>
-    </form>
+    </form>*@
+
+    @using (Html.BeginForm("Index", "Customers", FormMethod.Get))
+    {
+        <input type="text" asp-for="@Model.SearchQuery" class="form-control w-100" placeholder="Search customer by name and city">
+        <input type="submit" class="btn btn-primary my-1" />
+    }
 
     @if (Model.DisplaySearchError())
     {

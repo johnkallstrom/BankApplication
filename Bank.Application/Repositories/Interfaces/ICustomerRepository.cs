@@ -14,7 +14,6 @@ namespace Bank.Application.Repositories.Interfaces
         Task<bool> Create(Customers customer);
         Customers Get(int id);
         IEnumerable<Customers> GetAll();
-        IEnumerable<Customers> GetAll(string sortOrder, string searchQuery);
-        IEnumerable<Customers> GetAll(string searchQuery, int currentPage, int pageSize);
+        IEnumerable<Customers> GetAll(string sortOrder, string currentFilter, string searchQuery);
     }
 }
