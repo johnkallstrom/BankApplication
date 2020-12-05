@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Bank.Application.Repositories
+namespace Bank.Application.Repositories.Interfaces
 {
     public interface ICustomerRepository
     {
@@ -13,7 +13,8 @@ namespace Bank.Application.Repositories
         Task<bool> Update(Customers customer);
         Task<bool> Create(Customers customer);
         Customers Get(int id);
-        IQueryable<Customers> GetAll();
-        IEnumerable<Customers> GetAll(string searchString, int page);
+        IEnumerable<Customers> GetAll();
+        IEnumerable<Customers> GetAll(string sortOrder, string searchQuery);
+        IEnumerable<Customers> GetAll(string searchQuery, int currentPage, int pageSize);
     }
 }

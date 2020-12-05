@@ -1,11 +1,9 @@
-﻿using Bank.Application.Repositories;
+﻿using Bank.Application.Repositories.Interfaces;
+using Bank.Application.Services.Interfaces;
 using Bank.Infrastructure.Entities;
 using Bank.Infrastructure.Enums;
-using Bank.Infrastructure.SearchModels;
-using Microsoft.Azure.Search.Models;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Bank.Application.Services
@@ -27,12 +25,6 @@ namespace Bank.Application.Services
         }
 
         public IEnumerable<Customers> GetTopCustomersByCountry(string country) => _customerRepository.GetTopByCountry(country);
-
-        public IEnumerable<Customers> GetCustomersByIndex(DocumentSearchResult<CustomerSearch> searchResults)
-        {
-            var ids = searchResults.Results.Select(x => int.Parse(x.Document.CustomerStringId));
-            return _customerRepository.GetAllByID(ids);
-        }
 
         public async Task<bool> EditCustomer(Customers customer)
         {
@@ -87,11 +79,6 @@ namespace Bank.Application.Services
             return true;
         }
 
-        public IEnumerable<Customers> GetAllCustomers(string searchString, int page)
-        {
-            return _customerRepository.GetAll(searchString, page);
-        }
-
         public Customers GetCustomer(int id) => _customerRepository.Get(id);
 
         public IEnumerable<Accounts> GetCustomerAccounts(int id) => _accountRepository.GetAllCustomerAccounts(id);
@@ -105,6 +92,13 @@ namespace Bank.Application.Services
             return _customerRepository.Get(id);
         }
 
-        public int GetAllCustomersCount() => _customerRepository.GetAll().Count();
+        public IEnumerable<Customers> GetAllCustomers() => _customerRepository.GetAll();
+
+        public IEnumerable<Customers> GetAllCustomers(string sortOrder, string searchQuery) => _customerRepository.GetAll(sortOrder, searchQuery);
+
+        public IEnumerable<Customers> GetAllCustomers(string searchQuery, int currentPage, int pageSize)
+        {
+            return _customerRepository.GetAll(searchQuery, currentPage, pageSize);
+        }
     }
 }

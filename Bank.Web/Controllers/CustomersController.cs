@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
 using Bank.Application.Services;
+using Bank.Application.Services.Interfaces;
 using Bank.Infrastructure.Entities;
 using Bank.Infrastructure.Identity;
+using Bank.Web.Pagination;
 using Bank.Web.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -31,22 +33,19 @@ namespace Bank.Web.Controllers
 
         [HttpGet]
         [Authorize(Roles = "Admin, Cashier")]
-        [Route("customers")]
-        public IActionResult Index(string searchString, int? currentPage)
+        [Route("customers/{query?}")]
+        public IActionResult Index(string sortOrder, string searchQuery)
         {
-            int page = currentPage.HasValue ? currentPage.Value : 1;
+            var customers = _customerService.GetAllCustomers(sortOrder, searchQuery);
 
-            int count = _customerService.GetAllCustomersCount();
-
-            int totalPages = (int)Math.Ceiling((double)count / 50);
-
-            var customers = _customerService.GetAllCustomers(searchString, page);
-
-            var model = new CustomerSearchViewModel
+            var model = new CustomerListViewModel
             {
                 Customers = _mapper.Map<IEnumerable<CustomerViewModel>>(customers),
-                CurrentPage = page,
-                TotalPages = totalPages
+                SearchQuery = searchQuery,
+                NameSortParam = string.IsNullOrEmpty(sortOrder) ? "name_desc" : string.Empty,
+                AddressSortParam = sortOrder == "address" ? "address_desc" : "address",
+                CountrySortParam = sortOrder == "country" ? "country_desc" : "country",
+                CitySortParam = sortOrder == "city" ? "city_desc" : "city"
             };
 
             return View(model);

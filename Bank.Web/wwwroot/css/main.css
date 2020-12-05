@@ -40,3 +40,15 @@ footer p {
 #accounts .card {
     margin-bottom: 1rem;
 }
+
+.page-link:hover {
+    cursor: pointer;
+}
+
+table th a {
+    color: #fff;
+}
+
+table th a:hover {
+    color: #fff;
+}

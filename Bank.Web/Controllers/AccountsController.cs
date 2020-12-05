@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Bank.Application.Exceptions;
 using Bank.Application.Services;
+using Bank.Application.Services.Interfaces;
 using Bank.Web.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

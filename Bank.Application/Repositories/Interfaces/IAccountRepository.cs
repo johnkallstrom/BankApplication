@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Bank.Application.Repositories
+namespace Bank.Application.Repositories.Interfaces
 {
     public interface IAccountRepository
     {

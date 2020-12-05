@@ -1,4 +1,6 @@
 ﻿using Bank.Application.Repositories;
+using Bank.Application.Repositories.Interfaces;
+using Bank.Application.Services.Interfaces;
 using System.Linq;
 
 namespace Bank.Application.Services

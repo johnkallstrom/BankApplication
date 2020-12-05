@@ -1,4 +1,4 @@
-﻿namespace Bank.Application.Services
+﻿namespace Bank.Application.Services.Interfaces
 {
     public interface IStatisticsService
     {

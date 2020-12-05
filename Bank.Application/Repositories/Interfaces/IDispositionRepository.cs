@@ -1,7 +1,7 @@
 ﻿using Bank.Infrastructure.Entities;
 using System.Threading.Tasks;
 
-namespace Bank.Application.Repositories
+namespace Bank.Application.Repositories.Interfaces
 {
     public interface IDispositionRepository
     {

@@ -1,21 +1,19 @@
 ﻿using Bank.Infrastructure.Entities;
-using Bank.Infrastructure.SearchModels;
-using Microsoft.Azure.Search.Models;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Bank.Application.Services
+namespace Bank.Application.Services.Interfaces
 {
     public interface ICustomerService
     {
         IEnumerable<Customers> GetTopCustomersByCountry(string country);
-        IEnumerable<Customers> GetCustomersByIndex(DocumentSearchResult<CustomerSearch> searchResults);
         Task<bool> EditCustomer(Customers customer);
         Task<bool> CreateCustomer(Customers customer);
-        int GetAllCustomersCount();
-        IEnumerable<Customers> GetAllCustomers(string searchString, int page);
+        IEnumerable<Customers> GetAllCustomers();
+        IEnumerable<Customers> GetAllCustomers(string sortOrder, string searchQuery);
+        IEnumerable<Customers> GetAllCustomers(string searchQuery, int currentPage, int pageSize);
         Customers GetCustomer(int id);
         IEnumerable<Accounts> GetCustomerAccounts(int id);
-        Customers GetCustomerBySearch(string searchString);
+        Customers GetCustomerBySearch(string searchQuery);
     }
 }

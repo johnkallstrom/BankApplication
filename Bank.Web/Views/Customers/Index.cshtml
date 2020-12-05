@@ -1,4 +1,4 @@
-﻿@model CustomerSearchViewModel
+﻿@model CustomerListViewModel
 
 @{
     ViewData["Title"] = "Bank - Customers";
@@ -8,10 +8,12 @@
 <div id="customers">
     <h4>Customers</h4>
     <a asp-controller="Customers" asp-action="CreateCustomer" class="btn btn-primary mb-3">New</a>
-    <form class="form-inline mb-3">
-        <input asp-for="@Model.SearchString" type="text" class="form-control w-100" placeholder="Search customer by name and city">
+
+    <form class="form-inline mb-3" method="get">
+        <input asp-for="@Model.SearchQuery" type="text" class="form-control w-100" placeholder="Search customer by name and city">
         <button type="submit" class="btn btn-primary my-1">Search</button>
     </form>
+
     @if (Model.DisplaySearchError())
     {
         <h4 class="text-center">No search results found.</h4>
@@ -21,10 +23,18 @@
         <table class="table table-bordered table-responsive-sm">
             <thead class="thead-dark">
                 <tr>
-                    <th scope="col">Name</th>
-                    <th scope="col">Address</th>
-                    <th scope="col">City</th>
-                    <th scope="col">Country</th>
+                    <th scope="col">
+                        @Html.ActionLink("Name", "Index", "Customers", new { sortOrder = Model.NameSortParam })
+                    </th>
+                    <th scope="col">
+                        @Html.ActionLink("Address", "Index", "Customers", new { sortOrder = Model.AddressSortParam })
+                    </th>
+                    <th scope="col">
+                        @Html.ActionLink("City", "Index", "Customers", new { sortOrder = Model.CitySortParam })
+                    </th>
+                    <th scope="col">
+                        @Html.ActionLink("Country", "Index", "Customers", new { sortOrder = Model.CountrySortParam })
+                    </th>
                     <th scope="col">Details</th>
                 </tr>
             </thead>
@@ -47,19 +57,18 @@
         </table>
         <nav aria-label="...">
             <ul class="pagination">
-                @if (Model.DisplayPrevButton())
+                @*@if (Model.Pager.ShowPreviousButton)
                 {
                     <li class="page-item">
-                        <a onclick="window.location.href=updateQueryStringParameter(window.location.href, 'currentPage', '@(Model.CurrentPage - 1)')" class="page-link">Previous</a>
+                        <a onclick="window.location.href=updateQueryStringParameter(window.location.href, 'currentPage', '@(Model.Pager.CurrentPage - 1)')" class="page-link">Previous</a>
                     </li>
                 }
-
-                @if (Model.DisplayNextButton())
+                @if (Model.Pager.ShowNextButton)
                 {
                     <li class="page-item">
-                        <a onclick="window.location.href=updateQueryStringParameter(window.location.href, 'currentPage', '@(Model.CurrentPage + 1)')" class="page-link">Next</a>
+                        <a onclick="window.location.href=updateQueryStringParameter(window.location.href, 'currentPage', '@(Model.Pager.CurrentPage + 1)')" class="page-link">Next</a>
                     </li>
-                }
+                }*@
             </ul>
         </nav>
     }

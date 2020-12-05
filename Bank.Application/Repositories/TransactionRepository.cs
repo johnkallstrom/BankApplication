@@ -1,4 +1,5 @@
-﻿using Bank.Infrastructure;
+﻿using Bank.Application.Repositories.Interfaces;
+using Bank.Infrastructure;
 using Bank.Infrastructure.Entities;
 using System.Linq;
 using System.Threading.Tasks;

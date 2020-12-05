@@ -1,7 +1,8 @@
 using AutoMapper;
 using Bank.Application.Repositories;
+using Bank.Application.Repositories.Interfaces;
 using Bank.Application.Services;
-using Bank.Application.Services.Search;
+using Bank.Application.Services.Interfaces;
 using Bank.Infrastructure;
 using Bank.Infrastructure.Identity;
 using Microsoft.AspNetCore.Builder;
@@ -37,7 +38,6 @@ namespace Bank.Web
             services.AddDbContext<BankAppDataContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddTransient<IAzureSearchService, AzureSearchService>();
             services.AddTransient<IDispositionRepository, DispositionRepository>();
             services.AddTransient<ICustomerRepository, CustomerRepository>();
             services.AddTransient<ITransactionRepository, TransactionRepository>();

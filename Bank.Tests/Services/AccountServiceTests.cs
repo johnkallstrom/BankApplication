@@ -1,5 +1,6 @@
 ﻿using Bank.Application.Exceptions;
 using Bank.Application.Repositories;
+using Bank.Application.Repositories.Interfaces;
 using Bank.Application.Services;
 using Bank.Infrastructure.Entities;
 using Bank.Infrastructure.Enums;

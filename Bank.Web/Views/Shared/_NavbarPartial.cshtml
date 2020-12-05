@@ -17,17 +17,20 @@
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item">
+                <li class="nav-item @(ViewContext.RouteData.Values["Action"].ToString() == "Index" ? "active" : string.Empty)">
                     <a asp-controller="Home" asp-action="Index" class="nav-link">Home</a>
                 </li>
                 @if (SignInManager.IsSignedIn(User))
                 {
+                    <li class="nav-item @(ViewContext.RouteData.Values["Action"].ToString() == "UserProfile" ? "active" : string.Empty)">
+                        <a class="nav-link" asp-controller="Users"
+                           asp-action="UserProfile"
+                           asp-route-id="@GetUserId()">Profile
+                        </a>
+                    </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Settings</a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a asp-controller="Users"
-                               asp-action="UserProfile"
-                               asp-route-id="@GetUserId()" class="dropdown-item">Profile</a>
                             @if (User.IsInRole("Cashier"))
                             {
                                 <a asp-controller="Customers" asp-action="Index" class="dropdown-item">Customers</a>
