@@ -2,7 +2,7 @@
 using Bank.Infrastructure.Identity;
 using Bank.Web.ViewModels;
 
-namespace Bank.Web.Middleware
+namespace Bank.Web.Profiles
 {
     public class UserMapperProfile : Profile
     {

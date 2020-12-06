@@ -1,14 +1,11 @@
 ﻿using AutoMapper;
-using Bank.Application.Services;
 using Bank.Application.Services.Interfaces;
 using Bank.Infrastructure.Entities;
 using Bank.Infrastructure.Identity;
-using Bank.Web.Pagination;
 using Bank.Web.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -51,11 +48,13 @@ namespace Bank.Web.Controllers
             int pageSize = 50;
             int pageNumber = (page ?? 1);
 
-            customers.ToPagedList(pageNumber, pageSize);
+            var pagedCustomerList = customers.ToPagedList(pageNumber, pageSize);
+
+            var customerViewModelList = _mapper.Map<IEnumerable<Customers>, IEnumerable<CustomerViewModel>>(pagedCustomerList.ToArray());
 
             var model = new CustomerListViewModel
             {
-                Customers = _mapper.Map<IEnumerable<CustomerViewModel>>(customers),
+                Customers = new StaticPagedList<CustomerViewModel>(customerViewModelList, pagedCustomerList.GetMetaData()),
                 SearchQuery = searchQuery,
                 CurrentSort = sortOrder,
                 CurrentFilter = searchQuery,

@@ -41,9 +41,9 @@ namespace Bank.Application.Repositories
         {
             var collection = _context.Customers as IQueryable<Customers>;
 
-            if (!string.IsNullOrWhiteSpace(searchQuery))
+            if (!string.IsNullOrWhiteSpace(searchQuery) || !string.IsNullOrWhiteSpace(currentFilter))
             {
-                var query = searchQuery.Trim();
+                var query = !string.IsNullOrWhiteSpace(searchQuery) ? searchQuery.Trim() : currentFilter.Trim();
 
                 collection = collection.Where(x => x.Givenname.Contains(query)
                         || x.Surname.Contains(query)

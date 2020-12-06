@@ -9,37 +9,38 @@
     <h4>Customers</h4>
     <a asp-controller="Customers" asp-action="CreateCustomer" class="btn btn-primary mb-3">New</a>
 
-    @*<form class="form-inline mb-3" method="get">
-        <input asp-for="@Model.SearchQuery" type="text" class="form-control w-100" placeholder="Search customer by name and city">
-        <button type="submit" class="btn btn-primary my-1">Search</button>
-    </form>*@
-
     @using (Html.BeginForm("Index", "Customers", FormMethod.Get))
     {
-        <input type="text" asp-for="@Model.SearchQuery" class="form-control w-100" placeholder="Search customer by name and city">
-        <input type="submit" class="btn btn-primary my-1" />
+        @Html.TextBox("SearchQuery", Model.CurrentFilter as string,
+        new { @class = "form-control w-100", @placeholder = "Search customer by name and city" })
+        <input type="submit" class="btn btn-primary my-1 mb-3" />
     }
 
-    @if (Model.DisplaySearchError())
+    @if (Model.SearchQuery != null)
     {
-        <h4 class="text-center">No search results found.</h4>
+        <h4 class="text-center mb-4">Your search on "@Model.SearchQuery" resulted in @Model.Customers.TotalItemCount hits</h4>
     }
-    else
+
+    @if (Model.Customers.TotalItemCount >= 1)
     {
         <table class="table table-bordered table-responsive-sm">
             <thead class="thead-dark">
                 <tr>
                     <th scope="col">
-                        @Html.ActionLink("Name", "Index", "Customers", new { sortOrder = Model.NameSortParam })
+                        @Html.ActionLink("Name", "Index", "Customers",
+                        new { sortOrder = Model.NameSortParam, currentFilter = Model.CurrentFilter })
                     </th>
                     <th scope="col">
-                        @Html.ActionLink("Address", "Index", "Customers", new { sortOrder = Model.AddressSortParam })
+                        @Html.ActionLink("Address", "Index", "Customers",
+                        new { sortOrder = Model.AddressSortParam, currentFilter = Model.CurrentFilter })
                     </th>
                     <th scope="col">
-                        @Html.ActionLink("City", "Index", "Customers", new { sortOrder = Model.CitySortParam })
+                        @Html.ActionLink("City", "Index", "Customers", 
+                        new { sortOrder = Model.CitySortParam, currentFilter = Model.CurrentFilter })
                     </th>
                     <th scope="col">
-                        @Html.ActionLink("Country", "Index", "Customers", new { sortOrder = Model.CountrySortParam })
+                        @Html.ActionLink("Country", "Index", "Customers", 
+                        new { sortOrder = Model.CountrySortParam, currentFilter = Model.CurrentFilter })
                     </th>
                     <th scope="col">Details</th>
                 </tr>
@@ -61,21 +62,16 @@
                 </tbody>
             }
         </table>
-        <nav aria-label="...">
-            <ul class="pagination">
-                @*@if (Model.Pager.ShowPreviousButton)
-                {
-                    <li class="page-item">
-                        <a onclick="window.location.href=updateQueryStringParameter(window.location.href, 'currentPage', '@(Model.Pager.CurrentPage - 1)')" class="page-link">Previous</a>
-                    </li>
-                }
-                @if (Model.Pager.ShowNextButton)
-                {
-                    <li class="page-item">
-                        <a onclick="window.location.href=updateQueryStringParameter(window.location.href, 'currentPage', '@(Model.Pager.CurrentPage + 1)')" class="page-link">Next</a>
-                    </li>
-                }*@
-            </ul>
-        </nav>
+        <p>Page @(Model.Customers.PageCount < Model.Customers.PageNumber ? 0 : Model.Customers.PageNumber) of @Model.Customers.PageCount</p>
+
+        @Html.PagedListPager((IPagedList)Model.Customers, page => Url.Action("Index",
+        new { page, sortOrder = Model.CurrentSort, currentFilter = Model.CurrentFilter }),
+        new PagedListRenderOptionsBase
+        {
+            LiElementClasses = new string[] { "page-item" },
+            PageClasses = new string[] { "page-link" },
+            MaximumPageNumbersToDisplay = 5,
+            DisplayEllipsesWhenNotShowingAllPageNumbers = false
+        })
     }
 </div>

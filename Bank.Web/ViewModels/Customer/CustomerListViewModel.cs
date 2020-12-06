@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using X.PagedList;
 
 namespace Bank.Web.ViewModels
 {
@@ -19,8 +20,6 @@ namespace Bank.Web.ViewModels
 
         public string CitySortParam { get; set; }
 
-        public IEnumerable<CustomerViewModel> Customers { get; set; }
-
-        public bool DisplaySearchError() => Customers.Count() == 0 ? true : false;
+        public IPagedList<CustomerViewModel> Customers { get; set; }
     }
 }

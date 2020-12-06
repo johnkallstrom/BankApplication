@@ -1,10 +1,9 @@
 ﻿using AutoMapper;
 using Bank.Infrastructure.Entities;
-using Bank.Infrastructure.SearchModels;
 using Bank.Web.ViewModels;
-using Microsoft.Azure.Search.Models;
+using X.PagedList;
 
-namespace Bank.Web.Middleware
+namespace Bank.Web.Profiles
 {
     public class CustomerMapperProfile : Profile
     {
