@@ -13,7 +13,7 @@
     {
         @Html.TextBox("SearchQuery", Model.CurrentFilter as string,
         new { @class = "form-control w-100", @placeholder = "Search customer by name and city" })
-        <input type="submit" class="btn btn-primary my-1 mb-3" />
+        <input type="submit" value="Search" class="btn btn-primary my-1 mb-3" />
     }
 
     @if (Model.SearchQuery != null)
@@ -28,19 +28,19 @@
                 <tr>
                     <th scope="col">
                         @Html.ActionLink("Name", "Index", "Customers",
-                        new { sortOrder = Model.NameSortParam, currentFilter = Model.CurrentFilter })
+                        new { sortOrder = Model.SortingParameters.Name, currentFilter = Model.CurrentFilter })
                     </th>
                     <th scope="col">
                         @Html.ActionLink("Address", "Index", "Customers",
-                        new { sortOrder = Model.AddressSortParam, currentFilter = Model.CurrentFilter })
+                        new { sortOrder = Model.SortingParameters.Address, currentFilter = Model.CurrentFilter })
                     </th>
                     <th scope="col">
                         @Html.ActionLink("City", "Index", "Customers", 
-                        new { sortOrder = Model.CitySortParam, currentFilter = Model.CurrentFilter })
+                        new { sortOrder = Model.SortingParameters.City, currentFilter = Model.CurrentFilter })
                     </th>
                     <th scope="col">
                         @Html.ActionLink("Country", "Index", "Customers", 
-                        new { sortOrder = Model.CountrySortParam, currentFilter = Model.CurrentFilter })
+                        new { sortOrder = Model.SortingParameters.Country, currentFilter = Model.CurrentFilter })
                     </th>
                     <th scope="col">Details</th>
                 </tr>
@@ -65,7 +65,7 @@
         <p>Page @(Model.Customers.PageCount < Model.Customers.PageNumber ? 0 : Model.Customers.PageNumber) of @Model.Customers.PageCount</p>
 
         @Html.PagedListPager((IPagedList)Model.Customers, page => Url.Action("Index",
-        new { page, sortOrder = Model.CurrentSort, currentFilter = Model.CurrentFilter }),
+        new { page, sortOrder = Model.SortingParameters.Current, currentFilter = Model.CurrentFilter }),
         new PagedListRenderOptionsBase
         {
             LiElementClasses = new string[] { "page-item" },

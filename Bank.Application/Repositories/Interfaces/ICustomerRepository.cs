@@ -7,7 +7,6 @@ namespace Bank.Application.Repositories.Interfaces
 {
     public interface ICustomerRepository
     {
-        IEnumerable<Customers> GetAllByID(IEnumerable<int> ids);
         IQueryable<Customers> GetTopByCountry(string country);
         IQueryable<Customers> GetAllByCountry(string country);
         Task<bool> Update(Customers customer);

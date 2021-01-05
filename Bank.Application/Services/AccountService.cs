@@ -5,6 +5,7 @@ using Bank.Application.Services.Interfaces;
 using Bank.Infrastructure.Entities;
 using Bank.Infrastructure.Enums;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -23,6 +24,8 @@ namespace Bank.Application.Services
             _transactionRepository = transactionRepository;
         }
 
+        public IEnumerable<Accounts> GetAllAccounts() => _accountRepository.GetAll();
+        public IEnumerable<Accounts> GetAllAccountsWithCustomers() => _accountRepository.GetAllWithCustomers();
 
         public Accounts GetAccount(int id) => _accountRepository.Get(id);
 

@@ -12,6 +12,7 @@ namespace Bank.Application.Repositories.Interfaces
         Task<bool> UpdateMultiple(Accounts firstAccount, Accounts secondAccount);
         Accounts Get(int id);
         IEnumerable<Accounts> GetAll();
+        IEnumerable<Accounts> GetAllWithCustomers();
         IEnumerable<Accounts> GetAllCustomerAccounts(int id);
         IQueryable<Accounts> GetAllByCountry(string country);
         IQueryable<Accounts> GetTop10ByCountry(string country);

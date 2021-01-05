@@ -67,6 +67,8 @@ namespace Bank.Application.Repositories
 
         public IEnumerable<Accounts> GetAll() => _context.Accounts;
 
+        public IEnumerable<Accounts> GetAllWithCustomers() => _context.Accounts.Include(x => x.Dispositions).ThenInclude(c => c.Customer);
+
         public IEnumerable<Accounts> GetAllCustomerAccounts(int id)
         {
             return _context.Dispositions

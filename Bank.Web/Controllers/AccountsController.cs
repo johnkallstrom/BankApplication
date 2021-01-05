@@ -1,11 +1,13 @@
 ﻿using AutoMapper;
 using Bank.Application.Exceptions;
-using Bank.Application.Services;
 using Bank.Application.Services.Interfaces;
+using Bank.Infrastructure.Entities;
 using Bank.Web.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Bank.Web.Controllers
@@ -15,7 +17,9 @@ namespace Bank.Web.Controllers
         private readonly IAccountService _accountService;
         private readonly IMapper _mapper;
 
-        public AccountsController(IAccountService accountService, IMapper mapper)
+        public AccountsController(
+            IAccountService accountService, 
+            IMapper mapper)
         {
             _accountService = accountService;
             _mapper = mapper;
@@ -54,15 +58,14 @@ namespace Bank.Web.Controllers
         public IActionResult Deposit(int id)
         {
             var account = _accountService.GetAccount(id);
-            var model = _mapper.Map<CreateDepositViewModel>(account);
-
+            var model = _mapper.Map<AccountDepositViewModel>(account);
             return View(model);
         }
 
         [HttpPost]
         [Authorize(Roles = "Admin, Cashier")]
         [Route("accounts/deposit/{id}")]
-        public async Task<IActionResult> Deposit(CreateDepositViewModel model)
+        public async Task<IActionResult> Deposit(AccountDepositViewModel model)
         {
             if (!ModelState.IsValid) return View(model);
 
@@ -93,7 +96,7 @@ namespace Bank.Web.Controllers
         public IActionResult Withdrawal(int id)
         {
             var account = _accountService.GetAccount(id);
-            var model = _mapper.Map<CreateWithdrawalViewModel>(account);
+            var model = _mapper.Map<AccountWithdrawalViewModel>(account);
 
             return View(model);
         }
@@ -101,7 +104,7 @@ namespace Bank.Web.Controllers
         [HttpPost]
         [Authorize(Roles = "Admin, Cashier")]
         [Route("accounts/withdrawal/{id}")]
-        public async Task<ActionResult> Withdrawal(CreateWithdrawalViewModel model)
+        public async Task<ActionResult> Withdrawal(AccountWithdrawalViewModel model)
         {
             if (!ModelState.IsValid) return View(model);
 
@@ -137,8 +140,20 @@ namespace Bank.Web.Controllers
         [Route("accounts/transfer/{id}")]
         public IActionResult Transfer(int id)
         {
-            var account = _accountService.GetAccount(id);
-            var model = _mapper.Map<CreateTransferViewModel>(account);
+            var fromAccount = _accountService.GetAccount(id);
+            var toAccounts = _accountService.GetAllAccountsWithCustomers();
+
+            var model = _mapper.Map<AccountTransferViewModel>(fromAccount);
+
+            var options = new List<SelectListItem>();
+
+            options = toAccounts.Select(x => new SelectListItem
+            {
+                Text = $"{x.Dispositions.FirstOrDefault(d => d.AccountId == x.AccountId).Customer.Givenname} {x.Dispositions.FirstOrDefault(d => d.AccountId == x.AccountId).Customer.Surname}",
+                Value = x.AccountId.ToString()
+            }).ToList();
+
+            model.ToAccountOptions = options;
 
             return View(model);
         }
@@ -146,13 +161,13 @@ namespace Bank.Web.Controllers
         [HttpPost]
         [Authorize(Roles = "Admin, Cashier")]
         [Route("accounts/transfer/{id}")]
-        public async Task<IActionResult> Transfer(CreateTransferViewModel model)
+        public async Task<IActionResult> Transfer(AccountTransferViewModel model)
         {
             if (!ModelState.IsValid) return View(model);
 
             try
             {
-                var succeeded = await _accountService.Transfer(model.FromAccountId, model.ToAccountId, model.Amount);
+                var succeeded = await _accountService.Transfer(model.FromAccountId, int.Parse(model.ToAccountId), model.Amount);
                 if (succeeded) return RedirectToAction(nameof(AccountDetails), new { id = model.FromAccountId });
             }
             catch (AccountNotFoundException e)

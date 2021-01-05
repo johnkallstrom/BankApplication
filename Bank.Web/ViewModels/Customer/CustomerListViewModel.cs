@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using X.PagedList;
+﻿using X.PagedList;
 
 namespace Bank.Web.ViewModels
 {
@@ -10,16 +8,17 @@ namespace Bank.Web.ViewModels
 
         public string CurrentFilter { get; set; }
 
-        public string CurrentSort { get; set; }
-
-        public string NameSortParam { get; set; }
-
-        public string AddressSortParam { get; set; }
-
-        public string CountrySortParam { get; set; }
-
-        public string CitySortParam { get; set; }
+        public CustomerListSortingParameters SortingParameters { get; set; }
 
         public IPagedList<CustomerViewModel> Customers { get; set; }
+    }
+
+    public class CustomerListSortingParameters
+    {
+        public string Current { get; set; }
+        public string Name { get; set; }
+        public string Address { get; set; }
+        public string Country { get; set; }
+        public string City { get; set; }
     }
 }

@@ -90,21 +90,6 @@ namespace Bank.Application.Repositories
                 .FirstOrDefault(x => x.CustomerId == id);
         }
 
-        public IEnumerable<Customers> GetAllByID(IEnumerable<int> ids)
-        {
-            var customers = new List<Customers>();
-
-            foreach (var customer in _context.Customers)
-            {
-                if (ids.Contains(customer.CustomerId))
-                {
-                    customers.Add(customer);
-                }
-            }
-
-            return customers;
-        }
-
         public IQueryable<Customers> GetTopByCountry(string country)
         {
             var customers = _context.Dispositions

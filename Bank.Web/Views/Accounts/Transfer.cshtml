@@ -1,4 +1,4 @@
-﻿@model CreateTransferViewModel
+﻿@model AccountTransferViewModel
 
 @{
     ViewData["Title"] = $"Transfer - Account {Model.FromAccountId}";
@@ -10,6 +10,7 @@
     <form asp-controller="Accounts" asp-action="Transfer" method="post">
 
         <input type="hidden" asp-for="@Model.FromAccountId" />
+        <input type="hidden" asp-for="@Model.ToAccountId" />
 
         <fieldset disabled>
             <div class="form-group">
@@ -25,7 +26,7 @@
 
         <div class="form-group">
             <label asp-for="@Model.ToAccountId"></label>
-            <input type="text" asp-for="@Model.ToAccountId" value="@string.Empty" class="form-control" />
+            <select asp-items="@Model.ToAccountOptions" asp-for="@Model.ToAccountId" class="form-control"></select>
         </div>
 
         <div class="form-group">

@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Bank.Infrastructure.Entities;
 using Bank.Web.ViewModels;
+using System.Linq;
 
 namespace Bank.Web.Profiles
 {
@@ -10,9 +11,9 @@ namespace Bank.Web.Profiles
         {
             CreateMap<Accounts, AccountViewModel>();
             CreateMap<Accounts, AccountDetailsViewModel>();
-            CreateMap<Accounts, CreateDepositViewModel>();
-            CreateMap<Accounts, CreateWithdrawalViewModel>();
-            CreateMap<Accounts, CreateTransferViewModel>()
+            CreateMap<Accounts, AccountDepositViewModel>();
+            CreateMap<Accounts, AccountWithdrawalViewModel>();
+            CreateMap<Accounts, AccountTransferViewModel>()
                 .ForMember(dest => dest.FromAccountId, opt => opt.MapFrom(src => src.AccountId));
         }
     }

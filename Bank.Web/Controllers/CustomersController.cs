@@ -29,6 +29,7 @@ namespace Bank.Web.Controllers
             _customerService = customerService;
         }
 
+        #region Action Methods
         [HttpGet]
         [Authorize(Roles = "Admin, Cashier")]
         [Route("customers")]
@@ -56,12 +57,8 @@ namespace Bank.Web.Controllers
             {
                 Customers = new StaticPagedList<CustomerViewModel>(customerViewModelList, pagedCustomerList.GetMetaData()),
                 SearchQuery = searchQuery,
-                CurrentSort = sortOrder,
                 CurrentFilter = searchQuery,
-                NameSortParam = string.IsNullOrEmpty(sortOrder) ? "name_desc" : string.Empty,
-                AddressSortParam = sortOrder == "address" ? "address_desc" : "address",
-                CountrySortParam = sortOrder == "country" ? "country_desc" : "country",
-                CitySortParam = sortOrder == "city" ? "city_desc" : "city"
+                SortingParameters = GetSortingParameters(sortOrder)
             };
 
             return View(model);
@@ -162,5 +159,20 @@ namespace Bank.Web.Controllers
 
             return View(model);
         }
+        #endregion
+
+        #region Private Methods
+        private CustomerListSortingParameters GetSortingParameters(string sortOrder)
+        {
+            return new CustomerListSortingParameters
+            {
+                Current = sortOrder,
+                Name = string.IsNullOrEmpty(sortOrder) ? "name_desc" : string.Empty,
+                Address = sortOrder == "address" ? "address_desc" : "address",
+                Country = sortOrder == "country" ? "country_desc" : "country",
+                City = sortOrder == "city" ? "city_desc" : "city"
+            };
+        }
+        #endregion
     }
 }

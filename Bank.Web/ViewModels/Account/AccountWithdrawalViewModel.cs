@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Bank.Web.ViewModels
 {
-    public class CreateWithdrawalViewModel
+    public class AccountWithdrawalViewModel
     {
         [Required(ErrorMessage = "Please enter from account number.")]
         [Display(Name = "From")]
